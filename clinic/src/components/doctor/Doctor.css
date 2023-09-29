@@ -1,0 +1,91 @@
+.section-doctor {
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 15%;
+    width: var(--wide);
+}
+
+.section-doctor img.card-img-top {
+    width: 100%;
+}
+
+.card-img {
+    position: relative;
+
+}
+
+button.btn-note {
+    background: white;
+    color: black;
+
+    &:hover {
+        background: white;
+    }
+}
+
+div.card:hover div.card-body {
+    top: 0;
+    opacity: 1;
+}
+
+.card-body {
+    position: absolute;
+    background-color: #d2f6e2;
+    opacity: 0.8;
+    top: 60%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px !important;
+    transition: top 0s ease-in-out;
+}
+
+
+
+.section-doctor div.item:hover div.card-body {
+    top: 0.9;
+    opacity: 1;
+    transition: top 1s ease-in-out;
+}
+
+.card-img:hover+.card-body {
+    top: 0;
+}
+
+
+.banner-title {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+
+.banner-title>h1 {
+    font-size: 70px;
+}
+
+.section-doctor>h1 {
+    font-size: var(--font);
+    text-align: center;
+}
+
+.section-doctor .row {
+    margin: 7% auto;
+}
+
+form.form-find {
+    margin: 1% auto;
+    margin-top: -3%;
+    padding: 36px 45px 42px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border: 1px solid lightgray;
+    border-radius: 30px;
+    position: relative;
+    z-index: 999;
+    background-color: white;
+}
+
+.input-find {
+    width: 100%;
+    margin-right: 2%;
+
+}

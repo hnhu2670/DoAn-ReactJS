@@ -1,0 +1,22 @@
+section#section-profile {
+    margin: 5% auto;
+    display: flex;
+    width: 100%;
+}
+
+div.profile-avatar>img {
+    width: 70%;
+}
+
+div.profile-text {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#form-profile {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 3%;
+    padding: 2% 5%;
+}

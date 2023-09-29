@@ -1,0 +1,25 @@
+div.bs-thongtin {
+    width: 100%;
+}
+
+
+div.bs-avatar>img {
+    width: 100%;
+}
+
+div.bs-lichkham {
+    width: 30% !important;
+    border-left: 1px solid lightgray;
+}
+
+ul.ds-tgkham {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.ds-tgkham>li.tgkham {
+    /* background: #fff8ae; */
+    margin: 10px auto;
+    padding: 15px;
+    width: 20%;
+}

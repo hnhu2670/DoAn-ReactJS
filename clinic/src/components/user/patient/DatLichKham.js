@@ -1,0 +1,201 @@
+import { Col, Container, Form, Row } from "react-bootstrap";
+import TypeButton from "../../button/Button";
+import "./datLichKham.css";
+import { useContext, useState } from "react";
+import { MyUserContext } from "../../../App";
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import apis, { endpoints } from "../../configs/apis";
+
+const DatLichKham = () => {
+    const [user] = useContext(MyUserContext);
+    let nav = useNavigate();
+
+    const [appointment, setDatLich] = useState({
+        sickpersonId: user.id,
+        appointmentDate: "",
+        appointmentTime: "",
+        dod: user.dod
+        // prescription_id: ""
+
+    });
+    const change = (evt, field) => {
+        setDatLich((current) => {
+            return { ...current, [field]: evt.target.value };
+        });
+    }
+
+
+    const dangky = (evt) => {
+        evt.preventDefault();
+
+        const process = async () => {
+            try {
+                let formData = new FormData();
+                formData.append("appointmentDate", appointment.appointmentDate);
+                formData.append("sickpersonId", appointment.sickpersonId);
+                formData.append("appointmentTime", appointment.appointmentTime);
+                formData.append("dod", appointment.dod)
+
+                console.log(formData);
+
+                console.log("thanh cong");
+                let res = await apis.post(endpoints['dangky'], formData);
+                console.log("thanh cong");
+                if (res.status === 200) {
+                    nav("/");
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+        }
+
+        process();
+    }
+    return (
+        <>
+
+            <section id="section-datkham">
+
+                <Container>
+                    <Row>
+                        <Col sm={7}>
+                            <div className="profile-text">
+                                <Form id="form-profile" onSubmit={dangky}>
+                                    <h1 className="text-center">ĐẶT LỊCH KHÁM</h1>
+                                    <Row>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Tên bệnh nhân</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Tên bệnh nhân"
+                                                defaultValue={user.name}
+                                                disabled
+                                            />
+                                        </Form.Group>
+                                    </Row>
+                                    <Row>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Ngày sinh</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Ngày sinh"
+                                                defaultValue={appointment.dod}
+                                                disabled
+                                            />
+                                        </Form.Group>
+                                    </Row>
+                                    <Row>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Địa chỉ</Form.Label>
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Nhập địa chỉ bệnh nhân"
+                                                defaultValue={user.address}
+                                                disabled
+                                            />
+                                        </Form.Group>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Điện thoại</Form.Label>
+                                                <Form.Control
+                                                    type="tel"
+                                                    placeholder="Nhập điện thoại bệnh nhân"
+                                                    defaultValue={user.phone}
+                                                    disabled
+                                                />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Email</Form.Label>
+                                                <Form.Control
+                                                    type="email"
+                                                    placeholder="Nhập điện thoại bệnh nhân"
+                                                    defaultValue={user.emaill}
+                                                    disabled
+                                                />
+                                            </Form.Group>
+                                        </Col>
+
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Ngày khám</Form.Label>
+                                                <Form.Control type="date" value={appointment.appointmentDate}
+                                                    onChange={e => change(e, "appointmentDate")} />
+
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Giờ khám</Form.Label>
+                                                <Form.Control as="select" value={appointment.appointmentTime}
+                                                    onChange={e => change(e, "appointmentTime")} >
+
+                                                    <option value="09:00:00">09:00:00</option>
+                                                    <option value="09:30:00">09:30:00</option>
+                                                    <option value="10:00:00">10:00:00</option>
+                                                    <option value="10:30:00">10:30:00</option>
+                                                    <option value="11:00:00">11:00:00</option>
+                                                    <option value="11:30:00">11:30:00</option>
+                                                    <option value="12:00:00">12:00:00</option>
+                                                    <option value="12:30:00">12:30:00</option>
+                                                    <option value="13:00:00">13:00:00</option>
+                                                    <option value="13:30:00">13:30:00</option>
+                                                    <option value="14:00:00">14:00:00</option>
+                                                    <option value="14:30:00">14:30:00</option>
+                                                    <option value="15:00:00">15:00:00</option>
+                                                    <option value="15:30:00">15:30:00</option>
+                                                    <option value="16:00:00">16:00:00</option>
+                                                    <option value="16:30:00">16:30:00</option>
+                                                    <option value="17:00:00">17:00:00</option>
+                                                    <option value="17:30:00">17:30:00</option>
+                                                    <option value="18:00:00">18:00:00</option>
+                                                    <option value="18:30:00">18:30:00</option>
+                                                    <option value="19:00:00">19:00:00</option>
+                                                    <option value="19:30:00">19:30:00</option>
+                                                    <option value="20:00:00">20:00:00</option>
+                                                    <option value="20:30:00">20:30:00</option>
+                                                </Form.Control>
+
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Mô tả</Form.Label>
+                                            <Form.Control
+                                                as="textarea"
+                                                placeholder="Mô tả bệnh"
+                                                style={{ height: '100px' }}
+                                            />
+
+                                        </Form.Group>
+
+
+                                    </Row>
+                                    <Row>
+                                        <Form.Group className="mb-3">
+                                            <TypeButton type="submit">ĐẶT LỊCH KHÁM</TypeButton>
+                                        </Form.Group>
+                                    </Row>
+                                </Form>
+                            </div>
+                        </Col>
+                        <Col sm={5}>
+                            <img src="https://hoanmy.com/wp-content/themes/tot-bvhoanmy/assets/images/form-booking.png" />
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+        </>
+    );
+};
+
+export default DatLichKham;

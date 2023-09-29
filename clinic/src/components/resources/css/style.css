@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Varela Round', sans-serif !important;
+}
+
+:root {
+  --size: 10px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.row {
+  margin: 0 auto;
+}
+
+img.banner {
+  width: 100%;
+  /* height: 600px; */
+}
+
+h1.text-banner {
+  position: absolute;
+  top: 50%;
+  font-size: 70px;
+  padding: 0 30%;
+  color: black;
+  font-weight: bold;
+}
+
+/* HEADER */
+header {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #d2f6e2;
+  width: 100%;
+  height: 100%;
+}
+
+.logoName {
+  display: flex;
+  width: 30%;
+}
+
+.logoName h1 {
+
+  color: #198754;
+  font-weight: bold;
+  padding-top: 25px;
+  font-size: 20px;
+
+}
+
+.section-header a {
+  color: #123653;
+}
+
+.section-header img {
+  width: 100px;
+  background-color: #d2f6e2
+}
+
+.tab-menu {
+
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+nav.menu {
+
+  height: 70px;
+  border-radius: var(--size);
+  padding: var(--size);
+  padding-top: 10px;
+
+}
+
+nav.menu>ul>li {
+  padding: var(--size);
+  font-weight: bold;
+}
+
+nav.menu>ul>li:hover {
+  border-bottom: 2px solid #46476a;
+}
+
+@keyframes blink {
+  0% {
+    color: #c7ebc5;
+    /* Màu ban đầu là trắng */
+  }
+
+  50% {
+    color: #198754;
+    /* Màu xanh đậm */
+  }
+
+  100% {
+    color: #c7ebc5;
+    /* Màu trắng */
+  }
+}
+
+.booking {
+  animation: blink 1s infinite;
+  /* Áp dụng animation với thời gian 1 giây và lặp vô hạn */
+}
+
+.section-header img.avt_user {
+  width: 30px !important;
+}
+
+/* HOME */
+.index {
+  width: 100%;
+  height: 100%;
+  background-image: url('https://res.cloudinary.com/dstqvlt8d/image/upload/v1692163868/Green_Color_Abstract_Healthy_Medical_Background_sjkj2l.png');
+  background-size: cover;
+}
+
+.title {
+  padding-top: 100px;
+  height: 450px;
+  align-items: center;
+
+  /* margin-left: 52%; */
+  display: flex;
+
+}
+
+.index div.content {
+  width: 50%;
+}
+
+.doctorhomeimg {
+  margin: 10%;
+}
+
+/* .title div{
+    text-align: justify;
+    margin: 0px;
+    align-items: center;
+} */
+
+.title div p {
+  padding-top: 10px;
+  font-size: 20px;
+  width: 88%;
+  text-align: justify;
+
+}
+
+.animated-heading {
+  overflow: hidden;
+  /* Để ẩn phần vượt quá khung hiển thị */
+  white-space: nowrap;
+  /* Để không xuống dòng khi vượt quá khung hiển thị */
+  color: green;
+  /* Màu chữ xanh lá */
+}
+
+.animated-heading span {
+  display: inline-block;
+  /* Hiển thị dòng chữ trên cùng một dòng */
+  animation: slide-in 2s ease-in-out;
+  /* Sử dụng hiệu ứng slide-in trong 2 giây */
+}
+
+/* Định nghĩa hiệu ứng slide-in */
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    /* Di chuyển chữ về bên trái ngoài khung hiển thị */
+  }
+
+  100% {
+    transform: translateX(0);
+    /* Di chuyển chữ về vị trí ban đầu */
+  }
+}
+
+/* FOOTER */
+.footer {
+  background-color: #caedcc;
+  padding: 30px 0;
+}
+
+.footer.row {
+  display: flex;
+}
+
+.footer h4 {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.firstfooter {
+  display: flex;
+}
+
+.footer p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer ul li a:hover {
+  color: #333;
+}
+
+.footer hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.footer p.text-center {
+  margin-top: 20px;
+  color: #999;
+  font-size: 12px;
+}
+
+
+/* booking */
+.border {
+  display: flex;
+  border: 0.5px solid #5AAC4E;
+  border-radius: 30px;
+  margin: 50px;
+  background-color: #F5FFFA;
+}
+
+.border1 {
+  display: flex !important;
+}
+
+.img_booking>img {
+
+  width: 70%;
+  padding: 20px;
+  padding-left: 58px;
+  padding-top: 40px;
+}
+
+.img_booking {
+  width: 40%;
+}
+
+.registration-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 10%;
+  padding: 30px;
+}
+
+.registration-form h3 {
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.imgBooking {
+  width: 40%;
+}
+
+.imgBooking img {
+  width: 100%;
+  height: 100%;
+}
+
+.patient-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+input[type="time"] {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* LOGIN */
+.img_login img {
+  border-radius: 34px;
+  margin: 30px;
+}
+
+.login {
+  display: flex;
+  width: 100%;
+}
+
+.img_login {
+  width: 30%;
+}
+
+.mainLogin {
+  padding-top: 80px;
+  padding-left: 200px;
+  width: 50%;
+}
+
+.mainLogin h3 {
+  color: #198754;
+  font-weight: bold;
+}
+
+.Logincontent {
+  margin: 30px;
+  width: 100%;
+}
+
+#username {
+  height: 35px;
+  border-radius: 100px;
+}
+
+#pwd {
+  height: 35px;
+  border-radius: 100px;
+}
+
+.logincontent2 {
+  margin-bottom: 0px !important;
+  width: 100%;
+}
+
+.logincontent1 input {
+  font-size: 10px;
+}
+
+.logincontent2 input {
+  font-size: 10px;
+}
+
+.buttonLogin {
+  padding-left: 66%;
+  width: 10px;
+}
+
+.buttonLoginColor {
+  background-color: #45a049;
+  padding: 10px 20px;
+  width: 150px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 64%;
+}
+
+.mainLogin .nav-link {
+  padding-left: 75%;
+  font-size: 12px;
+  margin: 10px;
+  width: 100%;
+
+
+}
+
+.mainLogin .nav-link:hover {
+
+  color: #198754;
+}
+
+/* ĐĂNG KÝ */
+.signin {
+  margin-bottom: 20px;
+  width: 70%;
+  margin-top: 20px;
+}
+
+.img_signin {
+  width: 30%;
+}
+
+.img_signin img {
+  border-radius: 34px;
+  margin: 30px;
+
+}
+
+.contentsignin {
+  display: flex;
+}
+
+.contentsignin1 {
+  margin-right: 10%;
+  width: 50%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  padding: 10px 0;
+}
+
+.buttondangky {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 64%;
+}

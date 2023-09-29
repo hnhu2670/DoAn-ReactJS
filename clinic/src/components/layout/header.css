@@ -1,0 +1,18 @@
+#login-name {
+    margin-top: -5px;
+
+}
+
+button.btn-loginuser {
+    background: none;
+    outline: none;
+    border: none;
+    color: #123653 !important;
+    font-weight: bold;
+
+    &:hover {
+        background: none;
+        outline: none;
+        border: none;
+    }
+}
