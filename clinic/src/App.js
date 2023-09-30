@@ -19,6 +19,7 @@ import DatLichKham from './components/user/patient/DatLichKham';
 import Update from './components/MyProfile';
 import DKLam from './components/user/doctor/DKLam';
 import XNKham from './components/user/nurse/XNLichKham';
+import MyComponent from './components/CheckDk';
 
 // import Signin from './components/Signin';
 export const MyUserContext = createContext();
@@ -46,6 +47,7 @@ function App() {
             <Route path="/datlichkham" exact element={<DatLichKham />} />
             <Route path="/dangkylam" exact element={<DKLam />} />
             <Route path="/xacnhanlich" exact element={<XNKham />} />
+            <Route path="/checkdk" exact element={<MyComponent />} />
           </Routes>
           <Footer />
         </div>

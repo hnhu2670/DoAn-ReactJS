@@ -66,7 +66,7 @@ const Profile_doctor = () => {
             return dates;
         };
 
-        const numberOfDays = 3; // Số ngày liên tiếp cần tạo
+        const numberOfDays = 7; // Số ngày liên tiếp cần tạo
         const consecutiveDates = getConsecutiveDates(numberOfDays);
 
         // console.log(consecutiveDates);
