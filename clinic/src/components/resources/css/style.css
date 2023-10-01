@@ -256,13 +256,13 @@ nav.menu>ul>li:hover {
 
 
 /* booking */
-.border {
+/* .border {
   display: flex;
   border: 0.5px solid #5AAC4E;
   border-radius: 30px;
   margin: 50px;
   background-color: #F5FFFA;
-}
+} */
 
 .border1 {
   display: flex !important;
@@ -349,14 +349,22 @@ button:hover {
 }
 
 /* LOGIN */
+section.section-login {
+  background-image: url("../image/bgLogin.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .img_login img {
   border-radius: 34px;
   margin: 30px;
 }
 
 .login {
-  display: flex;
+  /* display: flex; */
   width: 100%;
+  margin: o auto;
 }
 
 .img_login {
@@ -364,19 +372,33 @@ button:hover {
 }
 
 .mainLogin {
-  padding-top: 80px;
-  padding-left: 200px;
-  width: 50%;
+  padding: 4% 0;
+  margin: 0 auto;
+  background-color: rgba(9, 9, 11, 0.4);
 }
 
-.mainLogin h3 {
-  color: #198754;
+.mainLogin h1 {
+  color: #d2f6e2;
   font-weight: bold;
+  font-size: 50px;
+}
+
+div.form-login {
+  width: 55%;
+  padding: 3%;
+  border: 1px solid gray;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30);
 }
 
 .Logincontent {
-  margin: 30px;
+  /* margin: 30px; */
   width: 100%;
+}
+
+.Logincontent label {
+  color: white;
 }
 
 #username {

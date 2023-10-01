@@ -11,6 +11,7 @@ const Dangky = () => {
         sickpersonId: user.id,
         appointmentDate: "",
         appointmentTime: "",
+        motabenh: "",
 
     });
 
@@ -32,6 +33,9 @@ const Dangky = () => {
             formData.append("appointmentDate", appointment.appointmentDate);
             formData.append("sickpersonId", appointment.sickpersonId);
             formData.append("appointmentTime", appointment.appointmentTime);
+            formData.append("motabenh", appointment.motabenh);
+
+
 
 
             console.log(formData);

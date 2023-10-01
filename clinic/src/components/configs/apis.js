@@ -24,7 +24,9 @@ export const endpoints = {
     "appointments": `${SERVER_CONTEXT}/api/appointments`,
     "shift": `${SERVER_CONTEXT}/api/doctor/shift`,
     "update-user": `${SERVER_CONTEXT}/api/user/update`,
-    "update-avatar": `${SERVER_CONTEXT}/api/user/changeAvatar`
+    "update-avatar": `${SERVER_CONTEXT}/api/user/changeAvatar`,
+    "isUser": `${SERVER_CONTEXT}/api/isUser/`,
+    "up-password": `${SERVER_CONTEXT}/api/up-password/`,
 
 
 }

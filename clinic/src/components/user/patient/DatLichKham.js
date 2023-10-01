@@ -15,8 +15,9 @@ const DatLichKham = () => {
         sickpersonId: user.id,
         appointmentDate: "",
         appointmentTime: "",
-        dod: user.dod
-        // prescription_id: ""
+        dod: user.dod,
+        motabenh: ""
+
 
     });
     const change = (evt, field) => {
@@ -36,6 +37,7 @@ const DatLichKham = () => {
                 formData.append("sickpersonId", appointment.sickpersonId);
                 formData.append("appointmentTime", appointment.appointmentTime);
                 formData.append("dod", appointment.dod)
+                formData.append("motabenh", appointment.motabenh)
 
                 console.log(formData);
 
@@ -173,6 +175,8 @@ const DatLichKham = () => {
                                                 as="textarea"
                                                 placeholder="Mô tả bệnh"
                                                 style={{ height: '100px' }}
+                                                value={appointment.motabenh}
+                                                onChange={e => change(e, "motabenh")}
                                             />
 
                                         </Form.Group>

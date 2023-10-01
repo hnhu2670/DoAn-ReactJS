@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import Apis, { authApi, endpoints } from './configs/apis';
 import cookie from 'react-cookies';
 import { MyUserContext } from '../App';
@@ -11,6 +11,7 @@ const Login = () => {
   const [user, dispatch] = useContext(MyUserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState([])
   // const [role, setRole] = useState('');
   const nav = useNavigate();
   const [error, setError] = useState('');
@@ -93,63 +94,74 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={login}>
-        <div className="border">
-          <div className="login">
-            <div className="img_login">
-              <img src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1691914443/Login_Web_Animation_fhmgp8.png" alt="alert" />
-            </div>
-            <div className="mainLogin">
-              <h3>Login</h3>
-              <div className="Logincontent logincontent1">
-                <label htmlFor="username">Tên đăng nhập</label>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
-                  id="username"
-                  placeholder="Nhập username..."
-                  name="username"
-                  required
-                />
-              </div>
-              <div className="Logincontent logincontent2">
-                <label htmlFor="pwd">Mật khẩu</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                  id="pwd"
-                  placeholder="Nhập mật khẩu..."
-                  name="password"
-                  required />
-              </div>
-              <Link to="/dangky" className="nav-link">
-                Đăng ký tại đây
-              </Link>
-              <GoogleOAuthProvider clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com">
-                <GoogleLogin onSubmit
-                  className="login_google"
-                  clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com"
-                  onSuccess={(credentialResponse) => {
-                    // console.log("Đăng nhập thành công", credentialResponse.credential);
-                    var token = credentialResponse.credential;
-                    var decoded = jwt_decode(token);
-                    console.log(decoded);
-                    loginGoogle(decoded);
+      <section className='section-login'>
+        <form onSubmit={login}>
+          <div className="border">
+            <div className="login">
 
-                  }}
-                  onFailure={(error) => {
-                    console.log("Đăng nhập không thành công", error);
+              <div className="mainLogin">
 
-                  }}
-                  redirectUri="http://localhost:3000"
-                />
-              </GoogleOAuthProvider>
-              <div className="buttonLogin">
-                <Button type="submit" className="buttonLoginColor">
-                  Đăng nhập
-                </Button>
+                <div className="form-login">
+                  <h1 className="text-center text-login">LOGIN</h1>
+                  <Row className="mb-3">
+                    <div className="Logincontent logincontent1">
+                      <label htmlFor="username">Tên đăng nhập</label>
+                      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
+                        id="username"
+                        placeholder="Nhập username..."
+                        name="username"
+                        required
+                      />
+                    </div>
+                  </Row>
+
+                  <Row>
+                    <div className="Logincontent logincontent2">
+                      <label htmlFor="pwd">Mật khẩu</label>
+                      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                        id="pwd"
+                        placeholder="Nhập mật khẩu..."
+                        name="password"
+                        required />
+                    </div>
+                  </Row>
+
+                  <Link to="/dangky" className="nav-link">
+                    Đăng ký tại đây
+                  </Link>
+                  <GoogleOAuthProvider clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com">
+                    <GoogleLogin onSubmit
+                      className="login_google"
+                      clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com"
+                      onSuccess={(credentialResponse) => {
+                        // console.log("Đăng nhập thành công", credentialResponse.credential);
+                        var token = credentialResponse.credential;
+                        var decoded = jwt_decode(token);
+                        console.log(decoded);
+                        loginGoogle(decoded);
+
+                      }}
+                      onFailure={(error) => {
+                        console.log("Đăng nhập không thành công", error);
+
+                      }}
+                      redirectUri="http://localhost:3000"
+                    />
+                  </GoogleOAuthProvider>
+                  <div className="buttonLogin">
+                    <Button type="submit" className="buttonLoginColor">
+                      Đăng nhập
+                    </Button>
+                  </div>
+                  {error && <p className="error">{error}</p>}
+                </div>
+
               </div>
-              {error && <p className="error">{error}</p>}
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </section>
+
     </>
   );
 };
