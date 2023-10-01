@@ -4,7 +4,7 @@ import 'tippy.js/dist/tippy.css';
 import "../resources/css/style.css";
 import './header.css';
 import { Link, useNavigate } from "react-router-dom";
-import { MyUserContext } from "../../App";
+import { MyUserContext } from "../App";
 import { Dropdown } from 'react-bootstrap';
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);

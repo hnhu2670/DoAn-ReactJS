@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Button, Row } from 'react-bootstrap';
-import Apis, { authApi, endpoints } from './configs/apis';
+import Apis, { authApi, endpoints } from '../configs/apis';
 import cookie from 'react-cookies';
 import { MyUserContext } from '../App';
 import jwt_decode from "jwt-decode";

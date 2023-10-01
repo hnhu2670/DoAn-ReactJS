@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Col, Container, Form, Image, Row } from "react-bootstrap"
 import { MyUserContext } from "../App";
-import "./resources/css/myProfile.css"
-import TypeButton from "./button/Button";
-import apis, { authApi, endpoints } from "./configs/apis";
+import "../resources/css/myProfile.css"
+import TypeButton from "../button/Button";
+import apis, { authApi, endpoints } from "../configs/apis";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import format from "date-fns/format";

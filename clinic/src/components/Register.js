@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Apis, { endpoints } from "./configs/apis";
-import MySpinner from "./layout/MySpinner";
-import "./resources/css/style.css";
+import Apis, { endpoints } from "../configs/apis";
+import MySpinner from "../layout/MySpinner";
+import "../resources/css/style.css";
 
 const Register = () => {
     const [user, setUser] = useState({

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import apis, { endpoints } from '../../configs/apis';
 import { Button, Form } from 'react-bootstrap';
 import MySpinner from '../../layout/MySpinner';
-import { MyUserContext } from '../../../App';
+import { MyUserContext } from '../../App';
 
 const Dangky = () => {
     const [user] = useContext(MyUserContext);

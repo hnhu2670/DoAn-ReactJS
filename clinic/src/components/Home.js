@@ -1,7 +1,7 @@
 import React from 'react';
-import './resources/css/home.css';
+import '../resources/css/home.css';
 
-import DoctorHome from './resources/image/doctorhome.png';
+import DoctorHome from '../resources/image/doctorhome.png';
 const Home = () => {
     return (
         <>

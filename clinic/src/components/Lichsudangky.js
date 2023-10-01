@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { format, parse } from 'date-fns';
-import apis, { authApi, endpoints } from './configs/apis';
-import MySpinner from './layout/MySpinner';
+import apis, { authApi, endpoints } from '../configs/apis';
+import MySpinner from '../layout/MySpinner';
 import { MyUserContext } from '../App';
 
 const Lichsudangky = () => {

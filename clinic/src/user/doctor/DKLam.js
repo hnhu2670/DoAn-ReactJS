@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Col, Container, Form, Image, Row, Table } from "react-bootstrap"
-import { MyUserContext } from "../../../App";
+import { MyUserContext } from "../../App";
 import { parseISO, isPast } from 'date-fns';
-import Lichsudangky from "../../Lichsudangky";
+import Lichsudangky from "../../components/Lichsudangky";
 import "../../resources/css/dkLam.css"
 const DKLam = () => {
     const [user] = useContext(MyUserContext);

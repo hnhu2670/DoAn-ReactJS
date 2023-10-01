@@ -3,24 +3,25 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createContext, useReducer } from 'react';
 import cookie from "react-cookies";
-import MyUserReducer from './components/reducer/MyUserReducer';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
+import MyUserReducer from './reducer/MyUserReducer';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 import Register from './components/Register'
 import ResetPass from './components/ResetPass'
 import OTPPage from './components/OTPPage'
 import Lichsudangky from './components/Lichsudangky'
 import Login from './components/Login'
-import Doctor from './components/doctor/Doctors';
-import Profile_doctor from './components/doctor/Profile_doctor';
-import Dangky from './components/user/patient/Dangky'
+import Doctor from './doctor/Doctors';
+import Profile_doctor from './doctor/Profile_doctor';
+import Dangky from './user/patient/Dangky'
 import Home from './components/Home';
-import DatLichKham from './components/user/patient/DatLichKham';
+import DatLichKham from './user/patient/DatLichKham';
 import Update from './components/MyProfile';
-import DKLam from './components/user/doctor/DKLam';
-import XNKham from './components/user/nurse/XNLichKham';
+import DKLam from './user/doctor/DKLam';
+import XNKham from './user/nurse/XNLichKham';
 import CheckDk from './components/CheckDk'
 import ForgetPassword from './components/ForgetPassword';
+import Navbar from './components/Navbar';
 // import Signin from './components/Signin';
 export const MyUserContext = createContext();
 function App() {
@@ -34,7 +35,6 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            {/* <Route path="/signin" exact element={<Signin />} /> */}
             <Route path="/login" exact element={<Login />} />
             <Route path="/datlich" exact element={<Dangky />} />
             <Route path="/dangky" exact element={<Register />} />
@@ -49,7 +49,10 @@ function App() {
             <Route path="/xacnhanlich" exact element={<XNKham />} />
             <Route path="/checkdk" exact element={<CheckDk />} />
             <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
+            <Route path='/navbar' exact element={<Navbar />} />
+            <Route path='/chatroom' exact element={<ChatRoom />} />
           </Routes>
+
           <Footer />
         </div>
       </BrowserRouter>

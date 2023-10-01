@@ -2,7 +2,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import TypeButton from "../../button/Button";
 import "./datLichKham.css";
 import { useContext, useState } from "react";
-import { MyUserContext } from "../../../App";
+import { MyUserContext } from "../../App";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import apis, { endpoints } from "../../configs/apis";

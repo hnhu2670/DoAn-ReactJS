@@ -11,7 +11,7 @@ import { CgSpinner } from "react-icons/cg";
 import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";
 import { auth } from '../firebase';
-import apis, { endpoints, authApi } from './configs/apis';
+import apis, { endpoints, authApi } from '../configs/apis';
 // import './style.scss';
 
 const ForgetPassword = () => {
