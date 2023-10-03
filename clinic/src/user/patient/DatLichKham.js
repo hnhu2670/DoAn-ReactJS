@@ -45,7 +45,7 @@ const DatLichKham = () => {
                 let res = await apis.post(endpoints['dangky'], formData);
                 console.log("thanh cong");
                 if (res.status === 200) {
-                    nav("/");
+                    nav("/xemlich");
                 }
             } catch (error) {
                 console.log(error)
@@ -129,7 +129,7 @@ const DatLichKham = () => {
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Ngày khám</Form.Label>
                                                 <Form.Control type="date" value={appointment.appointmentDate}
-                                                    onChange={e => change(e, "appointmentDate")} />
+                                                    onChange={e => change(e, "appointmentDate")} required />
 
                                             </Form.Group>
                                         </Col>
@@ -137,7 +137,7 @@ const DatLichKham = () => {
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Giờ khám</Form.Label>
                                                 <Form.Control as="select" value={appointment.appointmentTime}
-                                                    onChange={e => change(e, "appointmentTime")} >
+                                                    onChange={e => change(e, "appointmentTime")} required>
 
                                                     <option value="09:00:00">09:00:00</option>
                                                     <option value="09:30:00">09:30:00</option>
@@ -177,6 +177,7 @@ const DatLichKham = () => {
                                                 style={{ height: '100px' }}
                                                 value={appointment.motabenh}
                                                 onChange={e => change(e, "motabenh")}
+                                                required
                                             />
 
                                         </Form.Group>

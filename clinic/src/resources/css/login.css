@@ -1,0 +1,86 @@
+/* LOGIN */
+section.section-login {
+    background-image: url("../image/bgLogin.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.img_login img {
+    border-radius: 34px;
+    margin: 30px;
+}
+
+.login {
+    /* display: flex; */
+    width: 100%;
+    margin: o auto;
+}
+
+.img_login {
+    width: 30%;
+}
+
+.mainLogin {
+    padding: 4% 0;
+    margin: 0 auto;
+    background-color: rgba(9, 9, 11, 0.4);
+}
+
+div.form-login {
+    width: 55%;
+    padding: 1%;
+    border: 1px solid gray;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30);
+}
+
+.Logincontent {
+    /* margin: 30px; */
+    width: 100%;
+}
+
+.Logincontent label {
+    color: white;
+}
+
+input.input-login {
+    height: 45px;
+    /* border-radius: 100px; */
+    font-size: 15px;
+}
+
+.logincontent2 {
+    margin-bottom: 0px !important;
+    width: 100%;
+}
+
+.buttonLoginColor {
+    background-color: #d2f6e2 !important;
+    color: black !important;
+    padding: 10px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+
+    &:hover {
+        background-color: #60a37e !important;
+    }
+}
+
+.mainLogin .nav-link {
+    padding-left: 75%;
+    font-size: 12px;
+    margin: 10px;
+    width: 100%;
+
+
+}
+
+.mainLogin .nav-link:hover {
+
+    color: #198754;
+}

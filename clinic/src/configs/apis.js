@@ -14,7 +14,6 @@ export const endpoints = {
     "register": `${SERVER_CONTEXT}/api/register`,
     "dangky": `${SERVER_CONTEXT}/api/appointments`,
     "datlai": `${SERVER_CONTEXT}/api/appointments`,
-    // "xoa": `${SERVER_CONTEXT}/api/appointments/{id}`
     "xoa": (id) => `${SERVER_CONTEXT}/api/appointments/${id}`,
     "login-google": `${SERVER_CONTEXT}/api/login-google/`,
     "doctor": `${SERVER_CONTEXT}/api/doctors`,
@@ -27,6 +26,7 @@ export const endpoints = {
     "update-avatar": `${SERVER_CONTEXT}/api/user/changeAvatar`,
     "isUser": `${SERVER_CONTEXT}/api/isUser/`,
     "up-password": `${SERVER_CONTEXT}/api/up-password/`,
+    "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
 
 
 }

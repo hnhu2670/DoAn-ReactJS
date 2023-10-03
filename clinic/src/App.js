@@ -13,16 +13,16 @@ import Lichsudangky from './components/Lichsudangky'
 import Login from './components/Login'
 import Doctor from './doctor/Doctors';
 import Profile_doctor from './doctor/Profile_doctor';
-import Dangky from './user/patient/Dangky'
+// import Dangky from './user/patient/Dangky'
 import Home from './components/Home';
 import DatLichKham from './user/patient/DatLichKham';
 import Update from './components/MyProfile';
 import DKLam from './user/doctor/DKLam';
 import XNKham from './user/nurse/XNLichKham';
-import CheckDk from './components/CheckDk'
 import ForgetPassword from './components/ForgetPassword';
-import Navbar from './components/Navbar';
-// import Signin from './components/Signin';
+import Chat from "./Chat"
+import LichKham from "./user/doctor/LichKham"
+import PhieuKham from './user/doctor/PhieuKham';
 export const MyUserContext = createContext();
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/login" exact element={<Login />} />
-            <Route path="/datlich" exact element={<Dangky />} />
+            {/* <Route path="/datlich" exact element={<Dangky />} /> */}
             <Route path="/dangky" exact element={<Register />} />
             <Route path="/datlai" exact element={<ResetPass />} />
             <Route path="/xacnhanotp" exact element={<OTPPage />} />
@@ -46,15 +46,22 @@ function App() {
             <Route path="/trangcanhan" exact element={<Update />} />
             <Route path="/datlichkham" exact element={<DatLichKham />} />
             <Route path="/dangkylam" exact element={<DKLam />} />
+            {/* xác nhận lịch khám */}
             <Route path="/xacnhanlich" exact element={<XNKham />} />
-            <Route path="/checkdk" exact element={<CheckDk />} />
+            {/* lịch khám */}
+            <Route path="/xemlichkham" exact element={<LichKham />} />
+            {/* khám bệnh */}
+            <Route path="/khambenh" exact element={<PhieuKham />} />
             <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
-            <Route path='/navbar' exact element={<Navbar />} />
-            <Route path='/chatroom' exact element={<ChatRoom />} />
-          </Routes>
 
+          </Routes>
+          <Chat />
           <Footer />
+
+
+
         </div>
+
       </BrowserRouter>
 
     </MyUserContext.Provider>

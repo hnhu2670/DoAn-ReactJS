@@ -1,0 +1,14 @@
+section#section-chonbs {
+    width: 50%;
+    padding: 2%;
+    background-color: lightgray;
+    border: 1px solid white;
+    border-radius: 15px;
+}
+
+button.btn-xacnhan {
+    width: 30%;
+    margin-left: 65%;
+    border-radius: 15px;
+    background-color: #d2f6e2 !important;
+}
