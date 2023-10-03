@@ -17,6 +17,11 @@
   flex-wrap: wrap;
 }
 
+div.container {
+  padding: 0 4%;
+  /* margin: 0 5%; */
+}
+
 /* form date */
 .form-control {
   flex-direction: inherit !important;

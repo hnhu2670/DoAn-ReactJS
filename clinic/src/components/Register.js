@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Apis, { endpoints } from "../configs/apis";
 import MySpinner from "../layout/MySpinner";
 import "../resources/css/style.css";
-
+import "../resources/css/register.css"
 const Register = () => {
     const [user, setUser] = useState({
         "username": "",
@@ -70,15 +70,17 @@ const Register = () => {
 
 
     return <>
-        <div className='border'>
-            <div className="img_signin">
-                <img src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1691914443/Login_Web_Animation_fhmgp8.png" alt="alert" />
-            </div>
-            <div className='signin'>
-                <h1>Đăng ký tài khoản</h1>
+
+        <section id="section-register">
+            <div className="form-register">
+                {/* <div className="img_signin">
+                <img src="https://www.livemint.com/lm-img/img/2023/07/30/1600x900/It-is-a-noble-profession-but-becoming-a-doctor-is-_1690736586642.jpg" alt="alert" />
+            </div> */}
+
+                <h1 className="text-center text-login top-text">ĐĂNG KÝ TÀI KHOẢN</h1>
 
                 <Form onSubmit={register} className='contentsignin'>
-                    <div className='contentsignin1'>
+                    <Row className="m-2">
                         <Form.Group className="mb-3" >
                             <Form.Label>Tên</Form.Label>
                             <Form.Control type="text" placeholder="Tên"
@@ -90,28 +92,8 @@ const Register = () => {
                                 Vui lòng nhập tên!!!
                             </Form.Control.Feedback>
                         </Form.Group>
-
-                        <Form.Group className="mb-3" >
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Email"
-                                value={user.email}
-                                onChange={e => change(e, "email")}
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Vui lòng nhập email!!!
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className="mb-3" >
-                            <Form.Label>Điện thoại</Form.Label>
-                            <Form.Control type="tel" placeholder="Điện thoại"
-                                value={user.phone} onChange={e => change(e, "phone")}
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Vui lòng nhập số điện thoại!!!
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                    </Row>
+                    <Row className="m-2">
                         <Form.Group className="mb-3" >
                             <Form.Label>Tên đăng nhập</Form.Label>
                             <Form.Control type="text" value={user.username}
@@ -122,45 +104,8 @@ const Register = () => {
                                 Vui lòng nhập tên đăng nhập!!!
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Ngày sinh</Form.Label>
-                            <Form.Control type="date" value={user.dod}
-                                onChange={e => change(e, "dod")} placeholder="Xác nhận mật khẩu"
-                                required
-                            />
-                        </Form.Group>
-                    </div>
-                    <div className='contentsignin1'>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Mật khẩu</Form.Label>
-                            <Form.Control type="password" value={user.password}
-                                onChange={e => change(e, "password")} placeholder="Mật khẩu"
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Vui lòng nhập password!!!
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Xác nhận mật khẩu</Form.Label>
-                            <Form.Control type="password" value={user.confirmPass}
-                                onChange={e => change(e, "confirmPass")} placeholder="Xác nhận mật khẩu"
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Vui lòng nhập lại pasword!!!
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Địa chỉ</Form.Label>
-                            <Form.Control type="text" value={user.address}
-                                onChange={e => change(e, "address")} placeholder="Xác nhận mật khẩu"
-                                required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                Vui lòng nhập địa chỉ!!!
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                    </Row>
+                    <Row className="m-2">
                         <Form.Group className="mb-3">
                             <Form.Label>Giới tính</Form.Label>
                             <Form.Control as="select" value={user.sex} onChange={e => change(e, "sex")} >
@@ -172,6 +117,83 @@ const Register = () => {
                                 Vui lòng chọn giới tính!!!
                             </Form.Control.Feedback>
                         </Form.Group>
+                    </Row>
+                    <Row className="m-2">
+                        <Form.Group className="mb-3">
+                            <Form.Label>Ngày sinh</Form.Label>
+                            <Form.Control type="date" value={user.dod}
+                                onChange={e => change(e, "dod")} placeholder="Xác nhận mật khẩu"
+                                required
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className="m-2">
+                        <Form.Group className="mb-3">
+                            <Form.Label>Địa chỉ</Form.Label>
+                            <Form.Control type="text" value={user.address}
+                                onChange={e => change(e, "address")} placeholder="Địa chỉ"
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Vui lòng nhập địa chỉ!!!
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+
+                    <Row className="m-2">
+                        <Col>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Email"
+                                    value={user.email}
+                                    onChange={e => change(e, "email")}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Vui lòng nhập email!!!
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Điện thoại</Form.Label>
+                                <Form.Control type="tel" placeholder="Điện thoại"
+                                    value={user.phone} onChange={e => change(e, "phone")}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Vui lòng nhập số điện thoại!!!
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row className="m-2">
+                        <Form.Group className="mb-3">
+                            <Form.Label>Mật khẩu</Form.Label>
+                            <Form.Control type="password" value={user.password}
+                                onChange={e => change(e, "password")} placeholder="Mật khẩu"
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Vui lòng nhập password!!!
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+
+
+                    <Row className="m-2">
+                        <Form.Group className="mb-3">
+                            <Form.Label>Xác nhận mật khẩu</Form.Label>
+                            <Form.Control type="password" value={user.confirmPass}
+                                onChange={e => change(e, "confirmPass")} placeholder="Xác nhận mật khẩu"
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Vui lòng nhập lại pasword!!!
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+                    <Row className="m-2">
                         <Form.Group className="mb-3">
                             <Form.Label>Ảnh đại diện</Form.Label>
                             <Form.Control type="file" ref={avatar} />
@@ -179,17 +201,21 @@ const Register = () => {
                                 Vui lòng chọn ảnh!!!
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Form.Group className="mb-3">
+                    </Row>
+                    <Row className="m-2">
+                        <Form.Group >
                             {loading === true ? <MySpinner /> : <Button type="submit" variant="danger">Đăng ký</Button>}
 
                         </Form.Group>
-                        {err === null ? "" : <Alert variant="danger">{err}</Alert>}
+                    </Row>
+                    {err === null ? "" : <Alert variant="danger">{err}</Alert>}
 
-                    </div>
                 </Form>
-
             </div>
-        </div>
+        </section>
+
+
+
     </>
 }
 

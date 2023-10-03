@@ -17,14 +17,15 @@
 button.btn-note {
     background: white;
     color: black;
+    width: 50%;
 
     &:hover {
         background: white;
+        color: #60a37e !important;
     }
 }
 
 div.card:hover div.card-body {
-    top: 0;
     opacity: 1;
 }
 
@@ -32,20 +33,20 @@ div.card:hover div.card-body {
     position: absolute;
     background-color: #d2f6e2;
     opacity: 0.8;
-    top: 60%;
+    top: 55%;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 10px !important;
-    transition: top 0s ease-in-out;
+    transition: top 0.5s ease-in-out;
 }
 
 
 
 .section-doctor div.item:hover div.card-body {
-    top: 0.9;
+    /* top: 0.9; */
     opacity: 1;
-    transition: top 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
 }
 
 .card-img:hover+.card-body {

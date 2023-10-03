@@ -84,8 +84,6 @@ const MyProfile = () => {
         process();
 
     }
-
-
     return (<>
         <Container>
             <section id="section-profile">
@@ -93,7 +91,7 @@ const MyProfile = () => {
 
                 <div className="profile-text">
                     <Form id="form-profile" onSubmit={updateUser}>
-                        <h1 className="text-center">MY PROFILE</h1>
+                        <h1 className="text-center text-login top-text">MY PROFILE</h1>
                         <Row className="mt-5">
                             <Col sm={5} className="mt-5">
                                 <Form.Group

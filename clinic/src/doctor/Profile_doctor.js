@@ -150,15 +150,15 @@ const Profile_doctor = () => {
     return (<>
         <div className="container">
             <div>
-                thông tin bác sĩ {id}
+                <h1 className="text-center text-login top-text">THÔNG TIN BÁC SĨ</h1>
                 <Row className="bs-thongtin"  >
                     <Col >
                         <Row>
                             <Col className="bs-avatar">
                                 <img src={doctorId.avatar} alt="ảnh" />
                             </Col>
-                            <Col className="bs-name">
-                                <h3>{doctorId.name}</h3>
+                            <Col className="bs-name mt-5">
+                                <h3 style={{ fontSize: 30 + "px" }}>{doctorId.name}</h3>
                                 <p>Chuyên khoa </p>
 
                             </Col>
@@ -167,7 +167,7 @@ const Profile_doctor = () => {
                     </Col>
 
                     <Col className="bs-lichkham">
-                        <h4>Lịch khám bệnh của bác sĩ</h4>
+                        <h4 >Lịch khám bệnh của bác sĩ</h4>
                         {shift.map((d) => (
                             <Accordion key={d}>
                                 <Accordion.Header>{d.dateSchedule}</Accordion.Header>
@@ -188,9 +188,9 @@ const Profile_doctor = () => {
             <hr></hr>
 
             <div>
-                <h2>ĐÁNH GIÁ CỦA BỆNH NHÂN</h2>
+                <h2 className="m-3" style={{ fontSize: 35 + "px" }}>ĐÁNH GIÁ CỦA BỆNH NHÂN</h2>
                 <div style={{ display: "flex" }}>
-                    <p className="mr-1">Điểm đánh giá: {score}</p>
+                    <p className="mr-1">Đánh giá: </p>
 
                     {score == 1 ? (
                         <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>) :
@@ -213,7 +213,7 @@ const Profile_doctor = () => {
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
                             </>
-                        ) : (
+                        ) : score == 5 ? (
                             <>
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
@@ -221,6 +221,7 @@ const Profile_doctor = () => {
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
                                 <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
                             </>
+                        ) : (<p className="mr-1">Chưa có đánh giá</p>
                         )
                     }
                 </div>

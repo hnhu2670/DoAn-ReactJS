@@ -20,7 +20,7 @@ const Header = () => {
             <div>
                 <header>
                     <section className="section-header">
-                        <div className="flex tab-menu bg-sky-500/75 text-lg">
+                        <div className="flex tab-menu text-lg">
                             <div className="logoName">
                                 <Link to="/" ><img src={logoImg} alt="logo" /></Link>
                                 <Link to="/" ><h1>PISCES hospital</h1></Link>
@@ -39,7 +39,7 @@ const Header = () => {
                                         <li><Link variant="secondary" className='booking' to="/datlichkham"> Đăng Ký Khám </Link></li>
                                         <li><Link variant="secondary" className='booking' to="/dangkylam"> Đăng Ký Làm Việc </Link></li>
                                         <li><Link variant="secondary" to="/xemlich"> Lịch Đăng Ký </Link></li>
-                                        <div >
+                                        <div style={{ paddingTop: 15 + "px" }}>
                                             <img class="avt_user" src={user.avatar} alt="" />
                                         </div>
 
@@ -56,6 +56,7 @@ const Header = () => {
                                             </Dropdown>
 
                                         </li>
+                                        <li><Link className='text-center' to="/login-google">Chat now</Link></li>
                                         <li><Link variant="secondary" onClick={logout} to="/">Đăng xuất</Link></li>
                                     </>}
                                 </ul>

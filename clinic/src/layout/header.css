@@ -1,6 +1,10 @@
 #login-name {
-    margin-top: -5px;
+    margin-top: -12px;
 
+}
+
+div.dropdown {
+    padding: 8px 0;
 }
 
 button.btn-loginuser {
@@ -9,6 +13,8 @@ button.btn-loginuser {
     border: none;
     color: #123653 !important;
     font-weight: bold;
+    height: auto;
+    padding: 0;
 
     &:hover {
         background: none;

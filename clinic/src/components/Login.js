@@ -5,9 +5,14 @@ import Apis, { authApi, endpoints } from '../configs/apis';
 import cookie from 'react-cookies';
 import { MyUserContext } from '../App';
 import jwt_decode from "jwt-decode";
+import "../resources/css/login.css"
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import MySpinner from '../layout/MySpinner';
 
 const Login = () => {
+
+
+
   const [user, dispatch] = useContext(MyUserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -55,6 +60,7 @@ const Login = () => {
     }
 
     try {
+      setLoading(true)
       let res = await Apis.post(endpoints['login'], {
         username: username,
         password: password,
@@ -75,6 +81,7 @@ const Login = () => {
 
 
     } catch (err) {
+      setLoading(false)
       if (err.response && err.response.status === 401) {
         setError('Tên đăng nhập hoặc mật khẩu không chính xác');
       } else {
@@ -102,12 +109,13 @@ const Login = () => {
               <div className="mainLogin">
 
                 <div className="form-login">
-                  <h1 className="text-center text-login">LOGIN</h1>
+                  <h1 className="text-center text-login top-text">LOGIN</h1>
                   <Row className="mb-3">
                     <div className="Logincontent logincontent1">
                       <label htmlFor="username">Tên đăng nhập</label>
                       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}
                         id="username"
+                        className='input-login'
                         placeholder="Nhập username..."
                         name="username"
                         required
@@ -115,44 +123,55 @@ const Login = () => {
                     </div>
                   </Row>
 
-                  <Row>
+                  <Row className="mb-4">
                     <div className="Logincontent logincontent2">
                       <label htmlFor="pwd">Mật khẩu</label>
+
                       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                         id="pwd"
+                        className='input-login'
                         placeholder="Nhập mật khẩu..."
                         name="password"
                         required />
                     </div>
                   </Row>
+                  <Row className="mb-4">
+                    <div className="buttonLogin">
+                      {loading === true ? <MySpinner /> :
+                        <Button type="submit" className="buttonLoginColor">
+                          Đăng nhập
+                        </Button>
+                      }
 
-                  <Link to="/dangky" className="nav-link">
-                    Đăng ký tại đây
-                  </Link>
-                  <GoogleOAuthProvider clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com">
-                    <GoogleLogin onSubmit
-                      className="login_google"
-                      clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com"
-                      onSuccess={(credentialResponse) => {
-                        // console.log("Đăng nhập thành công", credentialResponse.credential);
-                        var token = credentialResponse.credential;
-                        var decoded = jwt_decode(token);
-                        console.log(decoded);
-                        loginGoogle(decoded);
+                    </div>
+                  </Row>
+                  <Row>
+                    <h2 className='text-center mb-4 text-white'>HOẶC</h2>
+                  </Row>
+                  <Row className="mb-3">
+                    <div className='text-center w-full'>
+                      <GoogleOAuthProvider clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com">
+                        <GoogleLogin onSubmit
+                          className="login_google"
+                          clientId="852352451720-t84v78jbcd5f8st240i16cfij5jljon2.apps.googleusercontent.com"
+                          onSuccess={(credentialResponse) => {
+                            // console.log("Đăng nhập thành công", credentialResponse.credential);
+                            var token = credentialResponse.credential;
+                            var decoded = jwt_decode(token);
+                            console.log(decoded);
+                            loginGoogle(decoded);
 
-                      }}
-                      onFailure={(error) => {
-                        console.log("Đăng nhập không thành công", error);
+                          }}
+                          onFailure={(error) => {
+                            console.log("Đăng nhập không thành công", error);
 
-                      }}
-                      redirectUri="http://localhost:3000"
-                    />
-                  </GoogleOAuthProvider>
-                  <div className="buttonLogin">
-                    <Button type="submit" className="buttonLoginColor">
-                      Đăng nhập
-                    </Button>
-                  </div>
+                          }}
+                          redirectUri="http://localhost:3000"
+                        />
+                      </GoogleOAuthProvider>
+                    </div>
+
+                  </Row>
                   {error && <p className="error">{error}</p>}
                 </div>
 

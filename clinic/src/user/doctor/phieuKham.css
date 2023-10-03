@@ -1,5 +1,15 @@
-#form-phieukham {
-    width: 25%;
+div#form-phieukham {
+    width: 30%;
     margin: 0 auto;
     /* background-color: lightblue; */
+}
+
+div#form-thongtin {
+    /* width: 80%; */
+    /* padding: 0 15%; */
+    margin: 0 auto;
+}
+
+section#section-phieukham>div>div.row>div.col p {
+    color: #60a37e;
 }

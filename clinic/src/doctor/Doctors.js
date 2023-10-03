@@ -78,13 +78,20 @@ const Doctor = () => {
                                     <Card.Img variant="top" src={d.avatar} />
                                     <Card.Body >
                                         <Card.Title>{d.name}</Card.Title>
-
                                         <Button className="btn-note">
                                             <Link to={`/bacsi/${d.id}`}
                                                 id={d.id}>
                                                 Chi tiết
                                             </Link>
                                         </Button>
+                                        {/* {loading === true ? <MySpinner /> :
+                                            <Button className="btn-note">
+                                                <Link to={`/bacsi/${d.id}`}
+                                                    id={d.id}>
+                                                    Chi tiết
+                                                </Link>
+                                            </Button>
+                                        } */}
                                     </Card.Body>
                                 </Card>
                             </Col>
