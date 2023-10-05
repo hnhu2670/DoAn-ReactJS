@@ -6,6 +6,7 @@ import { MyUserContext } from "../../App";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import apis, { endpoints } from "../../configs/apis";
+import moment from "moment";
 
 const DatLichKham = () => {
     const [user] = useContext(MyUserContext);
@@ -61,11 +62,13 @@ const DatLichKham = () => {
             <section id="section-datkham">
 
                 <Container>
+                    <h1 className="text-center text-login top-text">ĐẶT LỊCH KHÁM</h1>
                     <Row>
                         <Col sm={7}>
                             <div className="profile-text">
+
                                 <Form id="form-profile" onSubmit={dangky}>
-                                    <h1 className="text-center">ĐẶT LỊCH KHÁM</h1>
+
                                     <Row>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Tên bệnh nhân</Form.Label>
@@ -83,7 +86,7 @@ const DatLichKham = () => {
                                             <Form.Control
                                                 type="text"
                                                 placeholder="Ngày sinh"
-                                                defaultValue={appointment.dod}
+                                                defaultValue={moment(appointment.dod).format('DD/MM/YYYY')}
                                                 disabled
                                             />
                                         </Form.Group>

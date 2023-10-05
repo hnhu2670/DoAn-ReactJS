@@ -15,7 +15,7 @@ const Profile_doctor = () => {
     const [user] = useContext(MyUserContext);
     const [isbtn, setIsBtn] = useState(false)
     const { id } = useParams(); //id phải trùng lưu trữ với csdl
-    const [doctorId, setDoctor] = useState(null);
+    const [doctorId, setDoctor] = useState("");
     const [rating, setRating] = useState([]);
     const [score, setScore] = useState('');
     const [shift, setShift] = useState([]);

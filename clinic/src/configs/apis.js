@@ -27,6 +27,18 @@ export const endpoints = {
     "isUser": `${SERVER_CONTEXT}/api/isUser/`,
     "up-password": `${SERVER_CONTEXT}/api/up-password/`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
+    // "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
+    "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
+    "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
+    "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
+    "lichkhamchuaxatnhan": `${SERVER_CONTEXT}/api/nurse/lichkhamchuaxatnhan`,
+    "phieubenh": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieubenh`,
+    "lichdangkyca1": `${SERVER_CONTEXT}/api/lichlamdangkyca1`,
+    "lichdangkyca2": `${SERVER_CONTEXT}/api/lichlamdangkyca2`,
+    "lichdangkyca3": `${SERVER_CONTEXT}/api/lichlamdangkyca3`,
+    "dichvu": `${SERVER_CONTEXT}/api/service`,
+    "khambenh": `${SERVER_CONTEXT}/api/doctor/khambenh`
+
 
 
 }
