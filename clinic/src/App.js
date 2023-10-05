@@ -24,6 +24,7 @@ import Chat from "./Chat"
 import LichKham from "./user/doctor/LichKham"
 import PhieuKham from './user/doctor/PhieuKham';
 import Pay from './paypal/PayPal'
+import LichSuKham from './user/doctor/LichSuKham';
 export const MyUserContext = createContext();
 function App() {
 
@@ -56,7 +57,8 @@ function App() {
             <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
             {/* thanh toán */}
             <Route path="/thanhtoan" exact element={<Pay />} />
-
+            {/* lịch sử khám của bệnh nhân */}
+            <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
           </Routes>
           <Chat />
           <Footer />

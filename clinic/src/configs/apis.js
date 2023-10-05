@@ -37,7 +37,8 @@ export const endpoints = {
     "lichdangkyca2": `${SERVER_CONTEXT}/api/lichlamdangkyca2`,
     "lichdangkyca3": `${SERVER_CONTEXT}/api/lichlamdangkyca3`,
     "dichvu": `${SERVER_CONTEXT}/api/service`,
-    "khambenh": `${SERVER_CONTEXT}/api/doctor/khambenh`
+    "khambenh": `${SERVER_CONTEXT}/api/doctor/khambenh`,
+    "lichsukham": (id) => `${SERVER_CONTEXT}/api/doctor/lichsukham/${id}`,
 
 
 

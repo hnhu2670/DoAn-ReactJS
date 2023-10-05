@@ -48,7 +48,10 @@ const LichKham = () => {
                                 <tr key={appointment.id}>
                                     <td>{appointment.id}</td>
                                     <td>{appointment.sickpersonId.id}</td>
-                                    <td>{appointment.sickpersonId.name}</td>
+                                    <td><Link className='text-success'
+                                        to={`${appointment.sickpersonId.id}`}
+                                    >
+                                        {appointment.sickpersonId.name}</Link></td>
                                     <td> {moment(appointment.appointmentDate).format('DD/MM/YYYY')}</td>
                                     <td>{moment(appointment.appointmentDate).format('HH:mm')}</td>
                                     <td>{appointment.prescriptionId.conclusion}</td>
