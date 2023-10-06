@@ -25,6 +25,7 @@ import LichKham from "./user/doctor/LichKham"
 import PhieuKham from './user/doctor/PhieuKham';
 import Pay from './paypal/PayPal'
 import LichSuKham from './user/doctor/LichSuKham';
+import Thuoc from './user/doctor/Thuoc';
 export const MyUserContext = createContext();
 function App() {
 
@@ -59,6 +60,9 @@ function App() {
             <Route path="/thanhtoan" exact element={<Pay />} />
             {/* lịch sử khám của bệnh nhân */}
             <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
+            {/* thuốc */}
+            <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
+
           </Routes>
           <Chat />
           <Footer />

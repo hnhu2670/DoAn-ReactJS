@@ -4,20 +4,22 @@
     display: inline-block;
     outline: 0;
     border: none;
-    padding: 0 1%;
+    padding: 0 5%;
     height: 45px;
+    background: rgba(255, 255, 255, 0.9);
     line-height: 45px;
     border-radius: 7px;
     font-weight: 400;
-    font-size: 16px;
-    background: #fff;
+    /* font-size: 16px; */
+    ;
     color: black !important;
     box-shadow: 0 4px 14px 0 rgb(0 0 0 / 10%);
     transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     text-align: center;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgb(210 246 226);
+
         box-shadow: 0 6px 20px rgb(93 93 93 / 23%);
     }
 
