@@ -27,6 +27,7 @@ import LichSuKham from './user/doctor/LichSuKham';
 import Thuoc from './user/doctor/Thuoc';
 import ThanhToan from './user/nurse/ThanhToan';
 import ToaThuoc from './user/doctor/ToaThuoc';
+import DanhGia from './user/patient/DanhGia';
 export const MyUserContext = createContext();
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
   return (
     <MyUserContext.Provider value={[user, dispatch]}>
       <BrowserRouter>
+
         <Header />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -57,16 +59,20 @@ function App() {
           <Route path="/xemlichkham/khambenh/:id/phieukham" exact element={<PhieuKham />} />
           <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
           {/* thanh toán */}
-          <Route path='/thanhtoan' exact element={<ThanhToan />} />
+          <Route path='/thanhtoan/:id' exact element={<ThanhToan />} />
           {/* lịch sử khám của bệnh nhân */}
           <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
           {/* thuốc */}
           <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
           {/* toa thuốc */}
           <Route path="/toathuoc" exact element={<ToaThuoc />} />
+          {/* đánh giá */}
+          <Route path="/danhgia" exact element={<DanhGia />} />
         </Routes>
         <Chat />
         <Footer />
+
+
       </BrowserRouter>
 
     </MyUserContext.Provider>
