@@ -1,7 +1,35 @@
 import { Col, Container, Form, Row, Table } from "react-bootstrap"
 import TypeButton from "../../button/Button"
+import { useParams } from "react-router-dom"
+import { useState } from "react";
+import { useEffect } from "react";
+import apis, { endpoints } from "../../configs/apis";
 
 const ThanhToan = () => {
+    const {id} = useParams();
+    const [phieu, setPhieuKham] = useState([])
+    useEffect(() => {
+
+
+        const loadPhieuKham = async () => {
+            try {
+                let { data } = await apis.get(endpoints['phieukham'](id));
+                setPhieuKham(data)
+                // setLoading(true)
+                console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+        
+
+
+        loadPhieuKham()
+    }, [id]);
+
     return (<>
         <Container>
             <section>
@@ -10,17 +38,17 @@ const ThanhToan = () => {
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin bệnh nhân</h2>
                     <Row>
                         <Col>
-                            Họ tên
+                            Họ tên : {phieu.sickpersonId.name}
                         </Col>
                         <Col>
-                            Ngày sinh
+                            Ngày sinh :{phieu.sickpersonId.dod}
                         </Col>
                         <Col>
-                            giới tính
+                            giới tính : {phieu.sickpersonId.sex}
                         </Col>
                     </Row>
-                    <Row>Địa chỉ</Row>
-                    <Row>Điện thoại</Row>
+                    <Row>Địa chỉ : {phieu.sickpersonId.address}</Row>
+                    <Row>Điện thoại : {phieu.sickpersonId.phone}</Row>
                 </div>
                 <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin thuốc</h2>

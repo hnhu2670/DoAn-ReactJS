@@ -58,7 +58,7 @@ function App() {
             <Route path="/xemlichkham/khambenh/:id/phieukham" exact element={<PhieuKham />} />
             <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
             {/* thanh toán */}
-            <Route path='/thanhtoan' exact element={<ThanhToan />} />
+            <Route path='/thanhtoan/:id' exact element={<ThanhToan />} />
             {/* lịch sử khám của bệnh nhân */}
             <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
             {/* thuốc */}
