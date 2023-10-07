@@ -12,8 +12,7 @@ import PhoneInput from 'react-phone-input-2';
 import "react-phone-input-2/lib/style.css";
 import { auth } from '../firebase';
 import apis, { endpoints, authApi } from '../configs/apis';
-// import './style.scss';
-
+import ImgLogin from "../resources/image/bgQuenMK.jpg"
 const ForgetPassword = () => {
     const [validated, setValidated] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -180,143 +179,149 @@ const ForgetPassword = () => {
     return (
         <div>
             <Container>
-                <Row className="vh-100 d-flex justify-content-center align-items-center">
+                <Row>
                     <Col>
-                        <div className="border border-5 border-primary"></div>
-                        <div className='border border-1 border-primary text-center'>
-                            <Toaster toastOptions={{ duration: 4000 }} />
-                            <div id="recaptcha-container"></div>
-                            {user ? (
-                                <Card className="shadow">
-                                    <Card.Body>
-                                        <div className="mb-3 mt-md-4">
-                                            <h2 className="fw-bold mb-2 text-uppercase text-center text-blue-700">Đặt lại mật khẩu</h2>
-                                            <div className="mb-3">
-                                                <Form noValidate validated={validated}
-                                                    onSubmit={updatePassword}
-                                                >
-                                                    <Form.Group
-                                                        className="mb-3"
-                                                        controlId="formBasicPassword"
-                                                    >
-                                                        <p className="font-bold text-xl text-blue-700 text-left">Mật khẩu mới</p>
-                                                        <Form.Control
-                                                            required
-                                                            type="password"
-                                                            value={taiKhoan.newPassword}
-                                                            onChange={e => change(e, "newPassword")}
-                                                            placeholder="Nhập mật khẩu mới ..." />
-                                                        <Form.Control.Feedback>Tuyệt vời!</Form.Control.Feedback>
-                                                        <Form.Control.Feedback type="invalid">
-                                                            Vui lòng nhập mật khẩu mới!!!
-                                                        </Form.Control.Feedback>
-                                                    </Form.Group>
-                                                    <Form.Group
-                                                        className="mb-3"
-                                                        controlId="formBasicPassword"
-                                                    >
-                                                        <p className="font-bold text-xl text-blue-700 text-left">Xác nhận mật khẩu</p>
-                                                        <Form.Control
-                                                            required
-                                                            type="password"
-                                                            value={taiKhoan.confirmNewPassword}
-                                                            onChange={e => change(e, "confirmNewPassword")}
-                                                            placeholder="Nhập lại mật khẩu mới ..." />
-                                                        <Form.Control.Feedback>Tuyệt vời!</Form.Control.Feedback>
-                                                        <Form.Control.Feedback type="invalid">
-                                                            Vui lòng xác nhận lại mật khẩu!!!
-                                                        </Form.Control.Feedback>
-                                                    </Form.Group>
-                                                    {loading === false && <div className="d-grid">
-                                                        <Button
-                                                            variant="primary"
-                                                            type="submit">
-                                                            Đặt mật khẩu
-                                                        </Button>
-                                                    </div>}
-                                                    {password === false ? <Alert>Mật khẩu không trùng khớp</Alert> : <div></div>}
-                                                    {changeSuccess === true ? <Alert>Đổi mật khẩu thành công</Alert> : <div></div>}
-                                                    {err !== null && <Alert>{err}</Alert>}
-                                                </Form>
+                        <img src={ImgLogin} alt='ảnh' />
+                    </Col>
+                    <Col>
+                        <Row className="vh-100 d-flex justify-content-center align-items-center">
+                            <Col>
+                                {/* <div className="border border-5 border-primary"></div> */}
+                                <div className=''>
+                                    <Toaster toastOptions={{ duration: 4000 }} />
+                                    <div id="recaptcha-container"></div>
+                                    {user ? (
+                                        <Card className="shadow">
+                                            <Card.Body>
+                                                <div className="mb-3 mt-md-4">
+                                                    <h2 className="fw-bold mb-2 text-uppercase text-center ">Đặt lại mật khẩu</h2>
+                                                    <div className="mb-3">
+                                                        <Form noValidate validated={validated}
+                                                            onSubmit={updatePassword}
+                                                        >
+                                                            <Form.Group
+                                                                className="mb-3"
+                                                                controlId="formBasicPassword"
+                                                            >
+                                                                <p className="font-bold text-xl text-blue-700 text-left">Mật khẩu mới</p>
+                                                                <Form.Control
+                                                                    required
+                                                                    type="password"
+                                                                    value={taiKhoan.newPassword}
+                                                                    onChange={e => change(e, "newPassword")}
+                                                                    placeholder="Nhập mật khẩu mới ..." />
+                                                                <Form.Control.Feedback>Tuyệt vời!</Form.Control.Feedback>
+                                                                <Form.Control.Feedback type="invalid">
+                                                                    Vui lòng nhập mật khẩu mới!!!
+                                                                </Form.Control.Feedback>
+                                                            </Form.Group>
+                                                            <Form.Group
+                                                                className="mb-3"
+                                                                controlId="formBasicPassword"
+                                                            >
+                                                                <p className="font-bold text-xl text-blue-700 text-left">Xác nhận mật khẩu</p>
+                                                                <Form.Control
+                                                                    required
+                                                                    type="password"
+                                                                    value={taiKhoan.confirmNewPassword}
+                                                                    onChange={e => change(e, "confirmNewPassword")}
+                                                                    placeholder="Nhập lại mật khẩu mới ..." />
+                                                                <Form.Control.Feedback>Tuyệt vời!</Form.Control.Feedback>
+                                                                <Form.Control.Feedback type="invalid">
+                                                                    Vui lòng xác nhận lại mật khẩu!!!
+                                                                </Form.Control.Feedback>
+                                                            </Form.Group>
+                                                            {loading === false && <div className="d-grid">
+                                                                <Button
+                                                                    variant="primary"
+                                                                    type="submit">
+                                                                    Đặt mật khẩu
+                                                                </Button>
+                                                            </div>}
+                                                            {password === false ? <Alert>Mật khẩu không trùng khớp</Alert> : <div></div>}
+                                                            {changeSuccess === true ? <Alert>Đổi mật khẩu thành công</Alert> : <div></div>}
+                                                            {err !== null && <Alert>{err}</Alert>}
+                                                        </Form>
 
-                                            </div>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            ) : (
-                                <div className="w-80 flex flex-col gap-4 rounded-lg p-4" style={{ width: '100%' }}>
-                                    <h1 className="text-center leading-normal text-blue-700 text-5xl mb-6 font-bold">
-                                        Quên mật khẩu
-                                    </h1>
-                                    {showOTP ? (
-                                        <>
-                                            <div className="bg-black text-blue-700 w-fit mx-auto p-4 rounded-full border border-3 border-primary">
-                                                <BsFillShieldLockFill size={30} />
-                                            </div>
-                                            <h3
-                                                htmlFor="ph"
-                                                className="font-bold text-2xl text-blue-700 text-center"
-                                                style={{ marginBottom: 0 }}
-                                            >
-                                                Nhập mã otp
-                                            </h3>
-                                            <OtpInput
-                                                value={otp}
-                                                onChange={setOtp}
-                                                OTPLength={6}
-                                                otpType="number"
-                                                disabled={false}
-                                                autoFocus
-                                                className="opt-container"
-                                            ></OtpInput>
-                                            <button
-                                                onClick={onOTPVerify}
-                                                className="bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded"
-                                            >
-                                                {loading && (
-                                                    <CgSpinner size={20} className="mt-1 animate-spin" />
-                                                )}
-                                                <span>Xác minh OTP</span>
-                                            </button>
-                                        </>
+                                                    </div>
+                                                </div>
+                                            </Card.Body>
+                                        </Card>
                                     ) : (
-                                        <>
-                                            <div className="bg-white text-blue-700 w-fit mx-auto p-4 rounded-full border border-3 border-primary">
-                                                <BsTelephoneFill size={30} />
-                                            </div>
-                                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                <p className="textDky">Tên đăng nhập</p>
-                                                <Form.Control
-                                                    required
-                                                    type="text"
-                                                    value={username}
-                                                    onChange={e => {
-                                                        setUsername(e.target.value);
-                                                        setIsUserValid(true);
-                                                    }}
-                                                    placeholder="Nhập tên đăng nhập ..."
-                                                />
-                                                {!isUserValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền tên đăng nhập.</p>}
-                                            </Form.Group>
-                                            <Form.Group className="mb-3">
-                                                <p className="textDky">Số điện thoại</p>
-                                                <PhoneInput country={"in"} value={ph} onChange={handlePhoneChange} />
-                                            </Form.Group>
-                                            {!isPhValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền số điện thoại.</p>}
-                                            <button
-                                                onClick={onSubmitSMS}
-                                                className="bg-white w-full flex gap-1 items-center justify-center py-2.5 text-white rounded "
-                                            >
-                                                {loading && (
-                                                    <CgSpinner size={20} className="mt-1 animate-spin" />
-                                                )}
-                                                <span>Gửi SMS</span>
-                                            </button>
-                                        </>
+                                        <div className="w-80 flex flex-col gap-4 rounded-lg p-4" style={{ width: '100%' }}>
+                                            <h1 className="text-center text-login top-text">QUÊN MẬT KHẨU</h1>
+
+                                            {showOTP ? (
+                                                <>
+                                                    <div className="bg-black text-blue-700 w-fit mx-auto p-4 rounded-full border border-3 border-primary">
+                                                        <BsFillShieldLockFill size={30} />
+                                                    </div>
+                                                    <h3
+                                                        htmlFor="ph"
+                                                        className="font-bold text-2xl text-blue-700 text-center"
+                                                        style={{ marginBottom: 0 }}
+                                                    >
+                                                        Nhập mã otp
+                                                    </h3>
+                                                    <OtpInput
+                                                        value={otp}
+                                                        onChange={setOtp}
+                                                        OTPLength={6}
+                                                        otpType="number"
+                                                        disabled={false}
+                                                        autoFocus
+                                                        className="opt-container"
+                                                    ></OtpInput>
+                                                    <button
+                                                        onClick={onOTPVerify}
+                                                        className="bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 text-white rounded"
+                                                    >
+                                                        {loading && (
+                                                            <CgSpinner size={20} className="mt-1 animate-spin" />
+                                                        )}
+                                                        <span>Xác minh OTP</span>
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {/* <div className="bg-white text-blue-700 w-fit mx-auto p-4 rounded-full border border-3 border-primary">
+                                                        <BsTelephoneFill size={30} />
+                                                    </div> */}
+                                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                        <p className="textDky">Tên đăng nhập</p>
+                                                        <Form.Control
+                                                            required
+                                                            type="text"
+                                                            value={username}
+                                                            onChange={e => {
+                                                                setUsername(e.target.value);
+                                                                setIsUserValid(true);
+                                                            }}
+                                                            placeholder="Nhập tên đăng nhập ..."
+                                                        />
+                                                        {!isUserValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền tên đăng nhập.</p>}
+                                                    </Form.Group>
+                                                    <Form.Group className="mb-3">
+                                                        <p className="textDky">Số điện thoại</p>
+                                                        <PhoneInput country={"in"} value={ph} onChange={handlePhoneChange} />
+                                                    </Form.Group>
+                                                    {!isPhValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền số điện thoại.</p>}
+                                                    <button
+                                                        onClick={onSubmitSMS}
+                                                        className="bg-white w-full flex gap-1 items-center justify-center py-2.5 text-white rounded "
+                                                    >
+                                                        {loading && (
+                                                            <CgSpinner size={20} className="mt-1 animate-spin" />
+                                                        )}
+                                                        <span>Gửi SMS</span>
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
-                            )}
-                        </div>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>

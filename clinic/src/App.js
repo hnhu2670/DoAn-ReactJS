@@ -35,44 +35,38 @@ function App() {
   return (
     <MyUserContext.Provider value={[user, dispatch]}>
       <BrowserRouter>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/login" exact element={<Login />} />
-            {/* <Route path="/datlich" exact element={<Dangky />} /> */}
-            <Route path="/dangky" exact element={<Register />} />
-            <Route path="/datlai" exact element={<ResetPass />} />
-            <Route path="/xacnhanotp" exact element={<OTPPage />} />
-            <Route path="/xemlich" exact element={<Lichsudangky />} />
-            <Route path="/bacsi" exact element={<Doctor />} />
-            <Route path="/bacsi/:id" exact element={<Profile_doctor />} />
-            <Route path="/trangcanhan" exact element={<Update />} />
-            <Route path="/datlichkham" exact element={<DatLichKham />} />
-            <Route path="/dangkylam" exact element={<DKLam />} />
-            {/* xác nhận lịch khám */}
-            <Route path="/xacnhanlich" exact element={<XNKham />} />
-            {/* lịch khám */}
-            <Route path="/xemlichkham" exact element={<LichKham />} />
-            {/* khám bệnh */}
-            <Route path="/xemlichkham/khambenh/:id/phieukham" exact element={<PhieuKham />} />
-            <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
-            {/* thanh toán */}
-            <Route path='/thanhtoan' exact element={<ThanhToan />} />
-            {/* lịch sử khám của bệnh nhân */}
-            <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
-            {/* thuốc */}
-            <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
-            {/* toa thuốc */}
-            <Route path="/toathuoc" exact element={<ToaThuoc />} />
-          </Routes>
-          <Chat />
-          <Footer />
-
-
-
-        </div>
-
+        <Header />
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/login" exact element={<Login />} />
+          {/* <Route path="/datlich" exact element={<Dangky />} /> */}
+          <Route path="/dangky" exact element={<Register />} />
+          <Route path="/datlai" exact element={<ResetPass />} />
+          <Route path="/xacnhanotp" exact element={<OTPPage />} />
+          <Route path="/xemlich" exact element={<Lichsudangky />} />
+          <Route path="/bacsi" exact element={<Doctor />} />
+          <Route path="/bacsi/:id" exact element={<Profile_doctor />} />
+          <Route path="/trangcanhan" exact element={<Update />} />
+          <Route path="/datlichkham" exact element={<DatLichKham />} />
+          <Route path="/dangkylam" exact element={<DKLam />} />
+          {/* xác nhận lịch khám */}
+          <Route path="/xacnhanlich" exact element={<XNKham />} />
+          {/* lịch khám */}
+          <Route path="/xemlichkham" exact element={<LichKham />} />
+          {/* khám bệnh */}
+          <Route path="/xemlichkham/khambenh/:id/phieukham" exact element={<PhieuKham />} />
+          <Route path='/quenmatkhau' exact element={<ForgetPassword />} />
+          {/* thanh toán */}
+          <Route path='/thanhtoan' exact element={<ThanhToan />} />
+          {/* lịch sử khám của bệnh nhân */}
+          <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
+          {/* thuốc */}
+          <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
+          {/* toa thuốc */}
+          <Route path="/toathuoc" exact element={<ToaThuoc />} />
+        </Routes>
+        <Chat />
+        <Footer />
       </BrowserRouter>
 
     </MyUserContext.Provider>

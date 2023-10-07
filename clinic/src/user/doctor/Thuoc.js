@@ -129,6 +129,9 @@ const Thuoc = () => {
     return (
         <Container>
             <section>
+                <h2 className='col-title'>đây là phiếu bênh :idPre
+
+                </h2>
                 <Row>
                     <h2 className='col-title'>DANH SÁCH THUỐC</h2>
                     <Table striped bordered hove className="text-center mb-5">

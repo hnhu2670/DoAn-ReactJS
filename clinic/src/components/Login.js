@@ -8,6 +8,8 @@ import jwt_decode from "jwt-decode";
 import "../resources/css/login.css"
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import MySpinner from '../layout/MySpinner';
+// import { IconName } from "react-icons/fa";
+// import { FontAwesomeIcon } from "react-fontawesome"
 
 const Login = () => {
 

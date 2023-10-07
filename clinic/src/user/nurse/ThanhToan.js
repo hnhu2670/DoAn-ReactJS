@@ -2,6 +2,7 @@ import { Col, Container, Form, Row, Table } from "react-bootstrap"
 import TypeButton from "../../button/Button"
 
 const ThanhToan = () => {
+
     return (<>
         <Container>
             <section>
