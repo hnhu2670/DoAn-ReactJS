@@ -375,13 +375,7 @@ const PhieuKham = () => {
     return (
         <Container>
             <section id='section-phieukham'>
-
-
                 <h1 className="text-center text-login top-text">THÔNG TIN KHÁM BỆNH</h1>
-
-
-
-
                 <div id='form-phieukham'>
                     <Row>
                         <Col>Mã phiếu khám: </Col>

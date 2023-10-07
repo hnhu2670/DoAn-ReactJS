@@ -136,6 +136,11 @@ const Login = () => {
                     </div>
                   </Row>
                   <Row className="mb-4">
+                    <Link to="/quenmatkhau" className='text-white text-right'>
+                      <i> <u>Quên mật khẩu</u></i>
+                    </Link>
+                  </Row>
+                  <Row className="mb-4">
                     <div className="buttonLogin">
                       {loading === true ? <MySpinner /> :
                         <Button type="submit" className="buttonLoginColor">
@@ -145,6 +150,7 @@ const Login = () => {
 
                     </div>
                   </Row>
+
                   <Row>
                     <h2 className='text-center mb-4 text-white'>HOẶC</h2>
                   </Row>

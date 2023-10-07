@@ -180,33 +180,21 @@ const Thuoc = () => {
                                 <tr>
                                     <th>Mã thuốc</th>
                                     <th>Tên thuốc</th>
-                                    <th>NSX</th>
-                                    <th>HSD</th>
                                     <th>Số lượng</th>
                                     <th>Đơn vị</th>
-                                    <th>Ghi chú</th>
+                                    <th>Hướng dẫn sử dụng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {toathuoc.map((t) => (
+                                {toathuoc.map((t) => (
                                     <tr key={t.id}>
-                                        <td>{d.id}</td>
-                                        <td>{d.name}</td>
-                                        <td>{d.provider}</td>
-                                        <td> {moment(d.productionDate).format('DD/MM/YYYY')}</td>
-                                        <td>{d.quantity}</td>
-                                        <td>{d.idUnit.name}</td>
-                                        <td>
-                                            <button
-                                                onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}
-                                            >
-                                                Thêm
-                                            </button>
-                                        </td>
-
-
+                                        <td>{t.medicineId.id}</td>
+                                        <td>{t.medicineId.name}</td>
+                                        <td>{t.quantity}</td>
+                                        <td>{t.medicineId.idUnit.name}</td>
+                                        <td>{t.instructions}</td>
                                     </tr>
-                                ))} */}
+                                ))}
                             </tbody>
                         </Table>
                     </Form>
@@ -217,7 +205,6 @@ const Thuoc = () => {
                         <Row className="mb-3">
                             <div className="Logincontent logincontent1">
                                 <label htmlFor="username">Tên thuốc: {themthuoc.tenthuoc}</label>
-
                             </div>
                         </Row>
                         <Row className="mb-3">

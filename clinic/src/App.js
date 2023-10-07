@@ -26,6 +26,7 @@ import PhieuKham from './user/doctor/PhieuKham';
 import LichSuKham from './user/doctor/LichSuKham';
 import Thuoc from './user/doctor/Thuoc';
 import ThanhToan from './user/nurse/ThanhToan';
+import ToaThuoc from './user/doctor/ToaThuoc';
 export const MyUserContext = createContext();
 function App() {
 
@@ -62,7 +63,8 @@ function App() {
             <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
             {/* thuốc */}
             <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
-
+            {/* toa thuốc */}
+            <Route path="/toathuoc" exact element={<ToaThuoc />} />
           </Routes>
           <Chat />
           <Footer />
