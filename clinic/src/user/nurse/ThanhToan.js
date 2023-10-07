@@ -1,10 +1,11 @@
-import { Col, Container, Form, Row, Table } from "react-bootstrap"
+import { Button, Col, Container, Form, Row, Table } from "react-bootstrap"
 import TypeButton from "../../button/Button"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react";
 import { useEffect } from "react";
 import apis, { endpoints } from "../../configs/apis";
 import MySpinner from "../../layout/MySpinner";
+import axios from "axios";
 
 const ThanhToan = () => {
     const nav = useNavigate()
@@ -22,7 +23,7 @@ const ThanhToan = () => {
     useEffect(() => {
         const loadPhieuKham = async () => {
             try {
-                let { data } = await apis.get(endpoints['phieukham'](id));
+                let { data } = await apis.get(endpoints['phieukham'](22));
                 setPhieuKham(data)
                 setLoading(true)
                 // console.log(data);
@@ -113,7 +114,14 @@ const ThanhToan = () => {
                 let res = await apis.post(endpoints["thanhtoan"], formData);
                 console.log("thanh cong");
                 if (res.status === 200) {
-                    nav(`/xemlichkham/phieukham/${phieu.id}/kethuoc`);
+                    console.log(res)
+                    // window.location.href = res.headers.location;
+                    axios.get(res);
+                }
+                if (res.status === 302) {
+                    console.log(res)
+                    // window.location.href = res.headers.location;;
+                    // axios.get(res)
                 }
             } catch (error) {
                 console.log(error)
@@ -144,12 +152,12 @@ const ThanhToan = () => {
     }
 
 
-    console.log(hoadon);
+    console.log(thanhtoan);
     return (<>
         <Container>
             <section>
                 <h1 className="text-center text-login top-text">THANH TOÁN HÓA ĐƠN</h1>
-                <div>
+                {/* <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin bệnh nhân</h2>
                     {loading === true ? (
                         <>
@@ -171,7 +179,7 @@ const ThanhToan = () => {
                         <MySpinner />
                     </>)}
 
-                </div>
+                </div> */}
                 <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin thuốc</h2>
                     <Table striped bordered hove className="text-center mb-5">
@@ -265,7 +273,7 @@ const ThanhToan = () => {
                         </Col>
                         <Col className="mt-4">
                             <Form.Group className="mb-3">
-                                <Link onClick={thanhtoanhoadon}> THANH TOÁN </Link>
+                                <Button onClick={thanhtoanhoadon}> THANH TOÁN </Button>
                             </Form.Group>
                         </Col>
 
