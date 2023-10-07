@@ -42,6 +42,12 @@ export const endpoints = {
     "thuoc": `${SERVER_CONTEXT}/api/medicines`,
     "toathuoc": (id) => `${SERVER_CONTEXT}/api/doctor/phieubenh/${id}/kethuoc`,
     "kethuoc": `${SERVER_CONTEXT}/api/doctor/phieubenh/kethuoc`,
+    "thuockham": (id) =>  `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/thuoc`,
+    "dichvukham": (id) =>  `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/dichvu`,
+    "loaipayment": `${SERVER_CONTEXT}/api/nurse/hinhthucthanhtoan`,
+    "thanhtoan": `${SERVER_CONTEXT}/api/nurse/thanhtoan`,
+    "hoadon": (id) =>  `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
+
 
 
 
