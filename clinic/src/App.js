@@ -62,7 +62,7 @@ function App() {
           {/* toa thuốc */}
           <Route path="/toathuoc/:id" exact element={<ToaThuoc />} />
           {/* đánh giá */}
-          <Route path="/danhgia" exact element={<DanhGia />} />
+          <Route path="/danhgia/:id" exact element={<DanhGia />} />
         </Routes>
         <Chat />
         <Footer />

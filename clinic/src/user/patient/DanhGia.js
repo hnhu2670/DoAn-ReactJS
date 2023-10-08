@@ -1,12 +1,24 @@
-import React from 'react'
-import { Col, Container, Form, Row } from 'react-bootstrap'
+import React, { useContext, useState } from 'react'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import TypeButton from '../../button/Button'
 import ImgStar from "../../resources/image/sao.png"
 import { render } from '@testing-library/react'
 import { el } from 'date-fns/locale'
 import "./danhGia.css"
+import { MyUserContext } from '../../App'
+import { useParams } from 'react-router-dom'
+import apis, { endpoints } from '../../configs/apis'
+import { useEffect } from 'react'
 const DanhGia = () => {
-
+    const [user] = useContext(MyUserContext);
+    const { id } = useParams()
+    const [bacsi, setbacsi] = useState([])
+    const [danhgia, setdanhgia] = useState({
+        IdBenhNhan: user.id,
+        IdDoctor: id,
+        point: "",
+        comment: "",
+    });
     function changeDiem() {
         let diem = 0;
         let bstar = 0;
@@ -60,7 +72,61 @@ const DanhGia = () => {
         }
     }
 
+    useEffect(() => {
+        const loadbacsi = async () => {
+            try {
+                let { data } = await apis.get(endpoints['pro-doctor'](id));
+                setbacsi(data)
+                console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        
+        loadbacsi()
+    }, [id]);
 
+    const change = (event, field) => {
+        const value = event.target.value; // Get the current value of the input field
+
+        setdanhgia((current) => {
+            const update = { ...current };
+            update[field] = value;
+            return update;
+        });
+    }
+    const danhgiabacsi = (evt) => {
+        evt.preventDefault();
+        const process = async () => {
+            try {
+                let formData = new FormData();
+                formData.append("IdDoctor", danhgia.IdDoctor);
+                formData.append("IdBenhNhan", danhgia.IdBenhNhan);
+                formData.append("point", danhgia.point);
+                formData.append("comment", danhgia.comment);
+                console.log(formData.data);
+                console.log("thanh cong do");
+                let res = await apis.post(endpoints["danhgia"], formData);
+                console.log("thanh cong");
+                if (res.status === 200) {
+                    // chuyển qua trang phiếu bệnh ==> id phiếu bệnh
+                    console.log("danh gia thanh cong")
+                    // nav(`/xemlichkham/phieukham/${phieu.id}/kethuoc`);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+
+
+
+        }
+
+
+        process();
+    }
+
+    console.log(danhgia)
     return (
         <Container>
             <section>
@@ -68,32 +134,48 @@ const DanhGia = () => {
 
                 <Row>
                     <Col sm={5}>
-                        ảnh bác sĩ
+                        <img src={bacsi.avatar}></img>
+                        <h1>{bacsi.name}</h1>
                     </Col>
                     <Col className='col-danhgia mb-5' >
                         <Row>
                             <Form.Group className="mb-3">
                                 <Form.Label>Cảm nhận của bạn về bác sĩ: (Thông tin bác sĩ)</Form.Label>
                                 <Form.Control as="textarea"
+                                    onChange={e => change(e, "comment")}
                                     required>
 
                                 </Form.Control>
 
                             </Form.Group>
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <Form.Group className="mb-3">
                                 <Form.Label>Trên thang điểm từ 1-5 bạn sẽ chấm bao nhiêu điểm</Form.Label>
                                 <Form.Control type="number"
                                     // value={themthuoc.soluongthuoc}
-                                    // onChange={e => change(e, "soluongthuoc")}
+                                    onChange={e => change(e, "point")}
                                     required>
                                 </Form.Control>
 
                             </Form.Group>
+                        </Row> */}
+                        <Row>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" onChange={e => change(e, "point")} />
+                            <label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4" onChange={e => change(e, "point")} />
+                            <label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3" onChange={e => change(e, "point")} />
+                            <label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2" onChange={e => change(e, "point")} />
+                            <label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1" onChange={e => change(e, "point")} />
+                            <label for="star1"></label>
+                        </div>
                         </Row>
                         <Row>
-                            <TypeButton className="btn-note">GỬI ĐÁNH GIÁ</TypeButton>
+                            <Button onClick={danhgiabacsi} className="btn-note">GỬI ĐÁNH GIÁ</Button>
                         </Row>
                     </Col>
                 </Row>
