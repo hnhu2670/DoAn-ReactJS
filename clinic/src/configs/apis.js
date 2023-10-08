@@ -50,11 +50,7 @@ export const endpoints = {
     "loaipayment": `${SERVER_CONTEXT}/api/nurse/hinhthucthanhtoan`,
     "thanhtoan": `${SERVER_CONTEXT}/api/nurse/thanhtoan`,
     "hoadon": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
-
-
-
-
-
+    "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
 
 }
 export const authApi = () => {

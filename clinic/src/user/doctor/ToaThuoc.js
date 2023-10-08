@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import TypeButton from '../../button/Button'
 import { useParams } from 'react-router-dom';
 import apis, { endpoints } from '../../configs/apis';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const ToaThuoc = () => {
     const { id } = useParams();
     const [phieu, setPhieuKham] = useState([])
     const [toathuoc, setToaThuoc] = useState([])
+    const [load, setLoad] = useState(false)
     useEffect(() => {
 
 
@@ -41,38 +44,61 @@ const ToaThuoc = () => {
         loadtoathuoc()
     }, [id]);
 
-    const xuatpdf = (evt) => {
-        evt.preventDefault();
-        const process = async () => {
-            try {
-                let res = await apis.get(endpoints["pdf"](id));
-                console.log(res)
-                // window.location.href = endpoints["pdf"](22);
+    // const xuatpdf = (evt) => {
+    //     evt.preventDefault();
+    //     const process = async () => {
+    //         try {
+    //             let res = await apis.get(endpoints["pdf"](id));
+    //             console.log(res)
+    //             // window.location.href = endpoints["pdf"](22);
 
-                // window.location.href = res
-                console.log("thanh cong get");
-                // if (res.status === 200) {
-                // console.log(res.name)
-
-
-                // }
-                // else {
-                // console.log("them that bai")
-                // }
+    //             // window.location.href = res
+    //             console.log("thanh cong get");
+    //             // if (res.status === 200) {
+    //             // console.log(res.name)
 
 
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        process();
+    //             // }
+    //             // else {
+    //             // console.log("them that bai")
+    //             // }
+
+
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     process();
+    // }
+
+    const pdfRef = useRef()
+    const downPDF = () => {
+        // const filedown = document.querySelector(".form-download")
+        setLoad(true)
+        const filedown = pdfRef.current
+        html2canvas(filedown).then((canvas) => {
+            // chuyen thanh dang anh
+            const imgData = canvas.toDataURL('img/png')
+            const doc = new jsPDF('p', 'mm', 'a4', true)
+            const componentWidth = doc.internal.pageSize.getWidth()
+            const componentHeight = doc.internal.pageSize.getHeight()
+            const imgWidth = canvas.width
+            const imgHeight = canvas.height
+            const ratio = Math.min(componentWidth / imgWidth, componentHeight / imgHeight)
+            const imgX = (componentWidth - imgWidth * ratio) / 2
+            const imgY = 30
+            doc.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+            // setLoad(false)
+            doc.save('hoadon.pdf')
+        })
+
     }
 
 
     return (
         <>
             <Container>
-                <section>
+                <section className='form-download' >
                     <h1 className="text-center text-login top-text">TOA THUỐC</h1>
                     {/* <div>
                         Tên bác sĩ: {phieu.doctorId.name}
@@ -101,7 +127,7 @@ const ToaThuoc = () => {
                         </Row>
                     </div> */}
                     <hr />
-                    <div>
+                    <div ref={pdfRef}>
                         {toathuoc.map((d) => (
                             <Row>
                                 <Col>
@@ -117,7 +143,11 @@ const ToaThuoc = () => {
                     </div>
                     <hr />
                     <div>
-                        <Button onClick={xuatpdf} className="btn-normal mr-5">XUẤT</Button>
+                        <Button
+                            className="btn-normal mr-5"
+                            onClick={downPDF}
+                        >XUẤT
+                        </Button>
                         <TypeButton className="btn-normal">LƯU</TypeButton>
 
                     </div>

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import apis, { endpoints } from "../../configs/apis";
 import MySpinner from "../../layout/MySpinner";
 import axios from "axios";
+import { render } from "@testing-library/react";
 
 const ThanhToan = () => {
     const nav = useNavigate()
@@ -134,16 +135,26 @@ const ThanhToan = () => {
                 console.log("thanh cong do");
                 let res = await apis.post(endpoints["thanhtoan"], formData);
                 console.log("thanh cong");
+                axios.get(res);
+                
                 if (res.status === 200) {
-                    console.log(res)
-                    // window.location.href = res.headers.location;
-                    axios.get(res);
+                    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+                    console.log("1")
+// get trang bị lỗi 404
+                        try {
+                            console.log("2")
+                          let reslink = await apis.get(endpoints["thanhtoanthanhcong"](thanhtoan.idAppo));
+                          console.log("3")
+                          window.location.href = reslink.data;
+                          
+                        } catch (error) {
+                          console.error("Error while fetching reslink:", error);
+                          // Xử lý lỗi ở đây nếu cần
+                        }
+                      
                 }
-                if (res.status === 302) {
-                    console.log(res)
-                    // window.location.href = res.headers.location;;
-                    // axios.get(res)
-                }
+                
             } catch (error) {
                 console.log(error)
             }
