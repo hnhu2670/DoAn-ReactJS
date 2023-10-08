@@ -4,9 +4,9 @@ import apis, { endpoints } from '../../configs/apis'
 import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
-import "./thuoc.css"
-import { useNavigate, useParams } from 'react-router-dom'
-const Thuoc = () => {
+import "./phieuBenh.css"
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+const PhieuBenh = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
     const [dsThuoc, setDsThuoc] = useState([])
@@ -21,7 +21,28 @@ const Thuoc = () => {
         idAppo: id,
         tenthuoc: ''
     })
+    const [q] = useSearchParams()
 
+    // useEffect(() => {
+    //     const loadDoctor = async () => {
+    //         try {
+    //             setLoading(true)
+    //             let e = endpoints['thuoc'];
+    //             let medicineName = q.get("name");
+    //             if (medicineName !== null) {
+    //                 e = `${e}?name=${medicineName}`;
+    //             }
+
+    //             let res = await apis.get(e);
+    //             setDoctor(res.data);
+
+    //             console.log(res.data);
+    //         } catch (err) {
+    //             setLoading(false);
+    //             console.log(err);
+    //         }
+    //     };
+    // })
     useEffect(() => {
         const loadThuoc = async () => {
             try {
@@ -81,7 +102,11 @@ const Thuoc = () => {
                 console.log("thanh cong do");
                 let res = await apis.post(endpoints["kethuoc"], formData);
                 console.log("thanh cong");
+
                 if (res.status === 200) {
+                    // let formAdd = document.getElementById("row-addThuoc")
+                    // console.log(formClose)
+                    // formAdd.style.display = 'none';
                 }
                 else {
                     console.log("them that thai")
@@ -117,18 +142,37 @@ const Thuoc = () => {
     }
 
     const chonthuoc = (fieldid, id, fieldtname, tenthuoc) => {
+        let formAdd = document.getElementById("row-addThuoc")
+        if (formAdd.style.display === 'none') {
+            // Nếu form đang ẩn, thì hiển thị nó
+            formAdd.style.display = 'block';
+            console.log("hiện")
+        } else {
+            // Nếu form đang hiển thị, thì ẩn nó
+            formAdd.style.display = 'none';
+            console.log("ẩn")
+        }
         setThemThuoc((current) => {
+
             const update = { ...current };
             update[fieldid] = id;
             update[fieldtname] = tenthuoc;
-            return update;
+            return (<>update
+
+            </>);
+
         });
+
     }
-    // console.log(phieubenh.id)
-    // console.log(phieubenh.prescriptionId.id)
+    const formClose = () => {
+        let formClose = document.querySelector(".form-close")
+        let formAdd = document.getElementById("row-addThuoc")
+        console.log(formClose)
+        formAdd.style.display = 'none';
+    }
     return (
         <Container>
-            <section>
+            <section id="section-phieubenh">
                 <h2 className='col-title'>đây là phiếu bênh :idPre
 
                 </h2>
@@ -202,17 +246,22 @@ const Thuoc = () => {
                         </Table>
                     </Form>
                 </Row>
-                <Row>
-                    <Form className='form-addThuoc'>
-                        <h2 className='col-title'>THÊM THUỐC</h2>
+                <Row id="row-addThuoc">
+                    <Form id='form-addThuoc'>
+                        <Row>
+                            <Col>
+                                <h2 className='col-title text-center'>THÊM THUỐC</h2>
+                            </Col>
+                            <Col sm={1} className='m-2 form-close' onClick={formClose}>X</Col>
+                        </Row>
                         <Row className="mb-3">
                             <div className="Logincontent logincontent1">
-                                <label htmlFor="username">Tên thuốc: {themthuoc.tenthuoc}</label>
+                                <label htmlFor="username" className='text-black'>Tên thuốc: {themthuoc.tenthuoc}</label>
                             </div>
                         </Row>
                         <Row className="mb-3">
                             <div className="Logincontent logincontent1">
-                                <label htmlFor="username">Số lượng thuốc</label>
+                                <label htmlFor="username" className='text-black'>Số lượng thuốc</label>
                                 <input type="number"
                                     id="username"
                                     className='input-login'
@@ -227,7 +276,7 @@ const Thuoc = () => {
 
                         <Row className="mb-4">
                             <div className="Logincontent logincontent2">
-                                <label htmlFor="pwd">Cách dùng</label>
+                                <label htmlFor="pwd" className='text-black'>Cách dùng</label>
 
                                 <input type="text"
                                     id="pwd"
@@ -257,4 +306,4 @@ const Thuoc = () => {
     )
 }
 
-export default Thuoc
+export default PhieuBenh

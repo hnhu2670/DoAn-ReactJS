@@ -1,4 +1,4 @@
-import { Col, Container, Form, Row, Table } from "react-bootstrap"
+import { Alert, Col, Container, Form, Row, Table } from "react-bootstrap"
 import TypeButton from "../../button/Button"
 import { useParams } from "react-router-dom"
 import { useState } from "react";
@@ -11,6 +11,7 @@ const ThanhToan = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(false)
     const [phieu, setPhieuKham] = useState([])
+    const [phieuBenh, setPhieuBenh] = useState([])
     useEffect(() => {
         const loadPhieuKham = async () => {
             try {
@@ -18,6 +19,20 @@ const ThanhToan = () => {
                 setPhieuKham(data)
                 setLoading(true)
                 console.log(data);
+                console.log("-----------------------------")
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+        const loadPhieuBenh = async () => {
+            try {
+                let { data } = await apis.get(endpoints['phieubenh'](id));
+                setPhieuBenh(data)
+                // setLoading(true)
+                // console.log(data);
 
 
             } catch (err) {
@@ -26,6 +41,7 @@ const ThanhToan = () => {
             }
         };
         loadPhieuKham()
+        loadPhieuBenh()
     }, [id]);
     if (phieu === null) {
         return (<>
@@ -53,9 +69,11 @@ const ThanhToan = () => {
                             </Row>
                             <Row>Địa chỉ : {phieu.sickpersonId.address}</Row>
                             <Row>Điện thoại : {phieu.sickpersonId.phone}</Row>
+                            <Row>Chuẩn đoán : {phieu.prescriptionId.symptom}</Row>
                         </>
                     ) : (<>
-                        <MySpinner />
+                        <Alert className="text-danger">Chưa có thông phiếu khám</Alert>
+
                     </>)}
 
                 </div>

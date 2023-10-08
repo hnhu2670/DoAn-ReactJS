@@ -24,7 +24,7 @@ import Chat from "./Chat"
 import LichKham from "./user/doctor/LichKham"
 import PhieuKham from './user/doctor/PhieuKham';
 import LichSuKham from './user/doctor/LichSuKham';
-import Thuoc from './user/doctor/Thuoc';
+import PhieuBenh from './user/doctor/PhieuBenh';
 import ThanhToan from './user/nurse/ThanhToan';
 import ToaThuoc from './user/doctor/ToaThuoc';
 import DanhGia from './user/patient/DanhGia';
@@ -63,7 +63,7 @@ function App() {
           {/* lịch sử khám của bệnh nhân */}
           <Route path="/xemlichkham/:id" exact element={<LichSuKham />} />
           {/* thuốc */}
-          <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<Thuoc />} />
+          <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<PhieuBenh />} />
           {/* toa thuốc */}
           <Route path="/toathuoc" exact element={<ToaThuoc />} />
           {/* đánh giá */}

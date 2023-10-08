@@ -1,0 +1,32 @@
+section#section-phieubenh {
+    position: relative;
+}
+
+h2.col-title {
+    padding: 2%;
+    color: #60a37e;
+    font-size: 30px;
+}
+
+form.form-thuoc {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+form#form-addThuoc {
+    width: 60%;
+    margin: 2% auto;
+    padding: 2%;
+    border-radius: 15px;
+    background-color: white;
+    border: 3px solid #60a37e;
+}
+
+div#row-addThuoc {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    display: none;
+}
