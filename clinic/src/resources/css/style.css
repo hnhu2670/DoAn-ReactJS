@@ -370,3 +370,19 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* QUEN MAT KHAU */
+.img-quenmk>img {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.react-tel-input .form-control {
+  width: 100% !important;
+}
+
+.form-quenmatkhau {
+  border-left: 5px solid #45a049;
+  margin: 2% auto;
+  padding-top: 1%;
+}

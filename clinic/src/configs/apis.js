@@ -29,6 +29,7 @@ export const endpoints = {
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
     // "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
     "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
+    // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
     "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
     "lichkhamchuaxatnhan": `${SERVER_CONTEXT}/api/nurse/lichkhamchuaxatnhan`,
@@ -39,9 +40,17 @@ export const endpoints = {
     "dichvu": `${SERVER_CONTEXT}/api/service`,
     "khambenh": `${SERVER_CONTEXT}/api/doctor/khambenh`,
     "lichsukham": (id) => `${SERVER_CONTEXT}/api/doctor/lichsukham/${id}`,
+    "pdf": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/kethuoc/export/${id}`,
+    // "pdf": (id) => `${SERVER}/api/doctor/khambenh/kethuoc/export/${id}`,
     "thuoc": `${SERVER_CONTEXT}/api/medicines`,
     "toathuoc": (id) => `${SERVER_CONTEXT}/api/doctor/phieubenh/${id}/kethuoc`,
     "kethuoc": `${SERVER_CONTEXT}/api/doctor/phieubenh/kethuoc`,
+    "thuockham": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/thuoc`,
+    "dichvukham": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/dichvu`,
+    "loaipayment": `${SERVER_CONTEXT}/api/nurse/hinhthucthanhtoan`,
+    "thanhtoan": `${SERVER_CONTEXT}/api/nurse/thanhtoan`,
+    "hoadon": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
+
 
 
 

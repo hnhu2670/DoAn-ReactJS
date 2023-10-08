@@ -7,8 +7,6 @@ import MyUserReducer from './reducer/MyUserReducer';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Register from './components/Register'
-import ResetPass from './components/ResetPass'
-import OTPPage from './components/OTPPage'
 import Lichsudangky from './components/Lichsudangky'
 import Login from './components/Login'
 import Doctor from './doctor/Doctors';
@@ -41,10 +39,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" exact element={<Login />} />
-          {/* <Route path="/datlich" exact element={<Dangky />} /> */}
           <Route path="/dangky" exact element={<Register />} />
-          <Route path="/datlai" exact element={<ResetPass />} />
-          <Route path="/xacnhanotp" exact element={<OTPPage />} />
           <Route path="/xemlich" exact element={<Lichsudangky />} />
           <Route path="/bacsi" exact element={<Doctor />} />
           <Route path="/bacsi/:id" exact element={<Profile_doctor />} />
@@ -65,7 +60,7 @@ function App() {
           {/* thuốc */}
           <Route path="/xemlichkham/phieukham/:id/kethuoc" exact element={<PhieuBenh />} />
           {/* toa thuốc */}
-          <Route path="/toathuoc" exact element={<ToaThuoc />} />
+          <Route path="/toathuoc/:id" exact element={<ToaThuoc />} />
           {/* đánh giá */}
           <Route path="/danhgia" exact element={<DanhGia />} />
         </Routes>

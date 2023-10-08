@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { Button, Row } from 'react-bootstrap';
+import { Alert, Button, Row } from 'react-bootstrap';
 import Apis, { authApi, endpoints } from '../configs/apis';
 import cookie from 'react-cookies';
 import { MyUserContext } from '../App';
@@ -180,14 +180,16 @@ const Login = () => {
                     </div>
 
                   </Row>
-                  {error && <p className="error">{error}</p>}
+                  {error &&
+                    <Alert className='bg-red-400 text-danger'>{error}</Alert>}
+                  {/* <p className="error">{error}</p>} */}
                 </div>
 
               </div>
             </div>
           </div>
         </form>
-      </section>
+      </section >
 
     </>
   );

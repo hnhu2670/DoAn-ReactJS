@@ -55,6 +55,7 @@ const LichKham = () => {
                                     <td> {moment(appointment.appointmentDate).format('DD/MM/YYYY')}</td>
                                     <td>{moment(appointment.appointmentDate).format('HH:mm')}</td>
                                     <td>{appointment.prescriptionId.conclusion}</td>
+                                    {/* chuyển qua trang phiếu khám => id phiếu khám */}
                                     <td><Link className='text-danger' to={`khambenh/${appointment.id}/phieukham`}
                                         id={appointment.id}>
                                         Khám bệnh

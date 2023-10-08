@@ -5,7 +5,7 @@ import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
 import "./phieuBenh.css"
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 const PhieuBenh = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -21,28 +21,8 @@ const PhieuBenh = () => {
         idAppo: id,
         tenthuoc: ''
     })
-    const [q] = useSearchParams()
 
-    // useEffect(() => {
-    //     const loadDoctor = async () => {
-    //         try {
-    //             setLoading(true)
-    //             let e = endpoints['thuoc'];
-    //             let medicineName = q.get("name");
-    //             if (medicineName !== null) {
-    //                 e = `${e}?name=${medicineName}`;
-    //             }
 
-    //             let res = await apis.get(e);
-    //             setDoctor(res.data);
-
-    //             console.log(res.data);
-    //         } catch (err) {
-    //             setLoading(false);
-    //             console.log(err);
-    //         }
-    //     };
-    // })
     useEffect(() => {
         const loadThuoc = async () => {
             try {
@@ -55,15 +35,18 @@ const PhieuBenh = () => {
                 setLoading(false)
             }
 
+
         }
         const layphieubenh = async () => {
             try {
                 let res = await apis.get(endpoints["phieubenh"](id))
                 setphieubenh(res.data)
-                // console.log("----------------------------------")
-                // console.log(res.data)
+                console.log("----------------------------------")
+                console.log(res.data)
             } catch (error) {
                 console.log(error)
+
+
 
 
             }
@@ -71,6 +54,7 @@ const PhieuBenh = () => {
         loadThuoc()
         layphieubenh()
     }, [])
+
 
     useEffect(() => {
         const loadtoathuoc = async () => {
@@ -82,54 +66,64 @@ const PhieuBenh = () => {
                 console.log(res.data)
             } catch (error) {
                 console.log(error)
-
-
             }
         }
         loadtoathuoc()
     }, [phieubenh])
+
 
     const napthuoc = (evt) => {
         evt.preventDefault();
         const process = async () => {
             try {
                 let formData = new FormData();
-                formData.append("idAppo", 14);
+                formData.append("idAppo", id);
                 formData.append("idThuoc", themthuoc.idThuoc);
                 formData.append("soluongthuoc", themthuoc.soluongthuoc);
                 formData.append("huongdansudung", themthuoc.huongdansudung);
                 console.log(formData);
                 console.log("thanh cong do");
                 let res = await apis.post(endpoints["kethuoc"], formData);
-                console.log("thanh cong");
-
+                console.log("thanh cong post");
                 if (res.status === 200) {
-                    // let formAdd = document.getElementById("row-addThuoc")
+                    let formAdd = document.getElementById("row-addThuoc")
                     // console.log(formClose)
-                    // formAdd.style.display = 'none';
+                    formAdd.style.display = 'none';
+                    // const loadtoathuoc = async () => {
+                    //     try {
+                    //         let res = await apis.get(endpoints["toathuoc"](phieubenh.id))
+                    //         setToaThuoc(res.data)
+                    //         console.log("lấy được data")
+                    //         console.log("================================")
+                    //         console.log(res.data)
+                    //     } catch (error) {
+                    //         console.log(error)
+                    //     }
+                    // }
+                    // loadtoathuoc()
+
                 }
                 else {
-                    console.log("them that thai")
+                    console.log("them that bai")
                 }
+
 
             } catch (error) {
                 console.log(error)
             }
-
-
-
-
         }
-
-
         process();
     }
 
+    // useEffect(() => {
+    //     loadtoathuoc()
+    // })
     if (dsThuoc === null) {
         return (<>
             <MySpinner />
         </>)
     }
+
 
     const change = (event, field) => {
         const value = event.target.value; // Get the current value of the input field
@@ -140,6 +134,7 @@ const PhieuBenh = () => {
             return update;
         });
     }
+
 
     const chonthuoc = (fieldid, id, fieldtname, tenthuoc) => {
         let formAdd = document.getElementById("row-addThuoc")
@@ -153,27 +148,24 @@ const PhieuBenh = () => {
             console.log("ẩn")
         }
         setThemThuoc((current) => {
-
             const update = { ...current };
             update[fieldid] = id;
             update[fieldtname] = tenthuoc;
-            return (<>update
-
-            </>);
-
+            return update;
         });
-
     }
     const formClose = () => {
-        let formClose = document.querySelector(".form-close")
+        // let formClose = document.querySelector(".form-close")
         let formAdd = document.getElementById("row-addThuoc")
-        console.log(formClose)
+        // console.log(formClose)
         formAdd.style.display = 'none';
     }
     return (
         <Container>
-            <section id="section-phieubenh">
-                <h2 className='col-title'>đây là phiếu bênh :idPre
+            <section>
+                {/* đây là phiếu bênh :idPre */}
+                <h2 className='col-title'>Phiếu bệnh số: {phieubenh.id}
+
 
                 </h2>
                 <Row>
@@ -209,15 +201,19 @@ const PhieuBenh = () => {
                                         </td>
 
 
+
+
                                     </tr>
                                 ))}
                             </>) : (<>
                                 <MySpinner />
                             </>)}
 
+
                         </tbody>
                     </Table>
                 </Row>
+
 
                 <Row>
                     <h2 className='col-title'>TOA THUỐC</h2>
@@ -301,9 +297,15 @@ const PhieuBenh = () => {
                         </Row>
                     </Form>
                 </Row>
+                <Row className='m-4'>
+                    <TypeButton>XUẤT PHIẾU</TypeButton>
+                </Row>
+
             </section>
         </Container>
     )
 }
 
+
 export default PhieuBenh
+

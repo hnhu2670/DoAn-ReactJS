@@ -1,23 +1,35 @@
-import { Alert, Col, Container, Form, Row, Table } from "react-bootstrap"
+// import {  Col, Container, Form, Row, Table } from "react-bootstrap"
+import { Button, Col, Container, Form, Row, Table, Alert } from "react-bootstrap"
 import TypeButton from "../../button/Button"
-import { useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useState } from "react";
 import { useEffect } from "react";
 import apis, { endpoints } from "../../configs/apis";
 import MySpinner from "../../layout/MySpinner";
+import axios from "axios";
 
 const ThanhToan = () => {
-
+    const nav = useNavigate()
     const { id } = useParams();
     const [loading, setLoading] = useState(false)
     const [phieu, setPhieuKham] = useState([])
+
     const [phieuBenh, setPhieuBenh] = useState([])
+    const [thuocs, setThuocs] = useState([])
+    const [dichvus, setDichvus] = useState([])
+    const [loaipay, setloaipay] = useState([])
+    const [hoadon, sethoadon] = useState([])
+    const [thanhtoan, setthanhtoan] = useState({
+        idAppo: id,
+        loaithanhtoan: "null"
+    })
     useEffect(() => {
         const loadPhieuKham = async () => {
             try {
-                let { data } = await apis.get(endpoints['phieukham'](id));
+                let { data } = await apis.get(endpoints['phieukham'](22));
                 setPhieuKham(data)
                 setLoading(true)
+
                 console.log(data);
                 console.log("-----------------------------")
 
@@ -32,6 +44,7 @@ const ThanhToan = () => {
                 let { data } = await apis.get(endpoints['phieubenh'](id));
                 setPhieuBenh(data)
                 // setLoading(true)
+
                 // console.log(data);
 
 
@@ -40,19 +53,132 @@ const ThanhToan = () => {
                 // setLoading(false)
             }
         };
+
+        const loadthuoc = async () => {
+            try {
+                let { data } = await apis.get(endpoints['thuockham'](id));
+                setThuocs(data)
+                setLoading(true)
+                // console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+
+
+        const loaddichvu = async () => {
+            try {
+                let { data } = await apis.get(endpoints['dichvukham'](id));
+                setDichvus(data)
+                setLoading(true)
+                // console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+
+        const loadbill = async () => {
+            try {
+                let { data } = await apis.get(endpoints['hoadon'](id));
+                sethoadon(data)
+                setLoading(true)
+                // console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+
         loadPhieuKham()
+
         loadPhieuBenh()
+        loadthuoc()
+        loaddichvu()
+        loadbill()
     }, [id]);
+
+    useEffect(() => {
+        const loadpay = async () => {
+            try {
+                let { data } = await apis.get(endpoints['loaipayment']);
+                setloaipay(data)
+                setLoading(true)
+                // console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
+        loadpay()
+
+    }, []);
+
+    const thanhtoanhoadon = (evt) => {
+        evt.preventDefault();
+        const process = async () => {
+            try {
+                let formData = new FormData();
+                formData.append("idAppo", thanhtoan.idAppo);
+                formData.append("loaithanhtoan", thanhtoan.loaithanhtoan);
+                // console.log(formData.data);
+                console.log("thanh cong do");
+                let res = await apis.post(endpoints["thanhtoan"], formData);
+                console.log("thanh cong");
+                if (res.status === 200) {
+                    console.log(res)
+                    // window.location.href = res.headers.location;
+                    axios.get(res);
+                }
+                if (res.status === 302) {
+                    console.log(res)
+                    // window.location.href = res.headers.location;;
+                    // axios.get(res)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+
+
+
+        }
+
+
+        process();
+    }
+
+    const chonhinhthucthanhtoan = (event) => {
+        const value = event.target.value; // Get the current value of the input field
+
+        setthanhtoan((current) => {
+            const update = { ...current };
+            update["loaithanhtoan"] = value;
+            return update;
+        });
+    }
     if (phieu === null) {
         return (<>
             <MySpinner />
         </>)
     }
+
+
+    console.log(thanhtoan);
     return (<>
         <Container>
             <section>
                 <h1 className="text-center text-login top-text">THANH TOÁN HÓA ĐƠN</h1>
-                <div>
+                {/* <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin bệnh nhân</h2>
                     {loading === true ? (
                         <>
@@ -76,7 +202,7 @@ const ThanhToan = () => {
 
                     </>)}
 
-                </div>
+                </div> */}
                 <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin thuốc</h2>
                     <Table striped bordered hove className="text-center mb-5">
@@ -92,8 +218,16 @@ const ThanhToan = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <td>Hướng dẫn sử dụng</td>
-
+                            {thuocs.map((t) => (
+                                <tr key={t.id}>
+                                    <td>{t.id}</td>
+                                    <td>{t.medicineId.name}</td>
+                                    <td>{t.quantity}</td>
+                                    <td>{t.medicineId.idUnit.name}</td>
+                                    <td>{t.medicineId.price} VNĐ</td>
+                                    <td>{t.medicineId.price * t.quantity} VNĐ</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                 </div>
@@ -109,17 +243,29 @@ const ThanhToan = () => {
                             </tr>
                         </thead>
                         <tbody>
-
+                            {dichvus.map((d) => (
+                                <tr key={d.serviceId.id}>
+                                    <td>{d.id}</td>
+                                    <td>{d.serviceId.name}</td>
+                                    <td>{d.serviceId.price} VNĐ</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                 </div>
                 <div>
-                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tổng tiền: </h2>
+                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tổng tiền: {hoadon.payMoney}</h2>
                     <Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Hình thức thanh toán</Form.Label>
-                            <Form.Control as="select"
+                            <Form.Control as="select" onChange={chonhinhthucthanhtoan}
                                 required>
+                                <option value="">-- Chọn hình thức thanh toán --</option>
+                                {loaipay.map((method) => (
+                                    <option value={method.id}>
+                                        {method.paymentMethod}
+                                    </option>
+                                ))}
                             </Form.Control>
 
                         </Form.Group>
@@ -150,7 +296,7 @@ const ThanhToan = () => {
                         </Col>
                         <Col className="mt-4">
                             <Form.Group className="mb-3">
-                                <TypeButton type="submit">THANH TOÁN</TypeButton>
+                                <Button onClick={thanhtoanhoadon}> THANH TOÁN </Button>
                             </Form.Group>
                         </Col>
 
