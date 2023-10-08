@@ -7,19 +7,14 @@ import apis, { endpoints } from "../configs/apis"
 import MySpinner from "../layout/MySpinner"
 import "./Profile_doctor.css"
 import { MyUserContext } from "../App"
-import { format, getDate } from "date-fns"
-import FontAwesome from "react-fontawesome"
-import sao from "../resources/image/sao.png"
 const Profile_doctor = () => {
 
     const [user] = useContext(MyUserContext);
-    const [isbtn, setIsBtn] = useState(false)
     const { id } = useParams(); //id phải trùng lưu trữ với csdl
     const [doctorId, setDoctor] = useState("");
     const [rating, setRating] = useState([]);
     const [score, setScore] = useState('');
     const [shift, setShift] = useState([]);
-    const [shift2, setShift2] = useState([]);
 
 
 
@@ -28,11 +23,16 @@ const Profile_doctor = () => {
             try {
                 let { data } = await apis.get(endpoints['pro-doctor'](id));
                 setDoctor(data);
+                console.log(data)
 
             } catch (err) {
                 console.log(err);
             }
         };
+        loadDoctor();
+    }, [id]);
+
+    useEffect(()=>{
         const loadRating = async () => {
             try {
                 let { data } = await apis.get(endpoints['rating'](id));
@@ -41,11 +41,9 @@ const Profile_doctor = () => {
 
                 var sum = 0;
                 for (let i = 0; i < data.length; i++) {
-
                     sum += data[i].point;
-
                 }
-                // console.log(sum)
+                console.log((sum / data.length).toFixed(0))
                 setScore((sum / data.length).toFixed(0));
 
 
@@ -53,99 +51,38 @@ const Profile_doctor = () => {
                 console.log(err);
             }
         };
-
-        const getConsecutiveDates = (numberOfDays) => {
-            const dates = [];
-            const currentDate = new Date();
-
-            for (let i = 0; i < numberOfDays; i++) {
-                const date = new Date(currentDate.getTime() + i * 24 * 60 * 60 * 1000);
-                dates.push(date.toISOString().split("T")[0]);
-            }
-
-            return dates;
-        };
-
-        const numberOfDays = 7; // Số ngày liên tiếp cần tạo
-        const consecutiveDates = getConsecutiveDates(numberOfDays);
-
-        // console.log(consecutiveDates);
-
-        const loadShift = async () => {
-            // const date = format(new Date(shift.dateSchedule), "yyyy-MM-dd");
-            for (let day = 0; day < consecutiveDates.length; day++) {
-                try {
-
-                    let { data } = await apis.get(endpoints['shift'], {
-                        params: {
-                            IdDoctor: id,
-                            date: consecutiveDates[day]
-                        }
-                    });
-                    if (day == 0) {
-                        setShift(data)
-
-
-                    }
-                    // if (day == 1) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 2) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 3) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 4) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 5) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 6) {
-                    //     setShift(data)
-
-
-                    // }
-                    // if (day == 7) {
-                    //     setShift(data)
-
-
-                    // }
-                    console.log(shift)
-
-                } catch (error) {
-                    console.log(error)
-
-                }
-            }
-
-        }
-        loadDoctor();
         loadRating();
-        loadShift()
-    }, [id]);
+    },[id])
+
+    useEffect(()=>{
+        const loadlichlam = async () => {
+            try {
+                let { data } = await apis.get(endpoints['thoigianlamviec'](id));
+                setShift(data);
+                // console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        loadlichlam();
+    },[id])
 
     if (doctorId === null || rating === null || shift === null) {
         return (<>
             <MySpinner />
         </>)
     }
-    const buttonClick = () => {
-        setIsBtn((prevState) => !prevState)
+
+    // Group shifts based on dateSchedule
+    const groupedShifts = [];
+    shift.forEach((shift) => {
+    const existingGroup = groupedShifts.find((group) => group.dateSchedule === shift.dateSchedule);
+    if (existingGroup) {
+        existingGroup.shifts.push(shift);
+    } else {
+        groupedShifts.push({ dateSchedule: shift.dateSchedule, shifts: [shift] });
     }
-
-
+    });
 
     return (<>
         <div className="container">
@@ -159,29 +96,33 @@ const Profile_doctor = () => {
                             </Col>
                             <Col className="bs-name mt-5">
                                 <h3 style={{ fontSize: 30 + "px" }}>{doctorId.name}</h3>
-                                <p>Chuyên khoa </p>
-
+                                <p>Chuyên khoa {doctorId.khoaId.name}</p>
+                                <p>(<i>{doctorId.khoaId.describe}</i>)</p>
                             </Col>
                         </Row>
 
                     </Col>
 
                     <Col className="bs-lichkham">
-                        <h4 >Lịch khám bệnh của bác sĩ</h4>
-                        {shift.map((d) => (
-                            <Accordion key={d}>
-                                <Accordion.Header>{d.dateSchedule}</Accordion.Header>
-                                <Accordion.Body>
-                                    {d.shiftId.start} -- {d.shiftId.end}
-                                </Accordion.Body>
-                            </Accordion>
-                            // <h2 key={d}>{d.shiftId.start}
-                            //     -- {d.shiftId.end}
-                            //     {d.dateSchedule}
-                            // </h2>
+                    <h4>Lịch khám bệnh của bác sĩ</h4>
+                    {groupedShifts
+                        .sort((a, b) => new Date(a.dateSchedule) - new Date(b.dateSchedule))
+                        .map((group, index) => (
+                        <Accordion key={index}>
+                            <Accordion.Header>
+                            {new Date(group.dateSchedule).toLocaleDateString("en-US")}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                            {group.shifts
+                                .sort((a, b) => a.shiftId.id - b.shiftId.id)
+                                .map((shift) => (
+                                <div key={shift.id}>
+                                    {shift.shiftId.name} : {shift.shiftId.start} - {shift.shiftId.end}
+                                </div>
+                                ))}
+                            </Accordion.Body>
+                        </Accordion>
                         ))}
-
-
                     </Col>
                 </Row>
             </div>
@@ -189,64 +130,50 @@ const Profile_doctor = () => {
 
             <div>
                 <h2 className="m-3" style={{ fontSize: 35 + "px" }}>ĐÁNH GIÁ CỦA BỆNH NHÂN</h2>
-                <div style={{ display: "flex" }}>
-                    <p className="mr-1">Đánh giá: </p>
-
-                    {score == 1 ? (
-                        <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>) :
-                        score === 2 ? (
-                            <>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                            </>
-
-                        ) : score === 3 ? (
-                            <>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                            </>
-                        ) : score === 4 ? (
-                            <>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                            </>
-                        ) : score == 5 ? (
-                            <>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                                <img src={sao} style={{ width: 20 + "px", height: 20 + "px" }}></img>
-                            </>
-                        ) : (<p className="mr-1">Chưa có đánh giá</p>
-                        )
-                    }
+                <div className="rating">
+                <input type="radio" id="star5" name="rating" value="5" disabled={true} checked={score == 5} />
+                <label htmlFor="star5"><span className="star"></span></label>
+                <input type="radio" id="star4" name="rating" value="4" disabled={true} checked={score == 4} />
+                <label htmlFor="star4"><span className="star"></span></label>
+                <input type="radio" id="star3" name="rating" value="3" disabled={true} checked={score == 3} />
+                <label htmlFor="star3"><span className="star"></span></label>
+                <input type="radio" id="star2" name="rating" value="2" disabled={true} checked={score == 2} />
+                <label htmlFor="star2"><span className="star"></span></label>
+                <input type="radio" id="star1" name="rating" value="1" disabled={true} checked={score == 1} />
+                <label htmlFor="star1"><span className="star"></span></label>
                 </div>
 
-
-
-
-
-
-                {rating.map(c => {
-                    return <ListGroup.Item >
-                        <hr></hr>
-                        <Row className="p-1">
+                <ListGroup className="my-rating-list">
+                    {rating.map((c, index) => {
+                        const uniqueId = `star${index + 6}`; // Tạo id duy nhất bắt đầu từ 'star6'
+                        return (
+                        <ListGroup.Item key={index}>
+                            <hr />
+                            <Row className="p-1">
                             <ul>
-                                {/* <li><img src={c.sickpersonId.avatar} alt="ảnh" /></li> */}
+                                <li><img src={c.sickpersonId.avatar} alt="ảnh" /></li>
                                 <li><p style={{ fontWeight: "bold" }}>{c.sickpersonId.name}</p>{c.ratingDate.formData}</li>
+                                <li>
+                                <div className="rating">
+                                    <input type="radio" id={uniqueId} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 5} />
+                                    <label htmlFor={uniqueId}><span className="star"></span></label>
+                                    <input type="radio" id={`star${index + 7}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 4} />
+                                    <label htmlFor={`star${index + 7}`}><span className="star"></span></label>
+                                    <input type="radio" id={`star${index + 8}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 3} />
+                                    <label htmlFor={`star${index + 8}`}><span className="star"></span></label>
+                                    <input type="radio" id={`star${index + 9}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 2} />
+                                    <label htmlFor={`star${index + 9}`}><span className="star"></span></label>
+                                    <input type="radio" id={`star${index + 10}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 1} />
+                                    <label htmlFor={`star${index + 10}`}><span className="star"></span></label>
+                                </div>
+                                </li>
                                 <li>{c.value}</li>
-
                             </ul>
-                        </Row>
-
-
-                    </ListGroup.Item>
-                })}
-
+                            </Row>
+                        </ListGroup.Item>
+                        );
+                    })}
+                    </ListGroup>
 
             </div>
         </div >

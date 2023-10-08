@@ -52,6 +52,7 @@ export const endpoints = {
     "hoadon": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
     "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
     "danhgia": `${SERVER_CONTEXT}/api/doctor/rating`,
+    "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
 
 }
 export const authApi = () => {
