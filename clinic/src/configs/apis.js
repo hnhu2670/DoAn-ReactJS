@@ -28,8 +28,8 @@ export const endpoints = {
     "up-password": `${SERVER_CONTEXT}/api/up-password/`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
     // "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
-    // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
-    "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
+    "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
+    // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
     "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
     "lichkhamchuaxatnhan": `${SERVER_CONTEXT}/api/nurse/lichkhamchuaxatnhan`,
@@ -48,6 +48,7 @@ export const endpoints = {
     "loaipayment": `${SERVER_CONTEXT}/api/nurse/hinhthucthanhtoan`,
     "thanhtoan": `${SERVER_CONTEXT}/api/nurse/thanhtoan`,
     "hoadon": (id) =>  `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
+    "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
 
 
 
