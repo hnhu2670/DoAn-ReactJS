@@ -37,6 +37,7 @@ export const endpoints = {
     "lichdangkyca1": `${SERVER_CONTEXT}/api/lichlamdangkyca1`,
     "lichdangkyca2": `${SERVER_CONTEXT}/api/lichlamdangkyca2`,
     "lichdangkyca3": `${SERVER_CONTEXT}/api/lichlamdangkyca3`,
+    "lichlamdangky": `${SERVER_CONTEXT}/api/lichlamhdangky`,
     "dichvu": `${SERVER_CONTEXT}/api/service`,
     "khambenh": `${SERVER_CONTEXT}/api/doctor/khambenh`,
     "lichsukham": (id) => `${SERVER_CONTEXT}/api/doctor/lichsukham/${id}`,
@@ -52,7 +53,9 @@ export const endpoints = {
     "hoadon": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
     "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
     "danhgia": `${SERVER_CONTEXT}/api/doctor/rating`,
+    "lichdone": `${SERVER_CONTEXT}/api/lichlamhientai`,
     "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
+    "huylichlam": (id) => `${SERVER_CONTEXT}/api/xemlichlam/huy/${id}`,
 
 }
 export const authApi = () => {

@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { Col, Container, Form, Image, Row, Table } from "react-bootstrap"
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Col, Container, Form, Image, Row, Table } from "react-bootstrap"
 import { MyUserContext } from "../../App";
 import { parseISO, isPast, format } from 'date-fns';
 import "../../resources/css/dkLam.css"
@@ -35,6 +35,8 @@ const DKLam = () => {
     const [lichdangky1, setlichdangky1] = useState([]);
     const [lichdangky2, setlichdangky2] = useState([]);
     const [lichdangky3, setlichdangky3] = useState([]);
+    const [lichdone, setlichdone] = useState([]);
+    const [lichlamdangky, setlichlamdangky] = useState([]);
 
 
     const change = (event, field, date) => {
@@ -68,6 +70,22 @@ const DKLam = () => {
 
         return dates;
     };
+
+    const getCurrentWeekDates = () => {
+        const currentDate = new Date();
+        const currentMonday = new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 1));
+        const dates = [];
+      
+        for (let i = 0; i < 7; i++) {
+          const date = new Date(currentMonday);
+          date.setDate(date.getDate() + i);
+          const formattedDate = date.toISOString().substring(0, 10);
+          dates.push(formattedDate);
+        }
+      
+        return dates;
+      };
+      
     useEffect(() => {
         const loadlichdangky1 = async () => {
             try {
@@ -111,15 +129,45 @@ const DKLam = () => {
                 console.log(err);
             }
         };
+        const loadlichdone = async () => {
+            try {
+                let { data } = await authApi().get(endpoints['lichdone']);
+                data.forEach((item) => {
+                    item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
+                  });
+                  setlichdone(data);
+                //   console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        const loadlichlamdangky = async () => {
+            try {
+                let { data } = await authApi().get(endpoints['lichlamdangky']);
+                data.forEach((item) => {
+                    item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
+                  });
+                  setlichlamdangky(data);
+                  console.log(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
 
 
         loadlichdangky1();
         loadlichdangky2();
         loadlichdangky3();
+        loadlichdone();
+        loadlichlamdangky();
     }, []);
-    console.log(lichdangky1)
+
+
+    // console.log(lichdangky1)
     const nextWeekDates = getNextWeekDates();
-    // console.log(nextWeekDates[1]);
+    const currentWeekDates = getCurrentWeekDates();
+    // console.log(currentWeekDates);
     //
 
 
@@ -174,7 +222,18 @@ const DKLam = () => {
         process();
     }
 
-
+    const huy = (id) => {
+        const huylich = async () => {
+          try {
+            let { data } = await apis.get(endpoints['huylichlam'](id));
+            console.log(data);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        huylich();
+      };
+    
     return (<>
         <Container>
             <h1 className="text-center">Đăng ký làm việc của bác sĩ</h1>
@@ -509,6 +568,78 @@ const DKLam = () => {
             <Form.Group className="mb-3">
                 <TypeButton onClick={dangkyliclam}>ĐĂNG KÝ</TypeButton>
             </Form.Group>
+
+
+
+            {/* ----------------------------------------------------------------------------------------------------------- */}
+            <table className="table">
+                <thead>
+                    <tr>
+                    <th>Ca/thứ</th>
+                    <th>THỨ 2</th>
+                    <th>THỨ 3</th>
+                    <th>THỨ 4</th>
+                    <th>THỨ 5</th>
+                    <th>THỨ 6</th>
+                    <th>THỨ 7</th>
+                    <th>CHỦ NHẬT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>Ca sáng</td>
+                    {currentWeekDates.map((date, index) => (
+                    <td key={index}>
+                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 1) ? <>&#10003;</> : ""}
+                    </td>
+                    ))}
+                    </tr>
+                    <tr>
+                    <td>Ca chiều</td>
+                    {currentWeekDates.map((date, index) => (
+                    <td key={index}>
+                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 2) ? <>&#10003;</> : ""}
+                    </td>
+                    ))}
+                    </tr>
+                    <tr>
+                    <td>Ca tối</td>
+                    {currentWeekDates.map((date, index) => (
+                    <td key={index}>
+                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 3) ? <>&#10003;</> : ""}
+                    </td>
+                    ))}
+                    </tr>
+                
+                </tbody>
+                </table>
+
+
+                {/* ------------------------------------------------------------------- */}
+                <table className="table">
+  <thead>
+    <tr>
+      <th>Ngày làm</th>
+      <th>Ca làm</th>
+      <th>Thời gian bắt đầu</th>
+      <th>Thời gian kết ca</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {lichlamdangky.map((t) => (
+      <tr key={t.id}>
+        <td>{t.dateSchedule}</td>
+        <td>{t.shiftId.name}</td>
+        <td>{t.shiftId.start}</td>
+        <td>{t.shiftId.end}</td>
+        <td className="bthuy">
+          <button onClick={() => huy(t.id)}>Hủy</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
         </Container>
     </>)
 }
