@@ -70,11 +70,10 @@ function App() {
             <Route path="/danhgia" exact element={<DanhGia />} />
             {/* thong bao */}
             <Route path="/thongbao" exact element={<ThongBao />} />
-            <Route path="/login-google" exact element={< LoginGoogle />} />
-            <Route path="/chatroom" exact element={< ChatRoom />} />
-
+            {/* <Route path="/login-google" exact element={< LoginGoogle />} />
+            <Route path="/chatroom" exact element={< ChatRoom />} /> */}
           </Routes>
-          {/* <Chat /> */}
+          <Chat />
           <Footer />
         </BrowserRouter>
       </MyNotiContext.Provider>
