@@ -56,7 +56,6 @@ export const endpoints = {
     "lichdone": `${SERVER_CONTEXT}/api/lichlamhientai`,
     "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
     "huylichlam": (id) => `${SERVER_CONTEXT}/api/xemlichlam/huy/${id}`,
-
 }
 export const authApi = () => {
     return axios.create({
