@@ -4,9 +4,9 @@ import apis, { endpoints } from '../../configs/apis'
 import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
-import "./phieuBenh.css"
+import "./keThuoc.css"
 import { useNavigate, useParams } from 'react-router-dom'
-const PhieuBenh = () => {
+const KeThuoc = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
     const [dsThuoc, setDsThuoc] = useState([])
@@ -298,7 +298,8 @@ const PhieuBenh = () => {
                     </Form>
                 </Row>
                 <Row className='m-4'>
-                    <TypeButton>XUẤT PHIẾU</TypeButton>
+                    {/* id là của phiếu khám */}
+                    <TypeButton to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</TypeButton>
                 </Row>
 
             </section>
@@ -307,5 +308,5 @@ const PhieuBenh = () => {
 }
 
 
-export default PhieuBenh
+export default KeThuoc
 

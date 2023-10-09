@@ -1,16 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import TypeButton from '../../button/Button'
 import { useParams } from 'react-router-dom';
 import apis, { endpoints } from '../../configs/apis';
+import cookie from 'react-cookies';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import MySpinner from '../../layout/MySpinner';
+import { MyNotiContext } from '../../App';
 
 const ToaThuoc = () => {
+    // id phiếu khám
     const { id } = useParams();
+    // phiếu khám
     const [phieu, setPhieuKham] = useState([])
     const [toathuoc, setToaThuoc] = useState([])
     const [load, setLoad] = useState(false)
+
+    const [, notiDispatch] = useContext(MyNotiContext)
     useEffect(() => {
 
 
@@ -19,7 +26,7 @@ const ToaThuoc = () => {
                 let { data } = await apis.get(endpoints['phieukham'](id));
                 setPhieuKham(data)
                 // setLoading(true)
-                console.log(data);
+                // console.log(data);
 
 
             } catch (err) {
@@ -34,7 +41,7 @@ const ToaThuoc = () => {
                 setToaThuoc(res.data)
                 console.log("lấy được data")
                 console.log("================================")
-                console.log(res.data)
+                // console.log(res.data)
             } catch (error) {
                 console.log(error)
             }
@@ -44,39 +51,14 @@ const ToaThuoc = () => {
         loadtoathuoc()
     }, [id]);
 
-    // const xuatpdf = (evt) => {
-    //     evt.preventDefault();
-    //     const process = async () => {
-    //         try {
-    //             let res = await apis.get(endpoints["pdf"](id));
-    //             console.log(res)
-    //             // window.location.href = endpoints["pdf"](22);
 
-    //             // window.location.href = res
-    //             console.log("thanh cong get");
-    //             // if (res.status === 200) {
-    //             // console.log(res.name)
-
-
-    //             // }
-    //             // else {
-    //             // console.log("them that bai")
-    //             // }
-
-
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     process();
-    // }
 
     const pdfRef = useRef()
     const downPDF = () => {
-        // const filedown = document.querySelector(".form-download")
         setLoad(true)
         const filedown = pdfRef.current
         html2canvas(filedown).then((canvas) => {
+
             // chuyen thanh dang anh
             const imgData = canvas.toDataURL('img/png')
             const doc = new jsPDF('p', 'mm', 'a4', true)
@@ -93,13 +75,31 @@ const ToaThuoc = () => {
         })
 
     }
-
+    // load them thong bao
+    const addNoti = (phieu) => {
+        notiDispatch({
+            "type": "inc",
+            "payload": 1
+        })
+        // luu vao cookies ==> lay bill tu cookie??????????????
+        // can co class trong csdl de luu
+        let bill = cookie.load("bill") || {};
+        cookie.save("bill", bill)
+        console.log(bill + "load thong bao")
+    }
+    if (phieu === null) {
+        return (<MySpinner />)
+    }
 
     return (
         <>
             <Container>
                 <section className='form-download' >
                     <h1 className="text-center text-login top-text">TOA THUỐC</h1>
+                    {/* <div>
+
+                        phiếu bệnh :{phieu.prescriptionId.id}
+                    </div> */}
                     {/* <div>
                         Tên bác sĩ: {phieu.doctorId.name}
                     </div>
@@ -148,7 +148,8 @@ const ToaThuoc = () => {
                             onClick={downPDF}
                         >XUẤT
                         </Button>
-                        <TypeButton className="btn-normal">LƯU</TypeButton>
+                        {/* goi ham truyen id */}
+                        <TypeButton className="btn-normal" onClick={() => addNoti(phieu)}>LƯU</TypeButton>
 
                     </div>
                 </section>

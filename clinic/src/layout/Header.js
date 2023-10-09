@@ -4,10 +4,13 @@ import 'tippy.js/dist/tippy.css';
 import "../resources/css/style.css";
 import './header.css';
 import { Link, useNavigate } from "react-router-dom";
-import { MyUserContext } from "../App";
+import { MyNotiContext, MyUserContext } from "../App";
 import { Dropdown } from 'react-bootstrap';
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);
+    // số lượng thông báo sẽ hiện ra
+    const [notiCount,] = useContext(MyNotiContext);
+
     const nav = useNavigate;
 
     const logout = () => {
@@ -29,7 +32,7 @@ const Header = () => {
                             <nav className="menu ">
                                 <ul className="flex">
                                     <li><Link variant="secondary" to="/bacsi"> Bác sĩ </Link></li>
-
+                                    <li><Link variant="secondary" to="/"> Thông báo {notiCount}</Link></li>
                                     {user === null ? <>
                                         <li>
                                             <Link variant="secondary" to="/login">Đăng nhập</Link></li>
