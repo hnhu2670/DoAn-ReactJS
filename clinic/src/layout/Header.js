@@ -32,7 +32,7 @@ const Header = () => {
                             <nav className="menu ">
                                 <ul className="flex">
                                     <li><Link variant="secondary" to="/bacsi"> Bác sĩ </Link></li>
-                                    <li><Link variant="secondary" to="/"> Thông báo {notiCount}</Link></li>
+                                    <li><Link variant="secondary" to="/thongbao"> Thông báo {notiCount}</Link></li>
                                     {user === null ? <>
                                         <li>
                                             <Link variant="secondary" to="/login">Đăng nhập</Link></li>
@@ -59,7 +59,7 @@ const Header = () => {
                                             </Dropdown>
 
                                         </li>
-                                        <li><Link className='text-center' to="/login-google">Chat now</Link></li>
+                                        {/* <li><Link className='text-center' to="/login-google">Chat now</Link></li> */}
                                         <li><Link variant="secondary" onClick={logout} to="/">Đăng xuất</Link></li>
                                     </>}
                                 </ul>

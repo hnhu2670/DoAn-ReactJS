@@ -3,3 +3,26 @@ div.col-danhgia {
     padding: 3%;
     border-radius: 15px;
 }
+.rating {
+    display: inline-block;
+  }
+
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    float: right;
+    color: grey;
+    font-size: 24px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .rating label:before {
+    content: '\2605';
+  }
+  
+  .rating input:checked ~ label {
+    color: orange;
+  }

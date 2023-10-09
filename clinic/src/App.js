@@ -18,7 +18,6 @@ import Update from './components/MyProfile';
 import DKLam from './user/doctor/DKLam';
 import XNKham from './user/nurse/XNLichKham';
 import ForgetPassword from './components/ForgetPassword';
-import Chat from "./Chat"
 import LichKham from "./user/doctor/LichKham"
 import PhieuKham from './user/doctor/PhieuKham';
 import LichSuKham from './user/doctor/LichSuKham';
@@ -27,6 +26,10 @@ import ToaThuoc from './user/doctor/ToaThuoc';
 import DanhGia from './user/patient/DanhGia';
 import KeThuoc from './user/doctor/KeThuoc';
 import MyUserAddBill from './reducer/MyUserAddBill';
+import ThongBao from './user/nurse/ThongBao';
+import Chat from './Chat';
+import LoginGoogle from './chat-realtime/login/LoginGoogle';
+import ChatRoom from './chat-realtime/chatRoom/ChatRoom';
 export const MyUserContext = createContext();
 export const MyNotiContext = createContext()
 function App() {
@@ -65,12 +68,16 @@ function App() {
             <Route path="/kethuoc/toathuoc/:id" exact element={<ToaThuoc />} />
             {/* đánh giá */}
             <Route path="/danhgia" exact element={<DanhGia />} />
+            {/* thong bao */}
+            <Route path="/thongbao" exact element={<ThongBao />} />
+            <Route path="/login-google" exact element={< LoginGoogle />} />
+            <Route path="/chatroom" exact element={< ChatRoom />} />
+
           </Routes>
-          <Chat />
+          {/* <Chat /> */}
           <Footer />
         </BrowserRouter>
       </MyNotiContext.Provider>
-
     </MyUserContext.Provider>
 
   );

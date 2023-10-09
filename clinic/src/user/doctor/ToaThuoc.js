@@ -19,8 +19,6 @@ const ToaThuoc = () => {
 
     const [, notiDispatch] = useContext(MyNotiContext)
     useEffect(() => {
-
-
         const loadPhieuKham = async () => {
             try {
                 let { data } = await apis.get(endpoints['phieukham'](id));
@@ -52,7 +50,7 @@ const ToaThuoc = () => {
     }, [id]);
 
 
-
+    // xuat file pdf
     const pdfRef = useRef()
     const downPDF = () => {
         setLoad(true)
@@ -70,22 +68,43 @@ const ToaThuoc = () => {
             const imgX = (componentWidth - imgWidth * ratio) / 2
             const imgY = 30
             doc.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-            // setLoad(false)
+            // ten file load ve
             doc.save('hoadon.pdf')
         })
 
     }
-    // load them thong bao
-    const addNoti = (phieu) => {
-        notiDispatch({
-            "type": "inc",
-            "payload": 1
-        })
-        // luu vao cookies ==> lay bill tu cookie??????????????
-        // can co class trong csdl de luu
-        let bill = cookie.load("bill") || {};
-        cookie.save("bill", bill)
-        console.log(bill + "load thong bao")
+
+    // load them thong bao thanh toan
+    const addNoti = (noti) => {
+        try {
+            notiDispatch({
+                "type": "inc",
+                "payload": 1 //so luong tang
+            })
+
+            let bill = cookie.load("bill") || null;
+            if (bill == null) {
+                bill = {}
+            }
+            cookie.save("bill", JSON.stringify(bill))//luu bill vao cookie "bill"
+            console.log(bill + "load thong bao")
+            // ktra thong bao da ton tai chua
+            if (noti.id in bill) {
+                console.log("==========da co=========")
+                console.log(id)
+
+            } else {
+
+                console.log("----------chua co---------")
+                bill[noti.id] = {
+                    "id": noti.id
+                }
+                console.log(id)
+            }
+        } catch (error) {
+            console.log("------------loi----------" + error)
+        }
+
     }
     if (phieu === null) {
         return (<MySpinner />)

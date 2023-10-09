@@ -112,12 +112,10 @@ const ThanhToan = () => {
                 let { data } = await apis.get(endpoints['loaipayment']);
                 setloaipay(data)
                 setLoading(true)
-                // console.log(data);
 
 
             } catch (err) {
                 console.log(err);
-                // setLoading(false)
             }
         };
         loadpay()
@@ -136,25 +134,25 @@ const ThanhToan = () => {
                 let res = await apis.post(endpoints["thanhtoan"], formData);
                 console.log("thanh cong");
                 axios.get(res);
-                
+
                 if (res.status === 200) {
                     await new Promise((resolve) => setTimeout(resolve, 5000));
 
                     console.log("1")
-// get trang bị lỗi 404
-                        try {
-                            console.log("2")
-                          let reslink = await apis.get(endpoints["thanhtoanthanhcong"](thanhtoan.idAppo));
-                          console.log("3")
-                          window.location.href = reslink.data;
-                          
-                        } catch (error) {
-                          console.error("Error while fetching reslink:", error);
-                          // Xử lý lỗi ở đây nếu cần
-                        }
-                      
+                    // get trang bị lỗi 404
+                    try {
+                        console.log("2")
+                        let reslink = await apis.get(endpoints["thanhtoanthanhcong"](thanhtoan.idAppo));
+                        console.log("3")
+                        window.location.href = reslink.data;
+
+                    } catch (error) {
+                        console.error("Error while fetching reslink:", error);
+                        // Xử lý lỗi ở đây nếu cần
+                    }
+
                 }
-                
+
             } catch (error) {
                 console.log(error)
             }
@@ -177,7 +175,7 @@ const ThanhToan = () => {
             return update;
         });
     }
-    if (phieu === null) {
+    if (phieu === null || thuocs === null || dichvus === null) {
         return (<>
             <MySpinner />
         </>)
@@ -246,6 +244,7 @@ const ThanhToan = () => {
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin dịch vụ</h2>
                     <Table striped bordered hove className="text-center mb-5">
                         <thead>
+
                             <tr>
                                 <th>Mã dịch vụ</th>
                                 <th>Tên dịch vụ</th>
@@ -254,13 +253,34 @@ const ThanhToan = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {dichvus.map((d) => (
-                                <tr key={d.serviceId.id}>
-                                    <td>{d.id}</td>
-                                    <td>{d.serviceId.name}</td>
-                                    <td>{d.serviceId.price} VNĐ</td>
-                                </tr>
-                            ))}
+                            {dichvus === null ? (
+                                <Alert>không có dịch vụ</Alert>
+                            ) : (
+                                <>
+                                    {dichvus.map((d) => (
+                                        <tr key={d.serviceId?.id}>
+                                            <td>{d.id}</td>
+                                            <td>{d.serviceId?.name}</td>
+                                            <td>{d.serviceId?.price} VNĐ</td>
+                                        </tr>
+                                    ))}
+                                </>
+                            )}
+                            {/* 
+                            {dichvus === null ? (
+                                <Alert>khong co dich vu</Alert>
+                            )
+                                : (<>
+                                    {dichvus.map((d) => (
+                                        <tr key={d.serviceId.id}>
+                                            <td>{d.id}</td>
+                                            <td>{d.serviceId.name}</td>
+                                            <td>{d.serviceId.price} VNĐ</td>
+                                        </tr>
+                                    ))}
+                                </>
+                                )} */}
+
                         </tbody>
                     </Table>
                 </div>
