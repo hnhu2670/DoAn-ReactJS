@@ -12,3 +12,10 @@ button.btn-xacnhan {
     border-radius: 15px;
     background-color: #d2f6e2 !important;
 }
+
+form.form-addDoctor {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid #d2f6e2;
+    padding: 2%;
+}

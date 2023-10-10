@@ -69,7 +69,7 @@ const KeThuoc = () => {
             }
         }
         // if (phieubenh.id) {
-            loadtoathuoc();
+        loadtoathuoc();
         // }
     }, [phieubenh])
 
@@ -164,8 +164,8 @@ const KeThuoc = () => {
         // console.log(formClose)
         formAdd.style.display = 'none';
     }
-      return (
-        
+    return (
+
         <Container>
             <section>
                 {/* đây là phiếu bênh :idPre */}
