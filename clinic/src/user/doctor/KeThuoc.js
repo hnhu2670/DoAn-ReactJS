@@ -23,54 +23,51 @@ const KeThuoc = () => {
     })
 
 
+    const loadThuoc = async () => {
+        try {
+            let res = await apis.get(endpoints["thuoc"])
+            setDsThuoc(res.data)
+            setLoading(true)
+            console.log(res.data.id)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+
+
+    }
+    const layphieubenh = async () => {
+        try {
+            let res = await apis.get(endpoints["phieubenh"](id))
+            setphieubenh(res.data)
+            console.log("----------------------------------")
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+
+
+
+
+        }
+    }
+    const loadtoathuoc = async () => {
+        try {
+            let res = await apis.get(endpoints["toathuoc"](phieubenh.id))
+            setToaThuoc(res.data)
+            console.log("lấy được data")
+            console.log("================================")
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
-        const loadThuoc = async () => {
-            try {
-                let res = await apis.get(endpoints["thuoc"])
-                setDsThuoc(res.data)
-                setLoading(true)
-                console.log(res.data.id)
-            } catch (error) {
-                console.log(error)
-                setLoading(false)
-            }
-
-
-        }
-        const layphieubenh = async () => {
-            try {
-                let res = await apis.get(endpoints["phieubenh"](id))
-                setphieubenh(res.data)
-                console.log("----------------------------------")
-                console.log(res.data)
-            } catch (error) {
-                console.log(error)
-
-
-
-
-            }
-        }
         loadThuoc()
         layphieubenh()
-    }, [])
-
-
-    useEffect(() => {
-        const loadtoathuoc = async () => {
-            try {
-                let res = await apis.get(endpoints["toathuoc"](phieubenh.id))
-                setToaThuoc(res.data)
-                console.log("lấy được data")
-                console.log("================================")
-                console.log(res.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        // if (phieubenh.id) {
+        if (phieubenh.id) {
             loadtoathuoc();
-        // }
+        }
     }, [phieubenh])
 
 
@@ -89,8 +86,17 @@ const KeThuoc = () => {
                 console.log("thanh cong post");
                 if (res.status === 200) {
                     let formAdd = document.getElementById("row-addThuoc")
-                    // console.log(formClose)
+                    setThemThuoc({
+                        idThuoc: '',
+                        huongdansudung: '',
+                        soluongthuoc: '',
+                        idAppo: id,
+                        tenthuoc: ''
+                    }); 
                     formAdd.style.display = 'none';
+                    loadtoathuoc()
+                    loadThuoc()
+                
                     // setToaThuoc([...toathuoc, res.data]);
                     // setToaThuoc((prevState) => [...prevState, res.data]);
                     // const loadtoathuoc = async () => {
