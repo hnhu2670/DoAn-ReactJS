@@ -76,8 +76,6 @@ function App() {
 
             <Route path="/chat" element={<ChatRoom />} />
             <Route path="/newchatbox" element={<NewChatBox />} /> */}
-
-
           </Routes>
 
           <Footer />
