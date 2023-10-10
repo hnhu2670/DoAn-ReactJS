@@ -629,7 +629,7 @@ const DKLam = () => {
   <tbody>
     {lichlamdangky.map((t) => (
       <tr key={t.id}>
-        <td>{t.dateSchedule}</td>
+        <td>{new Date(t.dateSchedule).toLocaleDateString("vi-VN")}</td>
         <td>{t.shiftId.name}</td>
         <td>{t.shiftId.start}</td>
         <td>{t.shiftId.end}</td>

@@ -68,7 +68,9 @@ const KeThuoc = () => {
                 console.log(error)
             }
         }
-        loadtoathuoc()
+        // if (phieubenh.id) {
+            loadtoathuoc();
+        // }
     }, [phieubenh])
 
 
@@ -89,6 +91,8 @@ const KeThuoc = () => {
                     let formAdd = document.getElementById("row-addThuoc")
                     // console.log(formClose)
                     formAdd.style.display = 'none';
+                    // setToaThuoc([...toathuoc, res.data]);
+                    // setToaThuoc((prevState) => [...prevState, res.data]);
                     // const loadtoathuoc = async () => {
                     //     try {
                     //         let res = await apis.get(endpoints["toathuoc"](phieubenh.id))
@@ -160,7 +164,8 @@ const KeThuoc = () => {
         // console.log(formClose)
         formAdd.style.display = 'none';
     }
-    return (
+      return (
+        
         <Container>
             <section>
                 {/* đây là phiếu bênh :idPre */}

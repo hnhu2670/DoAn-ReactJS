@@ -14,7 +14,7 @@ const ThanhToan = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(false)
     const [phieu, setPhieuKham] = useState([])
-
+    const [tongtien, setTongtien] = useState()
     const [phieuBenh, setPhieuBenh] = useState([])
     const [thuocs, setThuocs] = useState([])
     const [dichvus, setDichvus] = useState([])
@@ -22,7 +22,7 @@ const ThanhToan = () => {
     const [hoadon, sethoadon] = useState([])
     const [thanhtoan, setthanhtoan] = useState({
         idAppo: id,
-        loaithanhtoan: "null"
+        loaithanhtoan: "null",
     })
     useEffect(() => {
         const loadPhieuKham = async () => {
@@ -97,6 +97,19 @@ const ThanhToan = () => {
                 // setLoading(false)
             }
         };
+        const loadtien = async () => {
+            try {
+                let { data } = await apis.get(endpoints['tinhtien'](id));
+                setTongtien(data)
+                setLoading(true)
+                // console.log(data);
+
+
+            } catch (err) {
+                console.log(err);
+                // setLoading(false)
+            }
+        };
 
         loadPhieuKham()
 
@@ -104,6 +117,7 @@ const ThanhToan = () => {
         loadthuoc()
         loaddichvu()
         loadbill()
+        loadtien()
     }, [id]);
 
     useEffect(() => {
@@ -129,6 +143,7 @@ const ThanhToan = () => {
                 let formData = new FormData();
                 formData.append("idAppo", thanhtoan.idAppo);
                 formData.append("loaithanhtoan", thanhtoan.loaithanhtoan);
+                formData.append("tongtien", tongtien);
                 // console.log(formData.data);
                 console.log("thanh cong do");
                 let res = await apis.post(endpoints["thanhtoan"], formData);
@@ -181,6 +196,30 @@ const ThanhToan = () => {
         </>)
     }
 
+    function calculateChange() {
+        var customerPayment = parseFloat(document.getElementById('customer-payment').value);
+        var totalAmount = parseFloat(tongtien);
+        var changeAmount = customerPayment - totalAmount;
+
+        console.log(totalAmount);
+        var formattedChangeAmount = formatCurrency(changeAmount);
+        document.getElementById('change-amount').value = formattedChangeAmount;
+    }
+
+    function formatCurrency(amount) {
+        var formatter = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+        if (amount < 0) {
+            return 'Thiếu ' + formatter.format(Math.abs(amount));
+        } else {
+            return formatter.format(amount);
+        }
+    }
 
     console.log(thanhtoan);
     return (<>
@@ -233,8 +272,8 @@ const ThanhToan = () => {
                                     <td>{t.medicineId.name}</td>
                                     <td>{t.quantity}</td>
                                     <td>{t.medicineId.idUnit.name}</td>
-                                    <td>{t.medicineId.price} VNĐ</td>
-                                    <td>{t.medicineId.price * t.quantity} VNĐ</td>
+                                    <td> {formatCurrency(t.medicineId.price)}</td>
+                                    <td> {formatCurrency(t.medicineId.price * t.quantity)}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -261,7 +300,7 @@ const ThanhToan = () => {
                                         <tr key={d.serviceId?.id}>
                                             <td>{d.id}</td>
                                             <td>{d.serviceId?.name}</td>
-                                            <td>{d.serviceId?.price} VNĐ</td>
+                                            <td>{formatCurrency(d.serviceId?.price)}</td>
                                         </tr>
                                     ))}
                                 </>
@@ -284,8 +323,8 @@ const ThanhToan = () => {
                         </tbody>
                     </Table>
                 </div>
-                <div>
-                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tổng tiền: {hoadon.payMoney}</h2>
+                {/* <div>
+                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tổng tiền: {tongtien}</h2>
                     <Row>
                         <Form.Group className="mb-3">
                             <Form.Label>Hình thức thanh toán</Form.Label>
@@ -301,6 +340,7 @@ const ThanhToan = () => {
 
                         </Form.Group>
                     </Row>
+                    {thanhtoan.loaithanhtoan === 1 && (
                     <Row>
                         <Col>
                             <Form.Group className="mb-3">
@@ -325,13 +365,65 @@ const ThanhToan = () => {
 
                             </Form.Group>
                         </Col>
+                    </Row>
+                    )}
+                    
                         <Col className="mt-4">
                             <Form.Group className="mb-3">
                                 <Button onClick={thanhtoanhoadon}> THANH TOÁN </Button>
                             </Form.Group>
-                        </Col>
+                        </Col>  
+                </div> */}
 
+                <div>
+                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }} id="total-amount">Tổng tiền: {formatCurrency(tongtien)}</h2>
+                    <Row>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Hình thức thanh toán</Form.Label>
+                            <Form.Control as="select" onChange={chonhinhthucthanhtoan} required>
+                                <option value="">-- Chọn hình thức thanh toán --</option>
+                                {loaipay.map((method) => (
+                                    <option value={method.id}>
+                                        {method.paymentMethod}
+                                    </option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
                     </Row>
+
+                    {thanhtoan.loaithanhtoan == 1 && (
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Tiền khách đưa</Form.Label>
+                                    <Form.Control
+                                        id="customer-payment"
+                                        type="text"
+                                        placeholder="Tiền khách đưa"
+                                        required
+                                        onInput={calculateChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Tiền trả lại</Form.Label>
+                                    <Form.Control
+                                        id="change-amount"
+                                        type="text"
+                                        placeholder="Tiền trả lại"
+                                        required
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    )}
+
+                    <Col className="mt-4">
+                        <Form.Group className="mb-3">
+                            <Button onClick={thanhtoanhoadon}>THANH TOÁN</Button>
+                        </Form.Group>
+                    </Col>
                 </div>
             </section>
         </Container>

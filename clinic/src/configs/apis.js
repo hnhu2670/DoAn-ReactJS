@@ -3,8 +3,8 @@ import cookie from "react-cookies";
 
 
 const SERVER_CONTEXT = "/Clinnic";
-// const SERVER = "http://localhost:8080";
-const SERVER = "http://localhost:8900";
+const SERVER = "http://localhost:8080";
+// const SERVER = "http://localhost:8900";
 
 export const endpoints = {
 
@@ -31,9 +31,11 @@ export const endpoints = {
     "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
     // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
     "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
+    "lichkhamcanthanhtoan": `${SERVER_CONTEXT}/api/nurse/lichkhamcanthanhtoan`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
     "lichkhamchuaxatnhan": `${SERVER_CONTEXT}/api/nurse/lichkhamchuaxatnhan`,
     "phieubenh": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieubenh`,
+    "tinhtien": (id) => `${SERVER_CONTEXT}/api/nurse/tinhtien/${id}`,
     "lichdangkyca1": `${SERVER_CONTEXT}/api/lichlamdangkyca1`,
     "lichdangkyca2": `${SERVER_CONTEXT}/api/lichlamdangkyca2`,
     "lichdangkyca3": `${SERVER_CONTEXT}/api/lichlamdangkyca3`,
@@ -54,6 +56,7 @@ export const endpoints = {
     "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
     "danhgia": `${SERVER_CONTEXT}/api/doctor/rating`,
     "lichdone": `${SERVER_CONTEXT}/api/lichlamhientai`,
+    "taohoadon": `${SERVER_CONTEXT}/api/doctor/taohoadon`,
     "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
     "huylichlam": (id) => `${SERVER_CONTEXT}/api/xemlichlam/huy/${id}`,
 }
