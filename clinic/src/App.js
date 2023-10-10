@@ -39,6 +39,7 @@ function App() {
     <MyUserContext.Provider value={[user, dispatch]}>
       <MyNotiContext.Provider value={[notiCount, notiDispatch]}>
         <BrowserRouter>
+
           <Header />
           <Routes>
             <Route path="/" exact element={<Home />} />
@@ -76,6 +77,7 @@ function App() {
           </Routes>
 
           <Footer />
+
         </BrowserRouter>
       </MyNotiContext.Provider>
     </MyUserContext.Provider>

@@ -48,37 +48,41 @@ const XNKham = () => {
     console.log(phieubenh)
 
     return (<>
-        xác nhận lịch khám
+
         <Container>
-            <Table striped bordered hove className="text-center" r>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>ID</th>
-                        <th>Mã bệnh nhân</th>
-                        <th>Ngày đăng ký</th>
-                        <th>Tên y tá</th>
-                        <th>Bác sĩ khám</th>
-                        <th>Trạng thái</th>
-                        <th>Ghi chú</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {lichkhamchuaxatnhan.map((d, index) => (
-                        <tr key={d.id}>
-                            <td>{index + 1}</td>
-                            <td>{d.id}</td>
-                            <td>{d.sickpersonId.id}-{d.sickpersonId.name}</td>
-                            <td>{d.appointmentDate}</td>
-                            <td>{d.nurseId}</td>
-                            <td>{d.doctorId}</td>
-                            <td>{d.status === 0 ? "Chưa xác nhận" : "Đã xác nhận"}</td>
-                            {/* <td>{phieubenh[index]?.id}-{phieubenh[index]?.conclusion}</td> */}
-                            <td>{phieubenh[index]?.conclusion}</td>
+            <h1 className="text-center text-login top-text">XÁC NHẬN LỊCH KHÁM</h1>
+            <div className="table-wrap">
+                <Table striped bordered hove className="text-center table-check" >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Mã bệnh nhân</th>
+                            <th>Ngày đăng ký</th>
+                            <th>Tên y tá</th>
+                            <th>Bác sĩ khám</th>
+                            <th>Trạng thái</th>
+                            <th>Ghi chú</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody className="scroll-table">
+                        {lichkhamchuaxatnhan.map((d, index) => (
+                            <tr key={d.id}>
+                                <td>{index + 1}</td>
+                                <td>{d.id}</td>
+                                <td>{d.sickpersonId.id}-{d.sickpersonId.name}</td>
+                                <td>{d.appointmentDate}</td>
+                                <td>{d.nurseId}</td>
+                                <td>{d.doctorId}</td>
+                                <td>{d.status === 0 ? "Chưa xác nhận" : "Đã xác nhận"}</td>
+                                {/* <td>{phieubenh[index]?.id}-{phieubenh[index]?.conclusion}</td> */}
+                                <td>{phieubenh[index]?.conclusion}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </div>
+
 
             <div className="add-doctor">
 
@@ -119,9 +123,12 @@ const XNKham = () => {
                             <option></option>
                         </Form.Control>
                     </Row>
-                    <Row className="mb-3">
+                    {/* <Row className="mb-3">
                         <Button >XÁC NHẬN</Button>
 
+                    </Row> */}
+                    <Row>
+                        <button class="btn-click">XÁC NHẬN </button>
                     </Row>
 
                 </Form>

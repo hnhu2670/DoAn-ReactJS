@@ -7,7 +7,7 @@
 }
 
 :root {
-  --size: 10px;
+  --size: 15px;
 }
 
 .flex {
@@ -72,6 +72,7 @@ header {
   background-color: #d2f6e2;
   width: 100%;
   height: 100%;
+  font-size: 1rem
 }
 
 .logoName {
@@ -90,6 +91,9 @@ header {
 
 .section-header a {
   color: #123653;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 1rem;
 }
 
 .section-header img {
@@ -114,9 +118,9 @@ nav.menu {
 }
 
 nav.menu>ul>li {
-  /* padding-top: var(--size); */
-  padding-top: 15px;
+  padding-top: var(--size);
   font-weight: bold;
+  margin-right: 5px;
 }
 
 
@@ -357,6 +361,7 @@ input[type="time"] {
   border-radius: 5px;
 }
 
+/* 
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
@@ -369,7 +374,7 @@ button {
 
 button:hover {
   background-color: #45a049;
-}
+} */
 
 /* QUEN MAT KHAU */
 .img-quenmk>img {

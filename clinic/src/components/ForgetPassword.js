@@ -275,7 +275,7 @@ const ForgetPassword = () => {
 
                                                         <MySpinner />
                                                     )}
-                                                    <span>NEXT</span>
+                                                    <span>⏭️</span>
                                                 </Button>
                                             </Col>
                                         </Row>
