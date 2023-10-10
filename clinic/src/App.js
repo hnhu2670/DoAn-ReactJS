@@ -27,9 +27,7 @@ import DanhGia from './user/patient/DanhGia';
 import KeThuoc from './user/doctor/KeThuoc';
 import MyUserAddBill from './reducer/MyUserAddBill';
 import ThongBao from './user/nurse/ThongBao';
-import Chat from './Chat';
-import LoginGoogle from './chat-realtime/login/LoginGoogle';
-import ChatRoom from './chat-realtime/chatRoom/ChatRoom';
+import AllChatBox from './chat/AllChat';
 export const MyUserContext = createContext();
 export const MyNotiContext = createContext()
 function App() {
@@ -70,10 +68,10 @@ function App() {
             <Route path="/danhgia" exact element={<DanhGia />} />
             {/* thong bao */}
             <Route path="/thongbao" exact element={<ThongBao />} />
-            {/* <Route path="/login-google" exact element={< LoginGoogle />} />
-            <Route path="/chatroom" exact element={< ChatRoom />} /> */}
+            <Route path="/allchat" exact element={<AllChatBox />} />
+
           </Routes>
-          <Chat />
+
           <Footer />
         </BrowserRouter>
       </MyNotiContext.Provider>

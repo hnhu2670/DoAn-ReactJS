@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import React, { useEffect, useContext, useState } from 'react';
 import { db } from "../firebase"
 import { collection, query, where, onSnapshot, orderBy, limit, getDocs, getCountFromServer } from "firebase/firestore";
-// import {
-//     MDBCol,
-//     MDBTypography,
-// } from "mdb-react-ui-kit";
+import {
+    MDBCol,
+    MDBTypography,
+} from "mdb-react-ui-kit";
 import { Navigate } from "react-router-dom";
 import MySpinner from "../layout/MySpinner";
 
@@ -60,33 +60,33 @@ const AllChatBox = () => {
                     {chatItem.map(c => {
                         let url = `/chat/admin/${c.name}`
 
-                        // return <MDBCol className="mb-4 mb-md-0">
-                        //     <div className="p-3">
-                        //         <MDBTypography listUnStyled className="mb-0">
-                        //             <li className="p-2 border-bottom w-100">
-                        //                 <Link
-                        //                     to={url}
-                        //                     className="d-flex justify-content-between"
-                        //                 >
-                        //                     <div className="d-flex flex-row">
-                        //                         <div>
-                        //                             <Image src={c.avatar} roundedCircle style={{ width: 50, height: 50, borderRadius: 50 / 2 }} />
+                        return <MDBCol className="mb-4 mb-md-0">
+                            <div className="p-3">
+                                <MDBTypography listUnStyled className="mb-0">
+                                    <li className="p-2 border-bottom w-100">
+                                        <Link
+                                            to={url}
+                                            className="d-flex justify-content-between"
+                                        >
+                                            <div className="d-flex flex-row">
+                                                <div>
+                                                    <Image src={c.avatar} roundedCircle style={{ width: 50, height: 50, borderRadius: 50 / 2 }} />
 
-                        //                         </div>
-                        //                         <div className="pt-1 pl-3">
-                        //                             <p className="text-monospace ">
-                        //                                 {c.name}
-                        //                             </p>
-                        //                             <p className="text-monospace ">
-                        //                                 {c.lastMessage}
-                        //                             </p>
-                        //                         </div>
-                        //                     </div>
-                        //                 </Link>
-                        //             </li>
-                        //         </MDBTypography>
-                        //     </div>
-                        // </MDBCol>
+                                                </div>
+                                                <div className="pt-1 pl-3">
+                                                    <p className="text-monospace ">
+                                                        {c.name}
+                                                    </p>
+                                                    <p className="text-monospace ">
+                                                        {c.lastMessage}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                </MDBTypography>
+                            </div>
+                        </MDBCol>
                     })}
                 </div>
             </Container>
