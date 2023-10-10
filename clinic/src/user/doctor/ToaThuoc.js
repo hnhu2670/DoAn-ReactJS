@@ -23,31 +23,34 @@ const ToaThuoc = () => {
             try {
                 let { data } = await apis.get(endpoints['phieukham'](id));
                 setPhieuKham(data)
-                // setLoading(true)
+                setLoad(true)
                 // console.log(data);
 
 
             } catch (err) {
                 console.log(err);
-                // setLoading(false)
-            }
-        }
-
-        const loadtoathuoc = async () => {
-            try {
-                let res = await apis.get(endpoints["toathuoc"](id))
-                setToaThuoc(res.data)
-                console.log("lấy được data")
-                console.log("================================")
-                // console.log(res.data)
-            } catch (error) {
-                console.log(error)
+                setLoad(false)
             }
         }
 
         loadPhieuKham()
+    }, []);
+
+    useEffect(() => {
+        const loadtoathuoc = async () => {
+            try {
+                let res = await apis.get(endpoints["toathuoc"](phieu.prescriptionId.id))
+                setToaThuoc(res.data)
+                console.log("lấy được data")
+                console.log("================================")
+                console.log(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
         loadtoathuoc()
-    }, [id]);
+    }, [phieu]);
+
 
 
     // xuat file pdf
@@ -69,9 +72,9 @@ const ToaThuoc = () => {
             const imgY = 30
             doc.addImage(imgData, "PNG", imgX, imgY, imgWidth * ratio, imgHeight * ratio);
             // ten file load ve
+
             doc.save('hoadon.pdf')
         })
-
     }
 
     // load them thong bao thanh toan
@@ -106,7 +109,31 @@ const ToaThuoc = () => {
         }
 
     }
-    if (phieu === null) {
+
+    const taohoadon = (evt) => {
+        evt.preventDefault();
+        const process = async () => {
+            try {
+                let formData = new FormData();
+                formData.append("IdAppo", id);
+                let res = await apis.post(endpoints["taohoadon"], formData);
+                console.log("thanh cong post");
+                if (res.status === 200) {
+                    console.log("tao xong hoa don va roi khoi");
+                }
+                else {
+                    console.log("them that bai")
+                }
+
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        process();
+    }
+
+    if (phieu.id == null) {
         return (<MySpinner />)
     }
 
@@ -119,11 +146,11 @@ const ToaThuoc = () => {
 
                         phiếu bệnh :{phieu.prescriptionId.id}
                     </div> */}
-                    {/* <div>
+                    <div ref={pdfRef}>
                         Tên bác sĩ: {phieu.doctorId.name}
                     </div>
                     <hr />
-                    <div>
+                    <div ref={pdfRef}>
                         <Row>
                             <Col>
                                 Họ và tên: {phieu.sickpersonId.name}
@@ -132,7 +159,7 @@ const ToaThuoc = () => {
                                 Giới tính: {phieu.sickpersonId.sex}
                             </Col>
                             <Col>
-                                Ngày sinh:  {phieu.sickpersonId.dod}
+                                Ngày sinh:  {new Date(phieu.sickpersonId.dod).toLocaleDateString("vi-VN")}
                             </Col>
                         </Row>
                         <Row>
@@ -144,7 +171,7 @@ const ToaThuoc = () => {
                         <Row>
                             Chuẩn đoán: {phieu.prescriptionId.symptom}
                         </Row>
-                    </div> */}
+                    </div>
                     <hr />
                     <div ref={pdfRef}>
                         {toathuoc.map((d) => (
@@ -170,6 +197,9 @@ const ToaThuoc = () => {
                         {/* goi ham truyen id */}
                         <TypeButton className="btn-normal" onClick={() => addNoti(phieu)}>LƯU</TypeButton>
 
+                    </div>
+                    <div>
+                        <Button onClick={taohoadon}>Tạo hóa đơn và rời khỏi</Button>
                     </div>
                 </section>
             </Container >
