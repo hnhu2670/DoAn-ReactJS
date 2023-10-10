@@ -59,6 +59,8 @@ const Header = () => {
                                             </Dropdown>
 
                                         </li>
+                                        <li><Link variant="secondary" to="/allchat">Chat now</Link></li>
+
                                         {/* <li><Link className='text-center' to="/login-google">Chat now</Link></li> */}
                                         <li><Link variant="secondary" onClick={logout} to="/">Đăng xuất</Link></li>
                                     </>}

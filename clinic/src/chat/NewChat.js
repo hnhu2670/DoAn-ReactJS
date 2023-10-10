@@ -1,4 +1,3 @@
-import ChatBox from "./ChatBox"
 import SendMessage from "./SendMessage"
 import { Navigate, useParams } from "react-router-dom";
 import { MyUserContext } from '../App';
@@ -9,20 +8,21 @@ import Message from "./Message";
 import { Container, Alert } from "react-bootstrap";
 
 
-const NewChatBox = () => {
+const NewChat = () => {
     const [user, dispatch] = useContext(MyUserContext);
     const { username } = useParams();
     const [messages, setMessages] = useState([]);
 
     const url_collection = "messages/" + username + "/chat"
     useEffect(() => {
+
         const q = query(collection(db, url_collection), orderBy("createdAt"), limit(50));
         const unsubscribe = onSnapshot(q, (snapshot) => {
-            const massages = [];
+            const chat = [];
             snapshot.forEach((doc) => {
-                massages.push({ ...doc.data(), id: doc.id });
+                chat.push({ ...doc.data(), id: doc.id });
             });
-            setMessages(massages);
+            setMessages(chat);
         });
         return () => unsubscribe;
     }, []);
@@ -52,4 +52,4 @@ const NewChatBox = () => {
     );
 }
 
-export default NewChatBox;
+export default NewChat;

@@ -20,22 +20,26 @@ const AllChatBox = () => {
     const [chatItem, setChatItem] = useState([]);
 
     useEffect(() => {
+        // load tat ca cac tin nhan
         const loadAllChatBox = () => {
             const q = query(collection(db, "chat")); // get All document in collection messages
             const unsubscribe = onSnapshot(q, async (snapshot) => {
+                // mang luu chat
                 let chatItems = [];
+                // gan db.chat cho expenCol
                 let expenCol = collection(db, "chat");
                 let snapshotCount = await getCountFromServer(expenCol);
                 let i = snapshotCount.data().count;
-                snapshot.forEach((doc) => { // Loop all document in q 
+                snapshot.forEach((doc) => {
                     chatItems.push(doc.data());
                     console.log(chatItems)
                 });
                 if (chatItems.length === i) {
-                    //Sort object by createdAt
+                    // xep mang theo thoi gian
                     chatItems.sort((a, b) => {
                         return a.createdAt - b.createdAt;
                     });
+                    // dao mang de hien tu cu den moi
                     chatItems.reverse();
                     //Update state
                     setChatItem(chatItems);
@@ -52,13 +56,14 @@ const AllChatBox = () => {
     if (chatItem === null || chatItem.length === 0) {
         return <MySpinner />;
     }
-
+    // console.log(user)
     return (
         <>
             <Container>
                 <div className="mt-4">
                     {chatItem.map(c => {
-                        let url = `/chat/admin/${c.name}`
+                        {/* link den tin nhan cua user*/ }
+                        let url = `/chat/${c.name}`
 
                         return <MDBCol className="mb-4 mb-md-0">
                             <div className="p-3">

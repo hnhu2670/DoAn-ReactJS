@@ -1,15 +1,14 @@
-import ChatBox from "./ChatBox"
 import SendMessage from "./SendMessage"
 import { Navigate } from "react-router-dom";
 import { MyUserContext } from '../App';
 import React, { useEffect, useContext, useState } from 'react';
 import AllChatBox from './AllChat'
-// import NewChatBox from './NewChat'
 import { db } from "../firebase"
-import { addDoc, collection, query, where, onSnapshot, serverTimestamp, setDoc, doc } from "firebase/firestore";
+import { addDoc, collection, query, where, onSnapshot, serverTimestamp, setDoc, doc, orderBy, limit } from "firebase/firestore";
 import { Button } from "react-bootstrap";
 // import { MDBBtn } from "mdb-react-ui-kit";
 import { redirect } from "react-router-dom";
+import NewChat from "./NewChat";
 
 const ChatRoom = () => {
 
@@ -21,18 +20,27 @@ const ChatRoom = () => {
     useEffect(() => {
         const loadChatRoom = async () => {
             if (user !== null) {
-                const q = query(collection(db, "chat"));
-                const massages = [];
-                const unsubscribe = onSnapshot(q, (snapshot) => {
-                    snapshot.forEach((doc) => {
-                        massages.push({ ...doc.data(), id: doc.id });
+                // const q = query(collection(db, "chat"));
+                const q = query(
+                    // db name in firebase
+                    collection(db, "chat"),
+                    orderBy("createdAt"),
+                    limit(50),
+                );
+                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                    const chat = [];
+                    querySnapshot.forEach((doc) => {
+                        chat.push({ ...doc.data(), id: doc.id });
                         if (doc.id === user['username']) {
                             setExist(true);
                         }
+
                     });
+                    setChatName(chat);
                 });
-                setChatName(massages);
                 return () => unsubscribe;
+
+
             }
         }
         loadChatRoom();
@@ -46,12 +54,12 @@ const ChatRoom = () => {
                 createdAt: serverTimestamp(),
                 lastMessage: "Bạn cần tư vấn gì ạ?"
             });
-            const newCollectionRef = collection(db, "chat", user['username'], "chat");
+            const newCollectionRef = collection(db, "chat", user['username'], "chatbox");
 
             await addDoc(newCollectionRef, {
-                text: "Bạn cần tư vấn gì ạ?",
-                name: "mhoang",
-                avatar: "https://res.cloudinary.com/dohcsyfoi/image/upload/v1692291482/zlgufqz0jcozwnup3bsf.jpg",
+                text: "CHatchatchat",
+                // name: "admin",
+                // avatar: "https://res.cloudinary.com/dohcsyfoi/image/upload/v1692291482/zlgufqz0jcozwnup3bsf.jpg",
                 createdAt: serverTimestamp(),
                 uid: "5"
             });
@@ -62,22 +70,24 @@ const ChatRoom = () => {
             console.log("Create fail");
         }
     }
-
+    console.log(user)
     if (user === null) {
         return <Navigate to="/login" replace={true} />;
     }
     else {
-        if (user['userRole'] === "ROLE_ADMIN") {
+        // ktra tra thong tin user
+        if (user.roleId.name === "ROLE_ADMIN") {
             return (
                 <>
                     <div>
                         {exist === true ?
                             <div>
-                                <ChatBox />
+                                <NewChat />
                                 <SendMessage />
                             </div>
                             :
                             <div className="mt-3 d-flex align-items-center justify-content-center">
+                                {/* <AllChatBox /> */}
                                 <Button onClick={handleCreateDoc}>Tạo đoạn hội thoại mới</Button>
                             </div>}
                     </div>
@@ -86,6 +96,7 @@ const ChatRoom = () => {
         } else {
             return (
                 <div>
+                    {/* <Button onClick={handleCreateDoc}>click me</Button> */}
                     <AllChatBox />
                 </div>
 

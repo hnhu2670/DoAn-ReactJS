@@ -24,7 +24,7 @@ const SendMessage = () => {
         try {
             const uid = user['id']
             //Update Document
-            const docRef = doc(db, "messages", username);
+            const docRef = doc(db, "chat", username);
             await updateDoc(docRef, {
                 createdAt: serverTimestamp(),
                 lastMessage: message
