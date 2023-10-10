@@ -3,8 +3,8 @@ import cookie from "react-cookies";
 
 
 const SERVER_CONTEXT = "/Clinnic";
-// const SERVER = "http://localhost:8080";
-const SERVER = "http://localhost:8900";
+const SERVER = "http://localhost:8080";
+// const SERVER = "http://localhost:8900";
 
 export const endpoints = {
 
@@ -59,6 +59,7 @@ export const endpoints = {
     "taohoadon": `${SERVER_CONTEXT}/api/doctor/taohoadon`,
     "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
     "huylichlam": (id) => `${SERVER_CONTEXT}/api/xemlichlam/huy/${id}`,
+    "xoathuoc": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/kethuoc/delete/${id}`,
 }
 export const authApi = () => {
     return axios.create({

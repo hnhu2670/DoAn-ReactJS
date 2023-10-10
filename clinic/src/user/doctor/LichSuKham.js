@@ -24,7 +24,7 @@ const LichSuKham = () => {
             }
         };
         loadLSKham()
-    }, [])
+    }, [id])
     return (
         <div>
             <Container>
@@ -32,7 +32,7 @@ const LichSuKham = () => {
                     <h1 className="text-center text-login top-text">LỊCH KHÁM BỆNH</h1>
                     <div >
                         <Row>
-                            <Col><h2>Tên bệnh nhân</h2></Col>
+                            <Col><h2>Tên bệnh nhân {lskham[0]?.sickpersonId.name}</h2></Col>
                             <Col><p></p></Col>
                         </Row>
 
@@ -48,7 +48,14 @@ const LichSuKham = () => {
                             </tr>
                         </thead>
                         <tbody>
-
+                            {lskham.map((h)=>(
+                                <tr>
+                                    <td>{new Date(h.appointmentDate).toLocaleDateString("vi-VN")}</td>
+                                    <td>{h.doctorId.name}</td>
+                                    <td>{h.prescriptionId.conclusion}</td>
+                                    <td>{h.prescriptionId.symptom}</td>
+                                </tr>
+                            ))}
 
                         </tbody>
                     </Table>
