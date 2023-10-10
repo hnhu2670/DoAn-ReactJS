@@ -72,10 +72,7 @@ function App() {
 
             <Route path="/allchat" element={<AllChatBox />} />
             <Route path="/chat/:username" element={<NewChat />} />
-            {/* <Route path="/chat/admin/:username" element={<NewChatBox />} />
 
-            <Route path="/chat" element={<ChatRoom />} />
-            <Route path="/newchatbox" element={<NewChatBox />} /> */}
           </Routes>
 
           <Footer />

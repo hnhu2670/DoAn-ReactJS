@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Form, Row, Table } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
 import apis, { endpoints } from '../../configs/apis'
 import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
 import "./keThuoc.css"
 import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
+import { auth } from '../../firebase'
 const KeThuoc = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -63,12 +65,15 @@ const KeThuoc = () => {
     }
 
     useEffect(() => {
-        loadThuoc()
-        layphieubenh()
+        loadThuoc();
+        layphieubenh();
+      }, []);
+      
+      useEffect(() => {
         if (phieubenh.id) {
-            loadtoathuoc();
+          loadtoathuoc();
         }
-    }, [phieubenh])
+      }, [phieubenh]);
 
 
     const napthuoc = (evt) => {
@@ -145,6 +150,22 @@ const KeThuoc = () => {
         });
     }
 
+    const deletePrescriptionItem = async (id, event) => {
+        event.preventDefault(); // Prevent form submission
+      
+        if (window.confirm("Bạn có chắc chắn muốn xóa thuốc này?")) {
+          console.log(id);
+          console.log(endpoints["xoathuoc"](id));
+          try {
+            await apis.delete(endpoints["xoathuoc"](id));
+            console.log('Xóa thành công');
+            loadtoathuoc();
+            loadThuoc();
+          } catch (error) {
+            console.error('Lỗi khi xóa:', error);
+          }
+        }
+      };
 
     const chonthuoc = (fieldid, id, fieldtname, tenthuoc) => {
         let formAdd = document.getElementById("row-addThuoc")
@@ -237,6 +258,7 @@ const KeThuoc = () => {
                                     <th>Số lượng</th>
                                     <th>Đơn vị</th>
                                     <th>Hướng dẫn sử dụng</th>
+                                    <th>Dụt nút xóa Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -247,6 +269,7 @@ const KeThuoc = () => {
                                         <td>{t.quantity}</td>
                                         <td>{t.medicineId.idUnit.name}</td>
                                         <td>{t.instructions}</td>
+                                        <td><button onClick={(e) => deletePrescriptionItem(t.id, e)}>Xóa</button></td>
                                     </tr>
                                 ))}
                             </tbody>

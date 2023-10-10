@@ -59,6 +59,7 @@ export const endpoints = {
     "taohoadon": `${SERVER_CONTEXT}/api/doctor/taohoadon`,
     "thoigianlamviec": (id) => `${SERVER_CONTEXT}/api/lichlamhientai/${id}`,
     "huylichlam": (id) => `${SERVER_CONTEXT}/api/xemlichlam/huy/${id}`,
+    "xoathuoc": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/kethuoc/delete/${id}`,
 }
 export const authApi = () => {
     return axios.create({
