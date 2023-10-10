@@ -56,7 +56,7 @@ const AllChatBox = () => {
     if (chatItem === null || chatItem.length === 0) {
         return <MySpinner />;
     }
-    // console.log(user)
+    console.log(user)
     return (
         <>
             <Container>

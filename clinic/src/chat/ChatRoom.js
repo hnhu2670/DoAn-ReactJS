@@ -87,7 +87,6 @@ const ChatRoom = () => {
                             </div>
                             :
                             <div className="mt-3 d-flex align-items-center justify-content-center">
-                                {/* <AllChatBox /> */}
                                 <Button onClick={handleCreateDoc}>Tạo đoạn hội thoại mới</Button>
                             </div>}
                     </div>
@@ -96,7 +95,6 @@ const ChatRoom = () => {
         } else {
             return (
                 <div>
-                    {/* <Button onClick={handleCreateDoc}>click me</Button> */}
                     <AllChatBox />
                 </div>
 
