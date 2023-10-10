@@ -67,7 +67,7 @@ const Doctor = () => {
 
                         />
                     </div>
-                    <TypeButton className="btn-normal" type="submit">Tìm kiếm</TypeButton>
+                    <button className="btn-click" type="submit">Tìm kiếm</button>
 
                 </Form>
                 <section className="section-doctor">
@@ -84,14 +84,7 @@ const Doctor = () => {
                                                 Chi tiết
                                             </Link>
                                         </Button>
-                                        {/* {loading === true ? <MySpinner /> :
-                                            <Button className="btn-note">
-                                                <Link to={`/bacsi/${d.id}`}
-                                                    id={d.id}>
-                                                    Chi tiết
-                                                </Link>
-                                            </Button>
-                                        } */}
+
                                     </Card.Body>
                                 </Card>
                             </Col>
