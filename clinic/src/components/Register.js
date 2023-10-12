@@ -204,7 +204,16 @@ const Register = () => {
                     </Row>
                     <Row className="m-2">
                         <Form.Group >
-                            {loading === true ? <MySpinner /> : <Button type="submit" variant="danger">Đăng ký</Button>}
+                            <Row className="mb-4">
+                                <div className="buttonLogin p-0">
+                                    {loading === true ? <MySpinner /> :
+                                        <Button type="submit" className="buttonLoginColor">
+                                            Đăng ký
+                                        </Button>
+                                    }
+
+                                </div>
+                            </Row>
 
                         </Form.Group>
                     </Row>
