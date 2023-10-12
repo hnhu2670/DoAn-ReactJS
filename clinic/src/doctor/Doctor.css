@@ -1,7 +1,7 @@
 .section-doctor {
     margin: 0 auto;
     margin-top: 5%;
-    margin-bottom: 15%;
+    /* margin-bottom: 15%; */
     width: var(--wide);
 }
 
@@ -71,6 +71,7 @@ div.card:hover div.card-body {
 
 .section-doctor .row {
     margin: 7% auto;
+    margin-bottom: 0;
 }
 
 form.form-find {
@@ -89,4 +90,14 @@ form.form-find {
     width: 100%;
     margin-right: 2%;
 
+}
+
+div.doctor-item {
+    width: 22% !important;
+    border: 2px solid #fff;
+    padding: 1.5%;
+    margin: 1.5%;
+    border-radius: 0 20px 0 20px;
+    box-shadow: 0px 10px 15px #0000001a;
+    color: #09a14d;
 }

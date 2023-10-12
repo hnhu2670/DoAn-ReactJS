@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, Button, Col, Container, Form, Image, Row, Table } from "react-bootstrap"
+import { Accordion, Alert, Button, Col, Container, Form, Image, Row, Tab, Table, Tabs } from "react-bootstrap"
 import { MyUserContext } from "../../App";
 import { parseISO, isPast, format } from 'date-fns';
 import "./DKLam.css"
@@ -85,83 +85,87 @@ const DKLam = () => {
 
         return dates;
     };
+    const loadlichdangky1 = async () => {
+        try {
+            let { data } = await authApi().get(endpoints['lichdangkyca1']);
+            const formattedData = data.map(timestamp => {
+                const date = new Date(timestamp);
+                const formattedDate = format(date, "yyyy-MM-dd");
+                return formattedDate;
+            });
+            setlichdangky1(formattedData);
+            //   console.log(formattedData);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const loadlichdangky2 = async () => {
+        try {
+            let { data } = await authApi().get(endpoints['lichdangkyca2']);
+            const formattedData = data.map(timestamp => {
+                const date = new Date(timestamp);
+                const formattedDate = format(date, "yyyy-MM-dd");
+                return formattedDate;
+            });
+            setlichdangky2(formattedData);
+            // console.log(formattedData);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const loadlichdangky3 = async () => {
+        try {
+            let { data } = await authApi().get(endpoints['lichdangkyca3']);
+            const formattedData = data.map(timestamp => {
+                const date = new Date(timestamp);
+                const formattedDate = format(date, "yyyy-MM-dd");
+                return formattedDate;
+            });
+            setlichdangky3(formattedData);
+            // console.log(formattedData);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const loadlichdone = async () => {
+        try {
+            let { data } = await authApi().get(endpoints['lichdone']);
+            data.forEach((item) => {
+                item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
+            });
+            setlichdone(data);
+            //   console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const loadlichlamdangky = async () => {
+        try {
+            let { data } = await authApi().get(endpoints['lichlamdangky']);
+            data.forEach((item) => {
+                item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
+            });
+            setlichlamdangky(data);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
 
     useEffect(() => {
-        const loadlichdangky1 = async () => {
-            try {
-                let { data } = await authApi().get(endpoints['lichdangkyca1']);
-                const formattedData = data.map(timestamp => {
-                    const date = new Date(timestamp);
-                    const formattedDate = format(date, "yyyy-MM-dd");
-                    return formattedDate;
-                });
-                setlichdangky1(formattedData);
-                //   console.log(formattedData);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        const loadlichdangky2 = async () => {
-            try {
-                let { data } = await authApi().get(endpoints['lichdangkyca2']);
-                const formattedData = data.map(timestamp => {
-                    const date = new Date(timestamp);
-                    const formattedDate = format(date, "yyyy-MM-dd");
-                    return formattedDate;
-                });
-                setlichdangky2(formattedData);
-                // console.log(formattedData);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        const loadlichdangky3 = async () => {
-            try {
-                let { data } = await authApi().get(endpoints['lichdangkyca3']);
-                const formattedData = data.map(timestamp => {
-                    const date = new Date(timestamp);
-                    const formattedDate = format(date, "yyyy-MM-dd");
-                    return formattedDate;
-                });
-                setlichdangky3(formattedData);
-                // console.log(formattedData);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        const loadlichdone = async () => {
-            try {
-                let { data } = await authApi().get(endpoints['lichdone']);
-                data.forEach((item) => {
-                    item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
-                });
-                setlichdone(data);
-                //   console.log(data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        const loadlichlamdangky = async () => {
-            try {
-                let { data } = await authApi().get(endpoints['lichlamdangky']);
-                data.forEach((item) => {
-                    item.dateSchedule = new Date(item.dateSchedule).toISOString().substring(0, 10);
-                });
-                setlichlamdangky(data);
-                console.log(data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
+        if (user) {
+            loadlichdangky1();
+            loadlichdangky2();
+            loadlichdangky3();
+            loadlichdone();
+            loadlichlamdangky();
+        }
 
 
-        loadlichdangky1();
-        loadlichdangky2();
-        loadlichdangky3();
-        loadlichdone();
-        loadlichlamdangky();
-    }, []);
+    }, [user]);
 
 
     // console.log(lichdangky1)
@@ -209,7 +213,12 @@ const DKLam = () => {
                 let res = await apis.post(endpoints['addSchedule'], formData);
                 console.log("thanh cong");
                 if (res.status === 200) {
-                    <Alert>Xác nhận thành công !!!!!!</Alert>
+                    loadlichdangky1()
+                    loadlichdangky2()
+                    loadlichdangky3()
+
+                    loadlichlamdangky()
+                    // <Alert Alert > Xác nhận thành công!!!!!!</Alert >
                     // nav("/");
                 }
             } catch (error) {
@@ -227,8 +236,11 @@ const DKLam = () => {
         const huylich = async () => {
             try {
                 let { data } = await apis.get(endpoints['huylichlam'](id));
-                <Alert>Hủy lịch thành công</Alert>
-                console.log(data);
+                console.log(data)
+                loadlichdangky1()
+                loadlichdangky2()
+                loadlichdangky3()
+                loadlichlamdangky()
             } catch (err) {
                 console.log(err);
                 <Alert>Hủy lịch thất bại</Alert>
@@ -240,403 +252,412 @@ const DKLam = () => {
     return (<>
         <Container>
             <section>
-                <h1 className="text-center text-login top-text">ĐĂNG KÝ LÀM</h1>
+                <Tabs
+                    id="justify-tab-example"
+                    className="m-3"
+                    justify
 
-                <Table striped bordered hove className="text-center table-addJob" >
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Thứ Hai</th>
-                            <th>Thứ Ba</th>
-                            <th>Thứ Tư</th>
-                            <th>Thứ Năm</th>
-                            <th>Thứ Sáu</th>
-                            <th>Thứ Bảy</th>
-                            <th>Chủ Nhật</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Ca sáng</td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[0]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu2ca1", nextWeekDates[0])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[1]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu3ca1", nextWeekDates[1])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[2]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu4ca1", nextWeekDates[2])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[3]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu5ca1", nextWeekDates[3])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[4]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu6ca1", nextWeekDates[4])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[5]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu7ca1", nextWeekDates[5])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky1.includes(nextWeekDates[6]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu8ca1", nextWeekDates[6])}
-                                    />
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ca chiều</td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[0]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu2ca2", nextWeekDates[0])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[1]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu3ca2", nextWeekDates[1])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[2]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu4ca2", nextWeekDates[2])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[3]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu5ca2", nextWeekDates[3])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[4]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu6ca2", nextWeekDates[4])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[5]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu7ca2", nextWeekDates[5])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky2.includes(nextWeekDates[6]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu8ca2", nextWeekDates[6])}
-                                    />
-                                )}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ca tối</td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[0]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu2ca3", nextWeekDates[0])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[1]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu3ca3", nextWeekDates[1])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[2]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu4ca3", nextWeekDates[2])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[3]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu5ca3", nextWeekDates[3])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[4]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu6ca3", nextWeekDates[4])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[5]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu7ca3", nextWeekDates[5])}
-                                    />
-                                )}
-                            </td>
-                            <td>
-                                {lichdangky3.includes(nextWeekDates[6]) ? (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        checked
-                                        disabled
-                                    />
-                                ) : (
-                                    <Form.Check
-                                        aria-label="option 1"
-                                        onChange={(e) => change(e, "thu8ca3", nextWeekDates[6])}
-                                    />
-                                )}
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-                <Form.Group className="mb-3 text-right">
-                    <button class="btn-click " onClick={dangkyliclam}>XÁC NHẬN</button>
-                </Form.Group>
+                >
+                    <Tab eventKey="home" title="LỊCH LÀM HIỆN TẠI">
+                        <h1 className="text-center text-login top-text">LỊCH LÀM HIỆN TẠI</h1>
+                        <Table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Ca/thứ</th>
+                                    <th>THỨ 2</th>
+                                    <th>THỨ 3</th>
+                                    <th>THỨ 4</th>
+                                    <th>THỨ 5</th>
+                                    <th>THỨ 6</th>
+                                    <th>THỨ 7</th>
+                                    <th>CHỦ NHẬT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ca sáng</td>
+                                    {currentWeekDates.map((date, index) => (
+                                        <td key={index}>
+                                            {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 1) ? <>&#10003;</> : ""}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <td>Ca chiều</td>
+                                    {currentWeekDates.map((date, index) => (
+                                        <td key={index}>
+                                            {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 2) ? <>&#10003;</> : ""}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr>
+                                    <td>Ca tối</td>
+                                    {currentWeekDates.map((date, index) => (
+                                        <td key={index}>
+                                            {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 3) ? <>&#10003;</> : ""}
+                                        </td>
+                                    ))}
+                                </tr>
 
+                            </tbody>
+                        </Table>
+                    </Tab>
+                    <Tab eventKey="profile" title="ĐĂNG KÝ LÀM">
+                        <h1 className="text-center text-login top-text">ĐĂNG KÝ LÀM</h1>
+                        <Table striped bordered hove className="text-center table-addJob" >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Thứ Hai</th>
+                                    <th>Thứ Ba</th>
+                                    <th>Thứ Tư</th>
+                                    <th>Thứ Năm</th>
+                                    <th>Thứ Sáu</th>
+                                    <th>Thứ Bảy</th>
+                                    <th>Chủ Nhật</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ca sáng</td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[0]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu2ca1", nextWeekDates[0])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[1]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu3ca1", nextWeekDates[1])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[2]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu4ca1", nextWeekDates[2])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[3]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu5ca1", nextWeekDates[3])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[4]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu6ca1", nextWeekDates[4])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[5]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu7ca1", nextWeekDates[5])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky1.includes(nextWeekDates[6]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu8ca1", nextWeekDates[6])}
+                                            />
+                                        )}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ca chiều</td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[0]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu2ca2", nextWeekDates[0])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[1]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu3ca2", nextWeekDates[1])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[2]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu4ca2", nextWeekDates[2])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[3]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu5ca2", nextWeekDates[3])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[4]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu6ca2", nextWeekDates[4])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[5]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu7ca2", nextWeekDates[5])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky2.includes(nextWeekDates[6]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu8ca2", nextWeekDates[6])}
+                                            />
+                                        )}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ca tối</td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[0]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu2ca3", nextWeekDates[0])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[1]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu3ca3", nextWeekDates[1])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[2]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu4ca3", nextWeekDates[2])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[3]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu5ca3", nextWeekDates[3])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[4]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu6ca3", nextWeekDates[4])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[5]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu7ca3", nextWeekDates[5])}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {lichdangky3.includes(nextWeekDates[6]) ? (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                checked
+                                                disabled
+                                            />
+                                        ) : (
+                                            <Form.Check
+                                                aria-label="option 1"
+                                                onChange={(e) => change(e, "thu8ca3", nextWeekDates[6])}
+                                            />
+                                        )}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <Form.Group className="mb-3 text-right">
+                            <button class="btn-click " onClick={dangkyliclam}>XÁC NHẬN</button>
+                        </Form.Group>
+                    </Tab>
 
+                    <Tab eventKey="contact" title="LỊCH VỪA ĐĂNG KÝ">
+                        <h1 className="text-center text-login top-text">LỊCH VỪA ĐĂNG KÝ</h1>
+                        <Table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Ngày làm</th>
+                                    <th>Ca làm</th>
+                                    <th>Thời gian bắt đầu</th>
+                                    <th>Thời gian kết ca</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {lichlamdangky.map((t) => (
+                                    <tr key={t.id}>
+                                        <td>{new Date(t.dateSchedule).toLocaleDateString("vi-VN")}</td>
+                                        <td>{t.shiftId.name}</td>
+                                        <td>{t.shiftId.start}</td>
+                                        <td>{t.shiftId.end}</td>
+                                        <td className="bthuy">
+                                            <button onClick={() => huy(t.id)}>❌</button>
+                                        </td>
 
-                {/* ----------------------------------------------------------------------------------------------------------- */}
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Ca/thứ</th>
-                            <th>THỨ 2</th>
-                            <th>THỨ 3</th>
-                            <th>THỨ 4</th>
-                            <th>THỨ 5</th>
-                            <th>THỨ 6</th>
-                            <th>THỨ 7</th>
-                            <th>CHỦ NHẬT</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Ca sáng</td>
-                            {currentWeekDates.map((date, index) => (
-                                <td key={index}>
-                                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 1) ? <>&#10003;</> : ""}
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Ca chiều</td>
-                            {currentWeekDates.map((date, index) => (
-                                <td key={index}>
-                                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 2) ? <>&#10003;</> : ""}
-                                </td>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Ca tối</td>
-                            {currentWeekDates.map((date, index) => (
-                                <td key={index}>
-                                    {lichdone.some((thu) => thu.dateSchedule.includes(date) && thu.shiftId.id === 3) ? <>&#10003;</> : ""}
-                                </td>
-                            ))}
-                        </tr>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
 
-                    </tbody>
-                </table>
-
-
-                {/* ------------------------------------------------------------------- */}
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Ngày làm</th>
-                            <th>Ca làm</th>
-                            <th>Thời gian bắt đầu</th>
-                            <th>Thời gian kết ca</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {lichlamdangky.map((t) => (
-                            <tr key={t.id}>
-                                <td>{new Date(t.dateSchedule).toLocaleDateString("vi-VN")}</td>
-                                <td>{t.shiftId.name}</td>
-                                <td>{t.shiftId.start}</td>
-                                <td>{t.shiftId.end}</td>
-                                <td className="bthuy">
-                                    <button onClick={() => huy(t.id)}>❌</button>
-                                </td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                    </Tab>
+                </Tabs>
             </section>
 
         </Container>

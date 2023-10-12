@@ -51,50 +51,78 @@ const Doctor = () => {
     }
     return (
         <>
-            <img className="banner" src={ImgDoctor}></img>
-            <div className="text-center ">
-                <h1 className="text-banner">BÁC SĨ</h1>
-            </div>
-            <Container>
+            <section style={{ backgroundColor: "#eeefef" }}>
 
-                <Form style={{ display: "flex" }} onSubmit={search} className="form-find">
-                    <div className="input-find">
-                        <Form.Control
-                            type="text"
-                            placeholder="Nhập tên bác sĩ cần tìm"
-                            value={name}
-                            onChange={e => setKw(e.target.value)}
 
-                        />
-                    </div>
-                    <button className="btn-click" type="submit">Tìm kiếm</button>
+                <img className="banner" src={ImgDoctor}></img>
+                <div className="text-center ">
+                    <h1 className="text-banner">BÁC SĨ</h1>
+                </div>
+                <Container>
 
-                </Form>
-                <section className="section-doctor">
-                    <Row className="items">
-                        {doctor.map((d) => (
-                            <Col xs={6} md={3} className="item mb-5" key={d.id}>
-                                <Card>
-                                    <Card.Img variant="top" src={d.avatar} />
-                                    <Card.Body >
-                                        <Card.Title>{d.name}</Card.Title>
+                    <Form style={{ display: "flex" }} onSubmit={search} className="form-find">
+                        <div className="input-find">
+                            <Form.Control
+                                type="text"
+                                placeholder="Nhập tên bác sĩ cần tìm"
+                                value={name}
+                                onChange={e => setKw(e.target.value)}
+
+                            />
+                        </div>
+                        <button className="btn-click" type="submit">Tìm kiếm</button>
+
+                    </Form>
+                    <section className="section-doctor">
+                        <Row>
+                            {doctor.map((d) => (
+                                <Col xs={6} md={3} className="mb-5 doctor-item">
+                                    <div className="doctors-img">
+                                        <img src={d.avatar} />
+                                    </div>
+                                    <div>
+                                        <h2 className="mt-4 mb-3" style={{ fontSize: 1.3 + "rem", fontWeight: "bold" }}>{d.name}</h2>
+                                        <p><i>{d.khoaId.name}</i></p>
+                                    </div>
+                                    <div className="mt-3 mb-3">
                                         <Button className="btn-note">
                                             <Link to={`/bacsi/${d.id}`}
                                                 id={d.id}>
                                                 Chi tiết
                                             </Link>
                                         </Button>
+                                    </div>
+                                </Col>
+                            ))}
+                        </Row>
+                    </section>
+                    {/* <section className="section-doctor">
+                <Row className="items">
+                    {doctor.map((d) => (
+                        <Col xs={6} md={3} className="item mb-5" key={d.id}>
+                            <Card>
+                                <Card.Img variant="top" src={d.avatar} />
+                                <Card.Body >
+                                    <Card.Title>{d.name}</Card.Title>
+                                    <Button className="btn-note">
+                                        <Link to={`/bacsi/${d.id}`}
+                                            id={d.id}>
+                                            Chi tiết
+                                        </Link>
+                                    </Button>
 
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
 
-                    </Row>
-                </section>
-            </Container>
+                </Row>
+            </section> */}
+                </Container >
+            </section >
         </>
     );
+
 };
 
 export default Doctor;

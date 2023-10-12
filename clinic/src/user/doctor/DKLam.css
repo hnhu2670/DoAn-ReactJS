@@ -1,3 +1,11 @@
 table.table-addJob {
     border: 3px solid green;
 }
+
+.nav-link {
+    color: #123653;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+}

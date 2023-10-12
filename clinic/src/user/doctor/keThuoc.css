@@ -18,16 +18,17 @@ form#form-addThuoc {
     margin: 2% auto;
     padding: 2%;
     border-radius: 15px;
-    background-color: white;
+    background-color: #f5f7f7;
     border: 3px solid #60a37e;
 }
 
 
 div#row-addThuoc {
     position: absolute;
-    top: 20%;
+    top: 35%;
     left: 0;
     right: 0;
     bottom: 10%;
     display: none;
+
 }

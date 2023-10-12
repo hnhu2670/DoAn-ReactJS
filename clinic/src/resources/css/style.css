@@ -4,6 +4,11 @@
   padding: 0;
   margin: 0;
   font-family: 'Varela Round', sans-serif !important;
+
+}
+
+body {
+  background-color: #f5f7f7;
 }
 
 :root {
@@ -150,76 +155,7 @@ nav.menu>ul>li {
   width: 30px !important;
 }
 
-/* HOME */
-.index {
-  width: 100%;
-  height: 100%;
-  background-image: url('https://res.cloudinary.com/dstqvlt8d/image/upload/v1692163868/Green_Color_Abstract_Healthy_Medical_Background_sjkj2l.png');
-  background-size: cover;
-}
 
-.title {
-  padding-top: 100px;
-  height: 450px;
-  align-items: center;
-
-  /* margin-left: 52%; */
-  display: flex;
-
-}
-
-.index div.content {
-  width: 50%;
-}
-
-.doctorhomeimg {
-  margin: 10%;
-}
-
-/* .title div{
-    text-align: justify;
-    margin: 0px;
-    align-items: center;
-} */
-
-.title div p {
-  padding-top: 10px;
-  font-size: 20px;
-  width: 88%;
-  text-align: justify;
-
-}
-
-
-
-.animated-heading {
-  overflow: hidden;
-  /* Để ẩn phần vượt quá khung hiển thị */
-  white-space: nowrap;
-  /* Để không xuống dòng khi vượt quá khung hiển thị */
-  color: green;
-  /* Màu chữ xanh lá */
-}
-
-.animated-heading span {
-  display: inline-block;
-  /* Hiển thị dòng chữ trên cùng một dòng */
-  animation: slide-in 2s ease-in-out;
-  /* Sử dụng hiệu ứng slide-in trong 2 giây */
-}
-
-/* Định nghĩa hiệu ứng slide-in */
-@keyframes slide-in {
-  0% {
-    transform: translateX(-100%);
-    /* Di chuyển chữ về bên trái ngoài khung hiển thị */
-  }
-
-  100% {
-    transform: translateX(0);
-    /* Di chuyển chữ về vị trí ban đầu */
-  }
-}
 
 /* FOOTER */
 .footer {

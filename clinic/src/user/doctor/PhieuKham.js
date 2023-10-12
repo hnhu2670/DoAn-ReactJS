@@ -240,8 +240,9 @@ const PhieuKham = () => {
                     </Row>
                 </div>
                 <div>
-                    <Form.Group className="mb-3">
-                        <Link onClick={khamBenh} > CẤP THUỐC</Link>
+                    <Form.Group className="m-3">
+                        <Link className="btn-click" type="submit" onClick={khamBenh} >CẤP THUỐC</Link>
+                        {/* <Link onClick={khamBenh} > CẤP THUỐC</Link> */}
                     </Form.Group>
                 </div>
             </section>
