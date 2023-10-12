@@ -147,47 +147,49 @@ const ToaThuoc = () => {
                         phiếu bệnh :{phieu.prescriptionId.id}
                     </div> */}
                     <div ref={pdfRef}>
-                        Tên bác sĩ: {phieu.doctorId.name}
-                    </div>
-                    <hr />
-                    <div ref={pdfRef}>
-                        <Row>
-                            <Col>
-                                Họ và tên: {phieu.sickpersonId.name}
-                            </Col>
-                            <Col>
-                                Giới tính: {phieu.sickpersonId.sex}
-                            </Col>
-                            <Col>
-                                Ngày sinh:  {new Date(phieu.sickpersonId.dod).toLocaleDateString("vi-VN")}
-                            </Col>
-                        </Row>
-                        <Row>
-                            Điện thoại: {phieu.sickpersonId.phone}
-                        </Row>
-                        <Row>
-                            Địa chỉ: {phieu.sickpersonId.address}
-                        </Row>
-                        <Row>
-                            Chuẩn đoán: {phieu.prescriptionId.symptom}
-                        </Row>
-                    </div>
-                    <hr />
-                    <div ref={pdfRef}>
-                        {toathuoc.map((d) => (
+                        <div>
+                            Tên bác sĩ: {phieu.doctorId.name}
+                        </div>
+                        <hr />
+                        <div>
                             <Row>
                                 <Col>
-                                    Tên thuốc:  {d.medicineId.name}
+                                    Họ và tên: {phieu.sickpersonId.name}
                                 </Col>
                                 <Col>
-                                    SL: {d.quantity}
+                                    Giới tính: {phieu.sickpersonId.sex}
                                 </Col>
-                                <p>Hướng dẫn: {d.instructions}</p>
+                                <Col>
+                                    Ngày sinh:  {new Date(phieu.sickpersonId.dod).toLocaleDateString("vi-VN")}
+                                </Col>
                             </Row>
-                        ))}
+                            <Row>
+                                Điện thoại: {phieu.sickpersonId.phone}
+                            </Row>
+                            <Row>
+                                Địa chỉ: {phieu.sickpersonId.address}
+                            </Row>
+                            <Row>
+                                Chuẩn đoán: {phieu.prescriptionId.symptom}
+                            </Row>
+                        </div>
+                        <hr />
+                        <div>
+                            {toathuoc.map((d) => (
+                                <Row>
+                                    <Col>
+                                        Tên thuốc:  {d.medicineId.name}
+                                    </Col>
+                                    <Col>
+                                        SL: {d.quantity}
+                                    </Col>
+                                    <p>Hướng dẫn: {d.instructions}</p>
+                                </Row>
+                            ))}
 
+                        </div>
+                        <hr />
                     </div>
-                    <hr />
                     <div>
                         <Button
                             className="btn-normal mr-5"

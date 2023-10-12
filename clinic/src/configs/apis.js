@@ -3,8 +3,8 @@ import cookie from "react-cookies";
 
 
 const SERVER_CONTEXT = "/Clinnic";
-// const SERVER = "http://localhost:8080";
-const SERVER = "http://localhost:8900";
+const SERVER = "http://localhost:8080";
+// const SERVER = "http://localhost:8900";
 
 export const endpoints = {
 
@@ -27,8 +27,9 @@ export const endpoints = {
     "isUser": `${SERVER_CONTEXT}/api/isUser/`,
     "up-password": `${SERVER_CONTEXT}/api/up-password/`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
-    // "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
+    "xacnhanbacsi": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}`,
     "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
+    "laybacsikhambenh": (id) => `${SERVER_CONTEXT}/nurse/phieukham/${id}/bacsi`,
     // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
     "lichkham": `${SERVER_CONTEXT}/api/doctor/lichkham`,
     "lichkhamcanthanhtoan": `${SERVER_CONTEXT}/api/nurse/lichkhamcanthanhtoan`,

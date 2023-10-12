@@ -5,7 +5,7 @@ import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
 import "./keThuoc.css"
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 const KeThuoc = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -460,7 +460,7 @@ const KeThuoc = () => {
 
                 <Row className='m-4'>
                     {/* id phiếu khám */}
-                    <button className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</button>
+                    <Link className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>
 
                 </Row>
 
