@@ -13,11 +13,22 @@ button.btn-xacnhan {
     background-color: #d2f6e2 !important;
 }
 
+div.add-doctor {
+    display: none;
+    top: 30%;
+    width: 90%;
+    position: absolute;
+}
+
 form.form-addDoctor {
     width: 60%;
     margin: 0 auto;
     border: 1px solid #d2f6e2;
     padding: 2%;
+    border: 2px solid #60a37e;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
 .btn-click {
@@ -47,4 +58,14 @@ form.form-addDoctor {
         color: black;
     }
 
+}
+
+/* thông báo */
+.thanhtoan {
+    padding: 5px;
+    border: 2px solid green;
+    border-radius: 5px;
+    width: auto;
+    margin: 3px 5px;
+    margin-top: -9px;
 }

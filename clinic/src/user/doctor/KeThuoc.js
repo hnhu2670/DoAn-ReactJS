@@ -5,7 +5,8 @@ import moment from 'moment'
 import MySpinner from '../../layout/MySpinner'
 import TypeButton from '../../button/Button'
 import "./keThuoc.css"
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import "../../resources/css/style.css"
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 const KeThuoc = () => {
     const nav = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -53,49 +54,28 @@ const KeThuoc = () => {
     const layphieubenh = async () => {
 
         try {
-
             let res = await apis.get(endpoints["phieubenh"](id))
-
             setphieubenh(res.data)
-
             console.log("----------------------------------")
-
             console.log(res.data)
-
         } catch (error) {
-
             console.log(error)
         }
 
     }
 
     const loadtoathuoc = async () => {
-
         try {
-
             let res = await apis.get(endpoints["toathuoc"](phieubenh.id))
-
             setToaThuoc(res.data)
-
             console.log("lấy được data")
-
             console.log("================================")
-
             console.log(res.data)
-
         } catch (error) {
-
             console.log(error)
-
         }
-
     }
-
-
     useEffect(() => {
-
-
-
         layphieubenh();
 
     }, []);
@@ -103,223 +83,112 @@ const KeThuoc = () => {
         loadThuoc();
     }, [q])
 
-
-
     useEffect(() => {
-
         if (phieubenh.id) {
-
             loadtoathuoc();
-
         }
 
     }, [phieubenh]);
 
-
-
     const napthuoc = (evt) => {
-
         evt.preventDefault();
-
         const process = async () => {
-
             try {
-
                 let formData = new FormData();
-
                 formData.append("idAppo", id);
-
                 formData.append("idThuoc", themthuoc.idThuoc);
-
                 formData.append("soluongthuoc", themthuoc.soluongthuoc);
-
                 formData.append("huongdansudung", themthuoc.huongdansudung);
-
                 console.log(formData);
-
                 console.log("thanh cong do");
-
                 let res = await apis.post(endpoints["kethuoc"], formData);
-
                 console.log("thanh cong post");
-
                 if (res.status === 200) {
-
                     let formAdd = document.getElementById("row-addThuoc")
-
                     setThemThuoc({
-
                         idThuoc: '',
-
                         huongdansudung: '',
-
                         soluongthuoc: '',
-
                         idAppo: id,
-
                         tenthuoc: ''
-
                     });
 
                     formAdd.style.display = 'none';
-
                     loadtoathuoc()
-
                     loadThuoc()
-
-
                 }
-
                 else {
-
                     console.log("them that bai")
-
                 }
-
-
 
             } catch (error) {
-
                 console.log(error)
-
             }
-
         }
-
         process();
-
     }
     if (dsThuoc === null) {
-
         return (<>
-
             <MySpinner />
-
         </>)
-
     }
 
-
-
     const change = (event, field) => {
-
         const value = event.target.value; // Get the current value of the input field
-
         console.log(value)
-
         setThemThuoc((current) => {
-
             const update = { ...current };
-
             update[field] = value;
-
             return update;
-
         });
-
     }
 
 
     const deletePrescriptionItem = async (id, event) => {
-
         event.preventDefault(); // Prevent form submission
-
-
-
         if (window.confirm("Bạn có chắc chắn muốn xóa thuốc này?")) {
-
             console.log(id);
-
             console.log(endpoints["xoathuoc"](id));
-
             try {
-
                 await apis.delete(endpoints["xoathuoc"](id));
-
                 console.log('Xóa thành công');
-
                 loadtoathuoc();
-
                 loadThuoc();
-
             } catch (error) {
-
                 console.error('Lỗi khi xóa:', error);
-
             }
-
         }
-
     };
 
-
     const chonthuoc = (fieldid, id, fieldtname, tenthuoc) => {
-
         let formAdd = document.getElementById("row-addThuoc")
-
         if (formAdd.style.display === 'none') {
-
-            // Nếu form đang ẩn, thì hiển thị nó
-
             formAdd.style.display = 'block';
-
             console.log("hiện")
-
         } else {
-
-            // Nếu form đang hiển thị, thì ẩn nó
-
             formAdd.style.display = 'none';
-
             console.log("ẩn")
-
         }
-
         setThemThuoc((current) => {
-
             const update = { ...current };
-
             update[fieldid] = id;
-
             update[fieldtname] = tenthuoc;
-
             return update;
-
         });
 
     }
 
     const formClose = () => {
-
-        // let formClose = document.querySelector(".form-close")
-
         let formAdd = document.getElementById("row-addThuoc")
-
-        // console.log(formClose)
-
         formAdd.style.display = 'none';
-
     }
-
     return (
-
-
-
         <Container>
-
             <section>
-
-                {/* đây là phiếu bênh :idPre */}
-
-                {/* <h2 className='col-title'>Phiếu bệnh số: {phieubenh.id}</h2> */}
-
                 <Row>
-
                     <h1 className="text-center text-login top-text">KÊ THUỐC</h1>
-
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tìm kiếm thuốc</h2>
-
-                    <Form style={{ display: "flex", width: 100 + "%" }} className='mb-3 p-0' onSubmit={search}>
+                    <Form style={{ display: "flex", width: 100 + "%", width: 96 + "%" }} className='mb-3 ml-3 p-0' onSubmit={search}>
                         <div className='mr-3' style={{ width: 100 + "%" }}>
 
                             <Form.Control
@@ -333,52 +202,56 @@ const KeThuoc = () => {
                         <button className="btn-click" type="submit">🔍 Tìm kiếm</button>
 
                     </Form>
-                    <Table striped bordered hove className="text-center mb-5">
+                    <Form id='table-lichkham'>
+                        <Table striped bordered hove className="text-center mb-5">
 
-                        <thead>
+                            <thead>
 
-                            <tr>
+                                <tr>
 
-                                <th>Mã thuốc</th>
+                                    <th>Mã thuốc</th>
 
-                                <th>Tên thuốc</th>
+                                    <th>Tên thuốc</th>
 
-                                <th>NSX</th>
+                                    <th>NSX</th>
 
-                                <th>HSD</th>
+                                    <th>HSD</th>
 
-                                <th>Số lượng</th>
+                                    <th>Số lượng</th>
 
-                                <th>Đơn vị</th>
+                                    <th>Đơn vị</th>
 
-                                <th>Thêm thuốc</th>
+                                    <th>Thêm thuốc</th>
 
-                            </tr>
+                                </tr>
 
-                        </thead>
+                            </thead>
 
-                        <tbody>
+                            <tbody>
 
-                            {loading === true ? (<>
-                                {dsThuoc.map((d) => (
-                                    <tr key={d.id}>
-                                        <td>{d.id}</td>
-                                        <td>{d.name}</td>
-                                        <td>{d.provider}</td>
-                                        <td> {moment(d.productionDate).format('DD/MM/YYYY')}</td>
-                                        <td>{d.quantity}</td>
-                                        <td>{d.idUnit.name}</td>
-                                        <td>
-                                            <button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </>) : (<>
-                                <MySpinner />
-                            </>)}
-                        </tbody>
-                    </Table>
+                                {loading === true ? (<>
+                                    {dsThuoc.map((d) => (
+                                        <tr key={d.id}>
+                                            <td>{d.id}</td>
+                                            <td>{d.name}</td>
+                                            <td>{d.provider}</td>
+                                            <td> {moment(d.productionDate).format('DD/MM/YYYY')}</td>
+                                            <td>{d.quantity}</td>
+                                            <td>{d.idUnit.name}</td>
+                                            <td>
+                                                <button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </>) : (<>
+                                    <MySpinner />
+                                </>)}
+                            </tbody>
+                        </Table>
+                    </Form>
+
                 </Row>
+                <hr />
                 <Row>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Toa thuốc</h2>
                     <Form className="form-thuoc" >
@@ -460,7 +333,7 @@ const KeThuoc = () => {
 
                 <Row className='m-4'>
                     {/* id phiếu khám */}
-                    <button className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</button>
+                    <Link className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>
 
                 </Row>
 

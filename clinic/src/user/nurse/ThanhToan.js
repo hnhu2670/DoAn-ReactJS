@@ -226,31 +226,6 @@ const ThanhToan = () => {
         <Container>
             <section>
                 <h1 className="text-center text-login top-text">THANH TOÁN HÓA ĐƠN</h1>
-                {/* <div>
-                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin bệnh nhân</h2>
-                    {loading === true ? (
-                        <>
-                            <Row>
-                                <Col>
-                                    Họ tên : {phieu.sickpersonId.name}
-                                </Col>
-                                <Col>
-                                    Ngày sinh :{phieu.sickpersonId.dod}
-                                </Col>
-                                <Col>
-                                    giới tính : {phieu.sickpersonId.sex}
-                                </Col>
-                            </Row>
-                            <Row>Địa chỉ : {phieu.sickpersonId.address}</Row>
-                            <Row>Điện thoại : {phieu.sickpersonId.phone}</Row>
-                            <Row>Chuẩn đoán : {phieu.prescriptionId.symptom}</Row>
-                        </>
-                    ) : (<>
-                        <Alert className="text-danger">Chưa có thông phiếu khám</Alert>
-
-                    </>)}
-
-                </div> */}
                 <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin thuốc</h2>
                     <Table striped bordered hove className="text-center mb-5">
@@ -305,75 +280,10 @@ const ThanhToan = () => {
                                     ))}
                                 </>
                             )}
-                            {/* 
-                            {dichvus === null ? (
-                                <Alert>khong co dich vu</Alert>
-                            )
-                                : (<>
-                                    {dichvus.map((d) => (
-                                        <tr key={d.serviceId.id}>
-                                            <td>{d.id}</td>
-                                            <td>{d.serviceId.name}</td>
-                                            <td>{d.serviceId.price} VNĐ</td>
-                                        </tr>
-                                    ))}
-                                </>
-                                )} */}
 
                         </tbody>
                     </Table>
                 </div>
-                {/* <div>
-                    <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Tổng tiền: {tongtien}</h2>
-                    <Row>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Hình thức thanh toán</Form.Label>
-                            <Form.Control as="select" onChange={chonhinhthucthanhtoan}
-                                required>
-                                <option value="">-- Chọn hình thức thanh toán --</option>
-                                {loaipay.map((method) => (
-                                    <option value={method.id}>
-                                        {method.paymentMethod}
-                                    </option>
-                                ))}
-                            </Form.Control>
-
-                        </Form.Group>
-                    </Row>
-                    {thanhtoan.loaithanhtoan === 1 && (
-                    <Row>
-                        <Col>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Tiền khách đưa</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Tiền khách đưa"
-                                    required
-                                />
-
-                            </Form.Group>
-                        </Col>
-                        <Col>
-
-                            <Form.Group className="mb-3">
-                                <Form.Label>Tiền trả lại</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Tiền trả lại"
-                                    required
-                                />
-
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    )}
-                    
-                        <Col className="mt-4">
-                            <Form.Group className="mb-3">
-                                <Button onClick={thanhtoanhoadon}> THANH TOÁN </Button>
-                            </Form.Group>
-                        </Col>  
-                </div> */}
 
                 <div>
                     <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }} id="total-amount">Tổng tiền: {formatCurrency(tongtien)}</h2>
@@ -421,7 +331,7 @@ const ThanhToan = () => {
 
                     <Col className="mt-4">
                         <Form.Group className="mb-3">
-                            <Button onClick={thanhtoanhoadon}>THANH TOÁN</Button>
+                            <Button className="btn-click" onClick={thanhtoanhoadon}>THANH TOÁN</Button>
                         </Form.Group>
                     </Col>
                 </div>

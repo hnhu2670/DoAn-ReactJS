@@ -96,28 +96,7 @@ const Doctor = () => {
                             ))}
                         </Row>
                     </section>
-                    {/* <section className="section-doctor">
-                <Row className="items">
-                    {doctor.map((d) => (
-                        <Col xs={6} md={3} className="item mb-5" key={d.id}>
-                            <Card>
-                                <Card.Img variant="top" src={d.avatar} />
-                                <Card.Body >
-                                    <Card.Title>{d.name}</Card.Title>
-                                    <Button className="btn-note">
-                                        <Link to={`/bacsi/${d.id}`}
-                                            id={d.id}>
-                                            Chi tiết
-                                        </Link>
-                                    </Button>
 
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-
-                </Row>
-            </section> */}
                 </Container >
             </section >
         </>

@@ -180,49 +180,51 @@ const DKLam = () => {
 
 
         const process = async () => {
-            try {
-                let formData = new FormData();
-                formData.append("IdUser", schedule.IdUser);
-                formData.append("thu2ca1", schedule.thu2ca1);
-                formData.append("thu2ca2", schedule.thu2ca2);
-                formData.append("thu2ca3", schedule.thu2ca3);
-                formData.append("thu3ca1", schedule.thu3ca1);
-                formData.append("thu3ca2", schedule.thu3ca2);
-                formData.append("thu3ca3", schedule.thu3ca3);
-                formData.append("thu4ca1", schedule.thu4ca1);
-                formData.append("thu4ca2", schedule.thu4ca2);
-                formData.append("thu4ca3", schedule.thu4ca3);
-                formData.append("thu5ca1", schedule.thu5ca1);
-                formData.append("thu5ca2", schedule.thu5ca2);
-                formData.append("thu5ca3", schedule.thu5ca3);
-                formData.append("thu6ca1", schedule.thu6ca1);
-                formData.append("thu6ca2", schedule.thu6ca2);
-                formData.append("thu6ca3", schedule.thu6ca3);
-                formData.append("thu7ca1", schedule.thu7ca1);
-                formData.append("thu7ca2", schedule.thu7ca2);
-                formData.append("thu7ca3", schedule.thu7ca3);
-                formData.append("thu8ca1", schedule.thu8ca1);
-                formData.append("thu8ca2", schedule.thu8ca2);
-                formData.append("thu8ca3", schedule.thu8ca3);
+            if (window.confirm('Đăng kí lịch !!!!')) {
+                try {
+                    let formData = new FormData();
+                    formData.append("IdUser", schedule.IdUser);
+                    formData.append("thu2ca1", schedule.thu2ca1);
+                    formData.append("thu2ca2", schedule.thu2ca2);
+                    formData.append("thu2ca3", schedule.thu2ca3);
+                    formData.append("thu3ca1", schedule.thu3ca1);
+                    formData.append("thu3ca2", schedule.thu3ca2);
+                    formData.append("thu3ca3", schedule.thu3ca3);
+                    formData.append("thu4ca1", schedule.thu4ca1);
+                    formData.append("thu4ca2", schedule.thu4ca2);
+                    formData.append("thu4ca3", schedule.thu4ca3);
+                    formData.append("thu5ca1", schedule.thu5ca1);
+                    formData.append("thu5ca2", schedule.thu5ca2);
+                    formData.append("thu5ca3", schedule.thu5ca3);
+                    formData.append("thu6ca1", schedule.thu6ca1);
+                    formData.append("thu6ca2", schedule.thu6ca2);
+                    formData.append("thu6ca3", schedule.thu6ca3);
+                    formData.append("thu7ca1", schedule.thu7ca1);
+                    formData.append("thu7ca2", schedule.thu7ca2);
+                    formData.append("thu7ca3", schedule.thu7ca3);
+                    formData.append("thu8ca1", schedule.thu8ca1);
+                    formData.append("thu8ca2", schedule.thu8ca2);
+                    formData.append("thu8ca3", schedule.thu8ca3);
 
 
-                // console.log(formData);
+                    // console.log(formData);
 
 
-                console.log("thanh cong");
-                let res = await apis.post(endpoints['addSchedule'], formData);
-                console.log("thanh cong");
-                if (res.status === 200) {
-                    loadlichdangky1()
-                    loadlichdangky2()
-                    loadlichdangky3()
+                    console.log("thanh cong");
+                    let res = await apis.post(endpoints['addSchedule'], formData);
+                    console.log("thanh cong");
+                    if (res.status === 200) {
+                        loadlichdangky1()
+                        loadlichdangky2()
+                        loadlichdangky3()
 
-                    loadlichlamdangky()
-                    // <Alert Alert > Xác nhận thành công!!!!!!</Alert >
-                    // nav("/");
+                        loadlichlamdangky()
+                        // <Alert Alert > Xác nhận thành công!!!!!!</Alert >
+                        // nav("/");
+                    }
+                } catch (error) {
+                    console.log(error)
                 }
-            } catch (error) {
-                console.log(error)
             }
 
 
@@ -232,19 +234,24 @@ const DKLam = () => {
         process();
     }
 
+    const [success, setSuccess] = useState(false)
     const huy = (id) => {
         const huylich = async () => {
-            try {
-                let { data } = await apis.get(endpoints['huylichlam'](id));
-                console.log(data)
-                loadlichdangky1()
-                loadlichdangky2()
-                loadlichdangky3()
-                loadlichlamdangky()
-            } catch (err) {
-                console.log(err);
-                <Alert>Hủy lịch thất bại</Alert>
+            if (window.confirm('Bạn có chắc chắn muốn xóa không?')) {
+                try {
+                    let { data } = await apis.get(endpoints['huylichlam'](id));
+                    console.log(data)
+                    loadlichdangky1()
+                    loadlichdangky2()
+                    loadlichdangky3()
+                    loadlichlamdangky()
+                    setSuccess(true)
+                } catch (err) {
+                    console.log(err);
+                    <Alert>Hủy lịch thất bại</Alert>
+                }
             }
+
         };
         huylich();
     };

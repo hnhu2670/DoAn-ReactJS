@@ -109,7 +109,7 @@ const Login = () => {
             <div className="login">
 
               <div className="mainLogin">
-
+                {error && <Alert className='w-90 mr-10 ml-10 text-danger'>{error}</Alert>}
                 <div className="form-login">
                   <h1 className="text-center text-login top-text">LOGIN</h1>
                   <Row className="mb-3">
@@ -180,9 +180,7 @@ const Login = () => {
                     </div>
 
                   </Row>
-                  {error &&
-                    <Alert className='bg-red-400 text-danger'>{error}</Alert>}
-                  {/* <p className="error">{error}</p>} */}
+
                 </div>
 
               </div>

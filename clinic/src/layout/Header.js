@@ -19,6 +19,7 @@ const Header = () => {
         dispatch({
             "type": "logout"
         })
+        
     }
     console.log(user)
     return (

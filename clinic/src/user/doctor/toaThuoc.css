@@ -1,0 +1,18 @@
+section.form-download h1.name-hospital {
+    color: #198754;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+section.form-download span {
+    font-weight: bold;
+}
+
+table.table-toathuoc {
+    border: 2px solid green;
+}
+
+table.table-toathuoc td,
+th {
+    border: 1px solid gray;
+}

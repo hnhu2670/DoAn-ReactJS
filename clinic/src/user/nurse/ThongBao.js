@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Container, Form, Row } from 'react-bootstrap'
 import cookie from "react-cookies"
 import MySpinner from '../../layout/MySpinner'
 import { Link } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
-import TypeButton from '../../button/Button'
+import "./XNLichKham.css"
 const ThongBao = () => {
     // const noti = cookie.load("bill") || null;
     const [phieucanthanhtoan, setPhieucanthanhtoan] = useState([])
@@ -22,30 +22,22 @@ const ThongBao = () => {
         }
         loadphieu()
     }, []);
-    
-    // if (noti === null) {
-    //     return <Alert className='text-danger'>Chưa nhận được giá trị</Alert>;
-    // }
-    // else {
-    //     console.log(noti)
-    // }
+
     return (
         <Container>
-            {/* <section>
-                <h2>THÔNG BÁO YÊU CẦU THANH TOÁN</h2>
-                {Object.values(noti).map((c) => (
 
-                    <div key={c.id}>
-
-                        Ma phieu kham {c.appoId} :
-                        <Link to={`/thanhtoan/${c.appoId}`}>Thanh toan</Link>
-                    </div>
-                ))}
-            </section> */}
             <section>
-                <h2>THÔNG BÁO YÊU CẦU THANH TOÁN</h2>
-                {phieucanthanhtoan.map((t)=>(
-                    <div>Phiếu có mã là {t.id} đã khám cho bệnh nhân {t.sickpersonId.name} hoàn tất <TypeButton to={`/thanhtoan/${t.id}`}>nhấn</TypeButton> để thanh toán...</div>
+                <h1 className="text-center text-login top-text">YÊU CẦU THANH TOÁN HÓA ĐƠN</h1>
+
+                {phieucanthanhtoan.map((t) => (<>
+                    <Row className='mb-4'>
+                        Phiếu có mã là {t.id} đã khám cho bệnh nhân {t.sickpersonId.name} hoàn tất
+                        <Link to={`/thanhtoan/${t.id}`} className='thanhtoan'>Nhấn </Link> để thanh toán...
+                    </Row>
+                    <hr />
+                </>
+
+
                 ))}
             </section>
 
