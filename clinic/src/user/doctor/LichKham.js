@@ -33,7 +33,7 @@ const LichKham = () => {
             <section>
                 <h1 className="text-center text-login top-text">LỊCH KHÁM BỆNH</h1>
                 <Form id='table-lichkham'>
-                    <Table striped bordered hove className="text-center mb-5 ">
+                    <Table striped bordered hove className="text-center mb-5 table-toathuoc">
                         <thead>
                             <tr>
                                 <th>Mã phiếu khám</th>
@@ -53,8 +53,9 @@ const LichKham = () => {
                                         <td>{appointment.sickpersonId.id}</td>
                                         <td><Link className='text-success'
                                             to={`${appointment.sickpersonId.id}`}
+                                            title="Xem lịch sử khám của bệnh nhân"
                                         >
-                                            {appointment.sickpersonId.name} ▶️</Link></td>
+                                            {appointment.sickpersonId.name} </Link></td>
                                         <td> {moment(appointment.appointmentDate).format('DD/MM/YYYY')}</td>
                                         <td>{moment(appointment.appointmentDate).format('HH:mm')}</td>
                                         <td>{appointment.prescriptionId.conclusion}</td>

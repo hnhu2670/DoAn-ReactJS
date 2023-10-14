@@ -9,7 +9,8 @@ h2.col-title {
 }
 
 form.form-thuoc {
-    height: 350px;
+    height: 400px;
+    margin-bottom: 2%;
     overflow-y: scroll;
 }
 

@@ -9,3 +9,17 @@ table.table-addJob {
     font-size: 1rem;
     font-weight: bold;
 }
+
+form#table-list {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+form#table-list>table.table {
+    border: 2px solid green;
+}
+
+form#table-list>table.table td,
+th {
+    border: 1px solid gray;
+}

@@ -193,32 +193,36 @@ const ToaThuoc = () => {
                         </div>
                         <hr />
                         <div>
-                            {toathuoc.map((d) => (<>
-                                <Table className='table-toathuoc'>
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Tên thuốc</th>
-                                            <th>Số lượng</th>
-                                            <th>Đơn vị</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
+
+                            <Table className='table-toathuoc'>
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên thuốc</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn vị</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {toathuoc.map((d, count) => (<>
+
+                                        <tr key={d.id}>
+                                            <td>{count + 1}</td>
                                             <td>{d.medicineId.name}</td>
                                             <td>{d.quantity}</td>
-                                            <td>{d.idUnit?.name}</td>
+                                            <td>{d.medicineId.idUnit?.name}</td>
+
                                         </tr>
-                                        <tr>
-                                            <td colSpan={4}>Liều dùng: {d.instructions}</td>
+                                        <tr className='text-left'>
+                                            <td colSpan={4}>Hướng dẫn: <b>{d.instructions}</b></td>
                                         </tr>
-                                    </tbody>
-                                </Table>
-                            </>
-                            ))}
+                                    </>
+                                    ))}
+                                </tbody>
+                            </Table>
+
                         </div>
-                        <div>
+                        <div className='mb-3'>
                             Người kê toa: <span>BS - {phieu.doctorId.name}</span>
                         </div>
                     </div>

@@ -54,7 +54,7 @@ const Doctor = () => {
             <section style={{ backgroundColor: "#eeefef" }}>
 
 
-                <img className="banner" src={ImgDoctor}></img>
+                <img className="banner" src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697266202/krbcoidakczi57qa06c7.png"></img>
                 <div className="text-center ">
                     <h1 className="text-banner">BÁC SĨ</h1>
                 </div>

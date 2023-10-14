@@ -19,7 +19,7 @@ const Header = () => {
         dispatch({
             "type": "logout"
         })
-        
+
     }
     console.log(user)
     return (
@@ -58,8 +58,10 @@ const Header = () => {
                                                         <li><Link variant="secondary" to="/xemlichkham"> Xem lịch khám </Link></li>
                                                     </> :
                                                     <>
-                                                        <li><Link variant="secondary" to="/datlichkham"> Đăng Ký Khám </Link></li>
+                                                        <li><Link variant="secondary" className='booking' to="/datlichkham"> Đăng Ký Khám </Link></li>
+                                                        <li><Link variant="secondary" to="/xemlich">Xem lịch khám</Link></li>
                                                         <li><Link variant="secondary" to="/danhgia">Đánh giá</Link></li>
+
                                                     </>}
                                             </>}
                                         <li><Link variant="secondary" to="/allchat">Chat now</Link></li>

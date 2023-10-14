@@ -82,7 +82,7 @@ const DanhGia = () => {
                 console.log(err);
             }
         };
-        
+
         loadbacsi()
     }, [id]);
 
@@ -134,8 +134,8 @@ const DanhGia = () => {
 
                 <Row>
                     <Col sm={5}>
-                        <img src={bacsi.avatar}></img>
-                        <h1>{bacsi.name}</h1>
+                        <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img>
+                        {/* <h1>{bacsi.name}</h1> */}
                     </Col>
                     <Col className='col-danhgia mb-5' >
                         <Row>
@@ -149,32 +149,22 @@ const DanhGia = () => {
 
                             </Form.Group>
                         </Row>
-                        {/* <Row>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Trên thang điểm từ 1-5 bạn sẽ chấm bao nhiêu điểm</Form.Label>
-                                <Form.Control type="number"
-                                    // value={themthuoc.soluongthuoc}
-                                    onChange={e => change(e, "point")}
-                                    required>
-                                </Form.Control>
 
-                            </Form.Group>
-                        </Row> */}
                         <Row>
-                        <div class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" onChange={e => change(e, "point")} />
-                            <label for="star5"></label>
-                            <input type="radio" id="star4" name="rating" value="4" onChange={e => change(e, "point")} />
-                            <label for="star4"></label>
-                            <input type="radio" id="star3" name="rating" value="3" onChange={e => change(e, "point")} />
-                            <label for="star3"></label>
-                            <input type="radio" id="star2" name="rating" value="2" onChange={e => change(e, "point")} />
-                            <label for="star2"></label>
-                            <input type="radio" id="star1" name="rating" value="1" onChange={e => change(e, "point")} />
-                            <label for="star1"></label>
-                        </div>
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" onChange={e => change(e, "point")} />
+                                <label for="star5"></label>
+                                <input type="radio" id="star4" name="rating" value="4" onChange={e => change(e, "point")} />
+                                <label for="star4"></label>
+                                <input type="radio" id="star3" name="rating" value="3" onChange={e => change(e, "point")} />
+                                <label for="star3"></label>
+                                <input type="radio" id="star2" name="rating" value="2" onChange={e => change(e, "point")} />
+                                <label for="star2"></label>
+                                <input type="radio" id="star1" name="rating" value="1" onChange={e => change(e, "point")} />
+                                <label for="star1"></label>
+                            </div>
                         </Row>
-                        <Row>
+                        <Row style={{ width: 95 + "%" }}>
                             <Button onClick={danhgiabacsi} className="btn-note">GỬI ĐÁNH GIÁ</Button>
                         </Row>
                     </Col>

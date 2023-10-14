@@ -193,9 +193,13 @@ const ForgetPassword = () => {
                         <div id="recaptcha-container"></div>
                         {user ? (
                             <div className="form-quenmk">
+                                {password === false ? <Alert>Mật khẩu không trùng khớp</Alert> : <div></div>}
+                                {changeSuccess === true ? <Alert>Đổi mật khẩu thành công</Alert> : <div></div>}
+                                {err !== null && <Alert>{err}</Alert>}
                                 <h2 className='mb-4 text-center' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Đặt lại mật khẩu</h2>
 
                                 <div className="mb-3">
+
                                     <Form noValidate validated={validated}
                                         onSubmit={updatePassword}
                                     >
@@ -232,15 +236,13 @@ const ForgetPassword = () => {
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         {loading === false && <div className="d-grid">
-                                            <Button
-                                                variant="success"
+                                            <button
+                                                className='typebutton'
                                                 type="submit">
                                                 Đặt mật khẩu
-                                            </Button>
+                                            </button>
                                         </div>}
-                                        {password === false ? <Alert>Mật khẩu không trùng khớp</Alert> : <div></div>}
-                                        {changeSuccess === true ? <Alert>Đổi mật khẩu thành công</Alert> : <div></div>}
-                                        {err !== null && <Alert>{err}</Alert>}
+
                                     </Form>
 
                                 </div>
@@ -309,18 +311,17 @@ const ForgetPassword = () => {
                                             </Form.Group>
                                             {!isPhValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền số điện thoại.</p>}
                                         </Row>
-                                        <Row className='mb-3'>
-                                            <Button
-                                                variant="success"
+                                        <Row className='mb-3 ml-3' style={{ width: 95 + "%" }}>
+                                            <button
                                                 type="submit"
                                                 onClick={onSubmitSMS}
+                                                className='typebutton'
                                             >
                                                 {loading && (
                                                     <MySpinner />
                                                 )}
-
                                                 GỬI SMS
-                                            </Button>
+                                            </button>
                                         </Row>
                                     </div>
 

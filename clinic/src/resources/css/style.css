@@ -334,3 +334,13 @@ form#table-lichkham {
   overflow-y: scroll;
   margin-bottom: 5%;
 }
+
+table {
+  border: 2px solid green;
+  text-align: center;
+}
+
+td,
+th {
+  border: 1px solid gray;
+}

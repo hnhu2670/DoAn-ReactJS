@@ -143,8 +143,6 @@ const PhieuKham = () => {
                     <div id='form-thongtin'>
                         <h2 className='m-3' style={{ fontSize: 30 + "px", fontWeight: "bold" }}>Thông tin bệnh nhân</h2>
                         <Row>
-
-
                             <Col>
                                 <Row>
                                     <Col className='col-sm-5'>Họ tên bệnh nhân: </Col>
@@ -205,7 +203,7 @@ const PhieuKham = () => {
                     <MySpinner />
                 </>)}
                 <hr />
-                <div>
+                <div className="mt-4">
                     <Row>
                         <Col>
                             <Form.Check
@@ -242,7 +240,6 @@ const PhieuKham = () => {
                 <div>
                     <Form.Group className="m-3">
                         <Link className="btn-click" type="submit" onClick={khamBenh} >CẤP THUỐC</Link>
-                        {/* <Link onClick={khamBenh} > CẤP THUỐC</Link> */}
                     </Form.Group>
                 </div>
             </section>

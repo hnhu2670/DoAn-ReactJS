@@ -637,31 +637,34 @@ const DKLam = () => {
 
                     <Tab eventKey="contact" title="LỊCH VỪA ĐĂNG KÝ">
                         <h1 className="text-center text-login top-text">LỊCH VỪA ĐĂNG KÝ</h1>
-                        <Table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Ngày làm</th>
-                                    <th>Ca làm</th>
-                                    <th>Thời gian bắt đầu</th>
-                                    <th>Thời gian kết ca</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {lichlamdangky.map((t) => (
-                                    <tr key={t.id}>
-                                        <td>{new Date(t.dateSchedule).toLocaleDateString("vi-VN")}</td>
-                                        <td>{t.shiftId.name}</td>
-                                        <td>{t.shiftId.start}</td>
-                                        <td>{t.shiftId.end}</td>
-                                        <td className="bthuy">
-                                            <button onClick={() => huy(t.id)}>❌</button>
-                                        </td>
-
+                        <Form id='table-list'>
+                            <Table className="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày làm</th>
+                                        <th>Ca làm</th>
+                                        <th>Thời gian bắt đầu</th>
+                                        <th>Thời gian kết ca</th>
+                                        <th></th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </Table>
+                                </thead>
+                                <tbody>
+                                    {lichlamdangky.map((t) => (
+                                        <tr key={t.id}>
+                                            <td>{new Date(t.dateSchedule).toLocaleDateString("vi-VN")}</td>
+                                            <td>{t.shiftId.name}</td>
+                                            <td>{t.shiftId.start}</td>
+                                            <td>{t.shiftId.end}</td>
+                                            <td className="bthuy">
+                                                <button onClick={() => huy(t.id)}>❌</button>
+                                            </td>
+
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+                        </Form>
+
 
                     </Tab>
                 </Tabs>

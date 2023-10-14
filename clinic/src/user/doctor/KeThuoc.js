@@ -196,7 +196,6 @@ const KeThuoc = () => {
                                 placeholder="Nhập tên thuốc cần tìm..."
                                 value={name}
                                 onChange={e => setKw(e.target.value)}
-
                             />
                         </div>
                         <button className="btn-click" type="submit">🔍 Tìm kiếm</button>
@@ -204,31 +203,18 @@ const KeThuoc = () => {
                     </Form>
                     <Form id='table-lichkham'>
                         <Table striped bordered hove className="text-center mb-5">
-
                             <thead>
-
                                 <tr>
-
                                     <th>Mã thuốc</th>
-
                                     <th>Tên thuốc</th>
-
                                     <th>NSX</th>
-
                                     <th>HSD</th>
-
                                     <th>Số lượng</th>
-
                                     <th>Đơn vị</th>
-
                                     <th>Thêm thuốc</th>
-
                                 </tr>
-
                             </thead>
-
                             <tbody>
-
                                 {loading === true ? (<>
                                     {dsThuoc.map((d) => (
                                         <tr key={d.id}>
@@ -239,7 +225,7 @@ const KeThuoc = () => {
                                             <td>{d.quantity}</td>
                                             <td>{d.idUnit.name}</td>
                                             <td>
-                                                <button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </button>
+                                                <Button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </Button>
                                             </td>
                                         </tr>
                                     ))}

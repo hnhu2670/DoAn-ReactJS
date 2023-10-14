@@ -45,6 +45,7 @@ const DatLichKham = () => {
                 console.log("thanh cong");
                 let res = await apis.post(endpoints['dangky'], formData);
                 console.log("thanh cong");
+                console.log(res.data)
                 if (res.status === 200) {
                     nav("/xemlich");
                 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../resources/css/home.css';
-import doctor from "../resources/image/Doctors.jpg"
+// import doctor from "../resources/image/Doctors.jpg"
 import DoctorHome from '../resources/image/dolo.png';
 import { Col, Container, Row } from 'react-bootstrap';
 const Home = () => {
@@ -29,7 +29,7 @@ const Home = () => {
                 </Row>
                 <Row className='mb-3 '>
                     <Col className='p-0'>
-                        <img src={doctor}></img>
+                        <img src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697266201/ekzzsmaojulxtohn4nle.jpg"></img>
                     </Col>
                     <Col style={{ backgroundColor: "#eeefef" }} className='p-0'>
                         <div style={{ padding: 2 + "rem" }}>

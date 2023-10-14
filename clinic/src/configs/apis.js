@@ -13,15 +13,13 @@ export const endpoints = {
     "current-user": `${SERVER_CONTEXT}/api/current-user/`,
     "register": `${SERVER_CONTEXT}/api/register`,
     "dangky": `${SERVER_CONTEXT}/api/appointments`,
-    "datlai": `${SERVER_CONTEXT}/api/appointments`,
+    // "datlai": `${SERVER_CONTEXT}/api/appointments`,
     "xoa": (id) => `${SERVER_CONTEXT}/api/appointments/${id}`,
     "login-google": `${SERVER_CONTEXT}/api/login-google/`,
     "appointments": `${SERVER_CONTEXT}/api/appointments`,
     "isUser": `${SERVER_CONTEXT}/api/isUser/`,
     "up-password": `${SERVER_CONTEXT}/api/up-password/`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,
-
-    // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/22/phieukham`,
 
     "lichkhamcanthanhtoan": `${SERVER_CONTEXT}/api/nurse/lichkhamcanthanhtoan`,
     "addSchedule": `${SERVER_CONTEXT}/api/dangkylichlam`,

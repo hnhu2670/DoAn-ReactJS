@@ -146,8 +146,8 @@ const MyProfile = () => {
                                     </Form.Group>
                                 </Row>
 
-                                <Row>
-                                    <TypeButton className="btn-normal" type="submit">UPDATE</TypeButton>
+                                <Row style={{ width: 95 + "%" }}>
+                                    <TypeButton className="typebutton" type="submit">UPDATE</TypeButton>
                                 </Row>
                             </Col>
                         </Row>
