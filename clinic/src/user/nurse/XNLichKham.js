@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./XNLichKham.css"
 import { MyUserContext } from "../../App";
+import moment from "moment";
 
 
 
@@ -16,6 +17,15 @@ const XNKham = () => {
     const [idPhieu, setidPhieu] = useState(null);
     const [phieukham, setPhieuKham] = useState(null);
     const [yta] = useContext(MyUserContext)
+    const [thongtinmail , setThongTinMail] = useState({
+        tenbenhnhan:"",
+        ngaykham:"",
+        giokham:"",
+        basi:"",
+        khoa:"",
+        emaill:""
+    })
+    const[idbacsi,setIdbacsi]=useState(null);
 
 
 
@@ -23,6 +33,7 @@ const XNKham = () => {
     const loadBacSi = async (idPhieu) => {
         try {
             let { data } = await apis.get(endpoints['laybacsikhambenh'](idPhieu));
+            // console.log(endpoints['laybacsikhambenh'](idPhieu))
             setBacSi(data);
 
 
@@ -41,26 +52,23 @@ const XNKham = () => {
             console.log(err);
         }
     };
-
+    const loadlichkham = async () => {
+        try {
+            let { data } = await apis.get(endpoints['lichkhamchuaxatnhan']);
+            setlichkhamchuaxatnhan(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     useEffect(() => {
-        const loadlichkham = async () => {
-            try {
-                let { data } = await apis.get(endpoints['lichkhamchuaxatnhan']);
-                setlichkhamchuaxatnhan(data);
-
-
-            } catch (err) {
-                console.log(err);
-            }
-        };
         loadlichkham();
     }, []);
 
     useEffect(() => {
         if (idPhieu) {
             loadBacSi(idPhieu)
-            // console.log("danh sach bac si")
-            // console.log(bacsi)
+            console.log("danh sach bac si")
+            console.log(bacsi)
             layPhieuKham(idPhieu)
             // console.log("thong tin phieu kham")
             // console.log(phieukham)
@@ -115,26 +123,37 @@ const XNKham = () => {
         const process = async () => {
             try {
                 let formData = new FormData();
-                formData.append("IdDoctor", 2);
+                formData.append("IdDoctor", idbacsi);
                 // console.log(formData.data);
                 console.log("thanh cong do");
-                let res = await authApi().post(endpoints["xacnhanbacsi"](id), formData);
-                console.log(res);
+                let res = await authApi().post(endpoints["xacnhanbacsi"](id), formData);                
                 if (res.data == true) {
                     alert(`Gửi mail thành công`);
+                    // window.confirm("test")
+                    let { data } = await apis.get(endpoints['phieukham'](id));
+                    setPhieuKham(data);
+                    console.log(phieukham);
+                    // window.confirm("test")
                     const templateId = 'template_6c5dkwu';
                     const serviceID = 'service_clinic2002';
-                    sendFeedback(serviceID, templateId, { tenbenhnhan: "T", ngaykham: "10/10/2019", giokham: "09:00:00", tenbacsi: "D", khoabacsi: "Khoa Luật", reply_to: "2051050075duy@ou.edu.vn" })
-                    // r.target.reset();
+                    sendFeedback(serviceID, templateId, { tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có lịch hẹn khám tại phòng mạch Piscel vào ngày "+thongtinmail.ngaykham+" vào lúc " + thongtinmail.giokham
+                    ,noidung2:"Vui lòng đến trước giờ khám khoảng 15 - 30 phút để chúng tôi có thể phục vụ bạn một cách tốt nhất."
+                    ,noidung3:"Bác sĩ của bạn là"+thongtinmail.basi+" chuyên "+thongtinmail.khoa, reply_to: thongtinmail.emaill})
+                    // console.log(phieukham);
                 }
                 if (res.data == false) {
-                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân`);
+                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân`); 
                     const templateId = 'template_6c5dkwu';
                     const serviceID = 'service_clinic2002';
-                    sendFeedback(serviceID, templateId, { tenbenhnhan: "T", ngaykham: "10/10/2019", giokham: "09:00:00", tenbacsi: "D", khoabacsi: "Khoa Luật", reply_to: "2051050075duy@ou.edu.vn" })
-                    // r.target.reset();
+                    sendFeedback(serviceID, templateId, { tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có đặt lịch khám tại phòng mạch Piscel vào ngày "+thongtinmail.ngaykham+" vào lúc " + thongtinmail.giokham
+                    , noidung2: "Tuy nhiên phòng mạch của chúng tôi đã đạt đến số lượng lịch khám vào ngày đó", noidung3: "Hi vọng bạn có thể đặt lịch vào một ngày khác", reply_to: thongtinmail.emaill })
+                    if(window.confirm("Có muốn xóa lịch khám của"+thongtinmail.tenbenhnhan+" không ?") === true){
+                        let { data } = await authApi().delete(endpoints.huylich(id));
+                        console.log("xoa thanh cong")
+                    }
                 }
-
+                loadlichkham();
+                formClose();
             } catch (error) {
                 console.log(error)
             }
@@ -142,7 +161,26 @@ const XNKham = () => {
         }
         process();
     }
-    console.log(idPhieu)
+
+    const handleSelectDoctor = (event) => {
+        const selectedValue = event.target.value;
+        const [selectedDoctorId, selectedDoctorName, selectedKhoaName, selectedTenBenhNhan, selectedNgayKhamInMillis,email] = selectedValue.split(",");
+        setIdbacsi(selectedDoctorId);
+        let selectedNgayKham = moment.unix(selectedNgayKhamInMillis / 1000);
+        setThongTinMail(prevState => ({
+          tenbenhnhan: selectedTenBenhNhan,
+          ngaykham: selectedNgayKham.format("DD/MM/yyyy"),
+          giokham: selectedNgayKham.format("HH:mm"),
+          basi: selectedDoctorName,
+          khoa: selectedKhoaName,
+          emaill:email
+        }));
+      };
+
+    console.log(bacsi)
+    // console.log(idPhieu)
+    // console.log(idbacsi)
+    console.log(thongtinmail)
 
     return (<>
 
@@ -197,12 +235,18 @@ const XNKham = () => {
                     </Row>
                     <Row className="mb-3">
                         <Col>Chọn bác sĩ:</Col>
-                        <Form.Control as="select" required>
-                            {bacsi.length > 0 ? (bacsi.map((t) => (
-                                <option key={t.id}>t.name</option>
-                            ))) : (<option>Không có bác sĩ làm ngày {new Date(phieukham?.appointmentDate).toLocaleDateString("vi-VN")} !!!</option>)};
+                        <Form.Control as="select" required onClick={handleSelectDoctor}>
+                        {bacsi.length > 0 ? (
+                            bacsi.map((t) => (
+                            <option key={t.id} value={`${t.id},${t.name},${t.khoaId.name},${phieukham?.sickpersonId.name},${phieukham?.appointmentDate},${phieukham?.sickpersonId.emaill}`}>
+                                {t.name} - {t.khoaId.name}
+                            </option>
+                            ))
+                        ) : (
+                            <option>Không có bác sĩ làm ngày {new Date(phieukham?.appointmentDate).toLocaleDateString("vi-VN")} !!!</option>
+                        )}
                         </Form.Control>
-                    </Row>
+                        </Row>
                     <Row>
                         <Button className="typebutton" onClick={() => xatnhanlichkham(phieukham?.id)}>XÁC NHẬN </Button>
                     </Row>

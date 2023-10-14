@@ -8,6 +8,7 @@ import apis, { endpoints } from "../../configs/apis";
 import MySpinner from "../../layout/MySpinner";
 import axios from "axios";
 import { render } from "@testing-library/react";
+import PhieuKham from "../doctor/PhieuKham";
 
 const ThanhToan = () => {
     const nav = useNavigate()
@@ -24,10 +25,11 @@ const ThanhToan = () => {
         idAppo: id,
         loaithanhtoan: "null",
     })
+    const nat = useNavigate()
     useEffect(() => {
         const loadPhieuKham = async () => {
             try {
-                let { data } = await apis.get(endpoints['phieukham'](22));
+                let { data } = await apis.get(endpoints['phieukham'](id));
                 setPhieuKham(data)
                 setLoading(true)
 
@@ -112,7 +114,6 @@ const ThanhToan = () => {
         };
 
         loadPhieuKham()
-
         loadPhieuBenh()
         loadthuoc()
         loaddichvu()
@@ -136,6 +137,16 @@ const ThanhToan = () => {
 
     }, []);
 
+    const sendFeedback = (serviceID, templateId, variables) => {
+        window.emailjs.send(
+            serviceID, templateId,
+            variables
+        ).then(res => {
+            console.log('Email successfully sent!')
+        })
+            .catch(err => console.error('There has been an error.  Here some thoughts on the error that occured:', err))
+    }
+
     const thanhtoanhoadon = (evt) => {
         evt.preventDefault();
         const process = async () => {
@@ -148,17 +159,23 @@ const ThanhToan = () => {
                 console.log("thanh cong do");
                 let res = await apis.post(endpoints["thanhtoan"], formData);
                 console.log("thanh cong");
-                axios.get(res);
-
+                const templateId = 'template_xhjr5ss';
+                const serviceID = 'service_clinic2002';
+                // const url = "http://localhost:3000/danhgia/"+phieu.doctorId.id;
+                const url = "http://localhost:3000/login"
+                sendFeedback(serviceID, templateId, { tenbenhnhan: phieu.sickpersonId.name, link_danh_gia:url,tenbacsi:phieu.doctorId.name,reply_to: phieu.sickpersonId.emaill})
+                window.confirm("test")
+                // axios.get(res);
                 if (res.status === 200) {
                     await new Promise((resolve) => setTimeout(resolve, 5000));
-
-                    console.log("1")
                     // get trang bị lỗi 404
                     try {
                         console.log("2")
                         let reslink = await apis.get(endpoints["thanhtoanthanhcong"](thanhtoan.idAppo));
                         console.log("3")
+                        if(reslink.data == true){
+                            nat("/");
+                        }
                         window.location.href = reslink.data;
 
                     } catch (error) {

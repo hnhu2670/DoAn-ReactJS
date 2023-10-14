@@ -161,18 +161,26 @@ const KeThuoc = () => {
     };
 
     const chonthuoc = (fieldid, id, fieldtname, tenthuoc) => {
+        console.log(fieldid)
+        console.log(id)
+        console.log(fieldtname)
+        console.log(tenthuoc)
+        console.log("=============================================================================do ke thuoc")
         let formAdd = document.getElementById("row-addThuoc")
         if (formAdd.style.display === 'none') {
             formAdd.style.display = 'block';
             console.log("hiện")
+            // window.confirm("dung lai")
         } else {
             formAdd.style.display = 'none';
             console.log("ẩn")
+            window.confirm("dung lai")
         }
         setThemThuoc((current) => {
             const update = { ...current };
             update[fieldid] = id;
             update[fieldtname] = tenthuoc;
+            // window.confirm("dung lai")
             return update;
         });
 
@@ -239,7 +247,7 @@ const KeThuoc = () => {
                                             <td>{d.quantity}</td>
                                             <td>{d.idUnit.name}</td>
                                             <td>
-                                                <button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </button>
+                                                <Button onClick={() => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </Button>
                                             </td>
                                         </tr>
                                     ))}
