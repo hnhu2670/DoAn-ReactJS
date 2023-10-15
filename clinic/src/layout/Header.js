@@ -6,6 +6,7 @@ import './header.css';
 import { Link, useNavigate } from "react-router-dom";
 import { MyNotiContext, MyUserContext } from "../App";
 import { Alert } from 'react-bootstrap';
+import apis, { endpoints } from '../configs/apis';
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);
 
@@ -22,6 +23,23 @@ const Header = () => {
 
     }
     console.log(user)
+
+    const [phieucanthanhtoan, setPhieucanthanhtoan] = useState([])
+    useEffect(() => {
+        const loadphieu = async () => {
+            try {
+                let res = await apis.get(endpoints["lichkhamcanthanhtoan"])
+                setPhieucanthanhtoan(res.data)
+                console.log("lấy được data")
+                console.log("================================")
+                console.log(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        loadphieu()
+    }, []);
+
     return (
         <>
             <div>
@@ -48,7 +66,7 @@ const Header = () => {
                                             <>
                                                 <li><Link variant="secondary" className='booking' to="/dangkylam"> Đăng Ký Làm Việc </Link></li>
                                                 <li><Link variant="secondary" to="/xacnhanlich"> Xác nhận lịch khám</Link></li>
-                                                <li><Link variant="secondary" to="/thongbao"> 🔔 {notiCount}</Link></li>
+                                                <li><Link variant="secondary" to="/thongbao"> 🔔 {phieucanthanhtoan.length}</Link></li>
 
                                             </> :
                                             <>

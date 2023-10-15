@@ -62,8 +62,8 @@ export const endpoints = {
     "hoadon": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/hoadon`,
     "thanhtoanthanhcong": (id) => `${SERVER_CONTEXT}/api/nurse/thanhtoan/${id}`,
     "xacnhanbacsi": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}`,
-    // "phieukham": (id) => `${SERVER_CONTEXT}/api/doctor/khambenh/${id}/phieukham`,
-    "laybacsikhambenh": (id) => `${SERVER_CONTEXT}/nurse/phieukham/${id}/bacsi`,
+    "huylich": (id) => `${SERVER_CONTEXT}/api/appointments/${id}`,
+    "laybacsikhambenh": (id) => `${SERVER_CONTEXT}/api/nurse/phieukham/${id}/bacsi`,
     // user
     "user": `${SERVER_CONTEXT}/api/users`,
     "update-user": `${SERVER_CONTEXT}/api/user/update`,

@@ -84,10 +84,11 @@ const Login = () => {
 
     } catch (err) {
       setLoading(false)
+      console.log(err)
       if (err.response && err.response.status === 401) {
-        setError('Tên đăng nhập hoặc mật khẩu không chính xác');
+        setError(err.response.data);
       } else {
-        setError('Tên đăng nhập hoặc mật khẩu không chính xác');
+        setError(err.response.data);
       }
     }
   };

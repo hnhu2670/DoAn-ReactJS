@@ -57,13 +57,20 @@ const MyProfile = () => {
             try {
                 let form = new FormData();
                 form.append("dod", user.dod);
-                form.append("avatar", avatar.current.files[0]);
-
+                if(avatar.current.files.length > 0){
+                    form.append("avatar", avatar.current.files[0]);
+                    console.log("anh moi")
+                } else {
+                    form.append("avatar", user.avatar);
+                    console.log("anh cu");
+                  }
                 console.log(user.dod)
                 for (let field in user) {
                     form.append(field, user[field]);
                 }
-
+               
+                console.log(form)
+                window.confirm("test")
                 let res = await authApi().post(endpoints['update-user'], form);
                 // let res1 = await authApi().post(endpoints['update-avatar'], form);
                 // console.log(res.data)

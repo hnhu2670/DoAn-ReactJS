@@ -9,21 +9,21 @@ const LichSuKham = () => {
     const [lskham, setLSKham] = useState([])
     const { id } = useParams()
     const [loading, setLoading] = useState(false)
-    // useEffect(() => {
-    //     const loadLSKham = async () => {
-    //         try {
-    //             let { data } = await apis.get(endpoints['lichsukham'](id));
-    //             setLSKham(data)
-    //             setLoading(true)
-    //             console.log(data);
+    useEffect(() => {
+        const loadLSKham = async () => {
+            try {
+                let { data } = await apis.get(endpoints['lichsukham'](id));
+                setLSKham(data)
+                setLoading(true)
+                console.log(data);
 
-    //         } catch (err) {
-    //             console.log(err);
-    //             setLoading(false)
-    //         }
-    //     };
-    //     loadLSKham()
-    // }, [id])
+            } catch (err) {
+                console.log(err);
+                setLoading(false)
+            }
+        };
+        loadLSKham()
+    }, [id])
 
     // const [date, setKw] = useState("");
     // const [q] = useSearchParams()
@@ -68,34 +68,34 @@ const LichSuKham = () => {
     //     loadLSKham();
     // }, [id]);
 
-    const [date, setKw] = useState("");
-    const [q] = useSearchParams();
-    const [nav] = useNavigate([]);
-    const search = (evt) => {
-        evt.preventDefault();
-        nav(`/xemlichkham/${id}?date=${date}`);
-    };
-    const timKiem = async () => {
-        try {
-            setLoading(true);
-            let e = endpoints['lichsukham'](id);
-            let ngayKham = q.get("date");
-            if (ngayKham !== null) {
-                e = `${e}?date=${ngayKham}`;
-            }
+    // const [date, setKw] = useState("");
+    // const [q] = useSearchParams();
+    // const [nav] = useNavigate([]);
+    // const search = (evt) => {
+    //     evt.preventDefault();
+    //     nav(`/xemlichkham/${id}?date=${date}`);
+    // };
+    // const timKiem = async () => {
+    //     try {
+    //         setLoading(true);
+    //         let e = endpoints['lichsukham'](id);
+    //         let ngayKham = q.get("date");
+    //         if (ngayKham !== null) {
+    //             e = `${e}?date=${ngayKham}`;
+    //         }
 
-            let res = await apis.get(e);
-            setLSKham(res.data);
+    //         let res = await apis.get(e);
+    //         setLSKham(res.data);
 
-            console.log(res.data);
-        } catch (err) {
-            setLoading(false);
-            console.log(err);
-        }
-    };
-    useEffect(() => {
-        timKiem();
-    }, [q]);
+    //         console.log(res.data);
+    //     } catch (err) {
+    //         setLoading(false);
+    //         console.log(err);
+    //     }
+    // };
+    // useEffect(() => {
+    //     timKiem();
+    // }, [q]);
     return (
         <div>
             <Container>
@@ -107,7 +107,7 @@ const LichSuKham = () => {
                             <Col><p style={{ fontSize: 25 + "px" }}>{lskham[0]?.sickpersonId.name}</p></Col>
                         </Row>
                     </div>
-                    <Form style={{ display: "flex", width: 100 + "%", width: 96 + "%" }} className='mb-3 ml-3 p-0'
+                    {/* <Form style={{ display: "flex", width: 100 + "%", width: 96 + "%" }} className='mb-3 ml-3 p-0'
                         onSubmit={search}>
                         <div className='mr-3' style={{ width: 100 + "%" }}>
 
@@ -119,7 +119,7 @@ const LichSuKham = () => {
                         </div>
                         <button className="btn-click" type="submit">🔍 Tìm kiếm</button>
 
-                    </Form>
+                    </Form> */}
                     <Form className="form-thuoc" >
                         <Table striped bordered hove className="text-center mb-5 table-toathuoc">
                             <thead>
