@@ -6,7 +6,7 @@ import { render } from '@testing-library/react'
 import { el } from 'date-fns/locale'
 import "./danhGia.css"
 import { MyUserContext } from '../../App'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
 import { useEffect } from 'react'
 const DanhGia = () => {
@@ -17,6 +17,7 @@ const DanhGia = () => {
         point: "",
         comment: "",
     });
+    const nav = useNavigate()
     function changeDiem() {
         let diem = 0;
         let bstar = 0;
@@ -107,6 +108,8 @@ const DanhGia = () => {
                 console.log("thanh cong");
                 if (res.status === 200) {
                     // chuyển qua trang phiếu bệnh ==> id phiếu bệnh
+                    alert("Đánh giá thành công")
+                    nav("/");
                     console.log("danh gia thanh cong")
                     // nav(`/xemlichkham/phieukham/${phieu.id}/kethuoc`);
                 }
@@ -131,8 +134,8 @@ const DanhGia = () => {
 
                 <Row>
                     <Col sm={5}>
-                        <img src={phieukham?.doctorId.avatar}></img>
-                        <h1>{phieukham?.doctorId.name}</h1>
+                        <img src={phieukham.doctorId?.avatar}></img>
+                        <h1>{phieukham.doctorId?.name}</h1>
                     </Col>
                     <Col className='col-danhgia mb-5' >
                         <Row>

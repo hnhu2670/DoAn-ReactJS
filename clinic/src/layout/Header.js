@@ -6,7 +6,7 @@ import './header.css';
 import { Link, useNavigate } from "react-router-dom";
 import { MyNotiContext, MyUserContext } from "../App";
 import { Alert } from 'react-bootstrap';
-import apis, { endpoints } from '../configs/apis';
+import apis, { authApi, endpoints } from '../configs/apis';
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);
 
@@ -39,7 +39,21 @@ const Header = () => {
         }
         loadphieu()
     }, []);
-
+    const [phieucandanhgia, setPhieucandanhgia] = useState([])
+    useEffect(() => {
+        const loadphieudanhgia = async () => {
+            try {
+                let res = await authApi().get(endpoints["cacphieucandanhgia"])
+                setPhieucandanhgia(res.data)
+                console.log("lấy được data")
+                console.log("================================")
+                console.log(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        loadphieudanhgia()
+    }, []);
     return (
         <>
             <div>
@@ -78,6 +92,7 @@ const Header = () => {
                                                     <>
                                                         <li><Link variant="secondary" to="/datlichkham"> Đăng Ký Khám </Link></li>
                                                         <li><Link variant="secondary" to="/danhgia">Đánh giá</Link></li>
+                                                        <li><Link variant="secondary" to="/thongbaodanhgia"> 🔔{phieucandanhgia.length} </Link></li>
                                                     </>}
                                             </>}
                                         <li><Link variant="secondary" to="/allchat">Chat now</Link></li>
