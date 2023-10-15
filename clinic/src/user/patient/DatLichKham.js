@@ -1,7 +1,7 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
 import TypeButton from "../../button/Button";
 import "./datLichKham.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MyUserContext } from "../../App";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,20 @@ const DatLichKham = () => {
 
 
     });
+
+    const [minDate, setMinDate] = useState("");
+    // const [minTime, setMinTime] = useState("");
+    // const [maxTime, setMaxTime] = useState("");
+// Tính toán ngày tối thiểu (hiện tại)
+    const currentDate = new Date().toISOString().split("T")[0];
+    // const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+    // const lastTime = "20:00:00"; // Giờ cuối cùng mà người dùng có thể chọn
+    useEffect(() => {
+        setMinDate(currentDate);
+        // setMinTime(currentTime);
+        // setMaxTime(lastTime);
+      }, []);
+
     const change = (evt, field) => {
         setDatLich((current) => {
             return { ...current, [field]: evt.target.value };
@@ -57,6 +71,7 @@ const DatLichKham = () => {
 
         process();
     }
+    // console(currentTime)
     return (
         <>
 
@@ -133,15 +148,19 @@ const DatLichKham = () => {
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Ngày khám</Form.Label>
                                                 <Form.Control type="date" value={appointment.appointmentDate}
-                                                    onChange={e => change(e, "appointmentDate")} required />
-
+                                                    onChange={e => change(e, "appointmentDate")} required 
+                                                    min={minDate}/>
+                                                    
                                             </Form.Group>
                                         </Col>
                                         <Col>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Giờ khám</Form.Label>
                                                 <Form.Control as="select" value={appointment.appointmentTime}
-                                                    onChange={e => change(e, "appointmentTime")} required>
+                                                    onChange={e => change(e, "appointmentTime")}
+                                                    // min={minTime}
+                                                    // max={maxTime}
+                                                    required>
 
                                                     <option value="09:00:00">09:00:00</option>
                                                     <option value="09:30:00">09:30:00</option>

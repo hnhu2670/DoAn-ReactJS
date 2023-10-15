@@ -6,7 +6,7 @@ import { render } from '@testing-library/react'
 import { el } from 'date-fns/locale'
 import "./danhGia.css"
 import { MyUserContext } from '../../App'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
 import { useEffect } from 'react'
 const DanhGia = () => {
@@ -17,6 +17,7 @@ const DanhGia = () => {
         point: "",
         comment: "",
     });
+    const nav = useNavigate()
     function changeDiem() {
         let diem = 0;
         let bstar = 0;
@@ -79,23 +80,20 @@ const DanhGia = () => {
         }
     };
     useEffect(() => {
-<<<<<<< HEAD
-        const loadbacsi = async () => {
-            try {
-                let { data } = await apis.get(endpoints['pro-doctor'](id));
-                setbacsi(data)
-                console.log(data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
+        // const loadbacsi = async () => {
+        //     try {
+        //         let { data } = await apis.get(endpoints['pro-doctor'](id));
+        //         setbacsi(data)
+        //         console.log(data);
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // };
 
-        loadbacsi()
-=======
-        if(id){
+        // loadbacsi()
+        if (id) {
             loadbacsi(id)
-        }  
->>>>>>> e34e7f779f3427586de478bc7fd7375035f4acc3
+        }
     }, [id]);
 
     const change = (event, field) => {
@@ -121,6 +119,8 @@ const DanhGia = () => {
                 console.log("thanh cong");
                 if (res.status === 200) {
                     // chuyển qua trang phiếu bệnh ==> id phiếu bệnh
+                    alert("Đánh giá thành công")
+                    nav("/");
                     console.log("danh gia thanh cong")
                     // nav(`/xemlichkham/phieukham/${phieu.id}/kethuoc`);
                 }
@@ -145,13 +145,15 @@ const DanhGia = () => {
 
                 <Row>
                     <Col sm={5}>
-<<<<<<< HEAD
+
                         <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img>
                         {/* <h1>{bacsi.name}</h1> */}
-=======
                         <img src={phieukham?.doctorId.avatar}></img>
                         <h1>{phieukham?.doctorId.name}</h1>
->>>>>>> e34e7f779f3427586de478bc7fd7375035f4acc3
+
+                        <img src={phieukham.doctorId?.avatar}></img>
+                        <h1>{phieukham.doctorId?.name}</h1>
+
                     </Col>
                     <Col className='col-danhgia mb-5' >
                         <Row>

@@ -11,7 +11,7 @@ import { useRef } from "react";
 const MyProfile = () => {
 
     const [current_user, dispatch] = useContext(MyUserContext);
-
+    const currentDate = new Date().toISOString().split('T')[0];
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
     const avatar = useRef();
@@ -23,12 +23,15 @@ const MyProfile = () => {
         "email": current_user.emaill,
         "phone": current_user.phone,
         "dod": date,
-        "avatar": current_user.avatar
+        // "avatar": current_user.avatar
 
     })
-    // const [avatar, setAvatar] = useState({
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    // })
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+      };
 
     const change = (evt, field) => {
         setUser(current => {
@@ -49,31 +52,29 @@ const MyProfile = () => {
             console.log(err);
         }
     }
+    
     const updateUser = (evt) => {
-        console.log(user.avatar)
+        console.log(avatar.current.files)
         evt.preventDefault();
         setLoading(true);
         const process = async () => {
             try {
                 let form = new FormData();
+                // let avatar = new FormData();
                 form.append("dod", user.dod);
                 if(avatar.current.files.length > 0){
+                    console.log("do thay anh")
                     form.append("avatar", avatar.current.files[0]);
-                    console.log("anh moi")
-                } else {
-                    form.append("avatar", user.avatar);
-                    console.log("anh cu");
-                  }
+                    let thayanh = await authApi().post(endpoints['update-avatar'], form);
+                    console.log("thay ảnh xog ời")
+                }
                 console.log(user.dod)
                 for (let field in user) {
                     form.append(field, user[field]);
+                    console.log(user[field])
                 }
-               
-                console.log(form)
-                window.confirm("test")
                 let res = await authApi().post(endpoints['update-user'], form);
-                // let res1 = await authApi().post(endpoints['update-avatar'], form);
-                // console.log(res.data)
+                console.log(res.data)
 
                 if (res.status === 200) {
                     setLoading(true);
@@ -91,6 +92,7 @@ const MyProfile = () => {
         process();
 
     }
+    
     return (<>
         <Container>
             <section id="section-profile">
@@ -104,8 +106,10 @@ const MyProfile = () => {
                                 <Form.Group
                                     className="mb-3 profile-avatar"
                                     controlId="formBasicAvatar">
-                                    <Image src={user.avatar} rounded />
-                                    <Form.Control className="mt-2" type='file' ref={avatar} style={{ width: 70 + "%" }} />
+                                    {/* <Image src={current_user.avatar} rounded /> */}
+                                    <Image src={selectedImage ? URL.createObjectURL(selectedImage) : current_user.avatar} rounded />
+                                    {/* <Form.Control className="mt-2" type='file' ref={avatar} style={{ width: 70 + "%" }} /> */}
+                                    <Form.Control className="mt-2" type='file' ref={avatar} style={{ width: 70 + "%" }} onChange={handleImageChange} />
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -133,6 +137,7 @@ const MyProfile = () => {
                                             placeholder="Ngày sinh"
                                             value={user.dod}
                                             onChange={(e) => change(e, "dod")}
+                                            max={currentDate}
                                         />
                                     </Form.Group>
                                 </Row>

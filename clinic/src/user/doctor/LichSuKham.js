@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { Col, Container, Form, Row, Table } from 'react-bootstrap'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
 import Search from 'antd/es/input/Search'
 
@@ -66,20 +66,8 @@ const LichSuKham = () => {
                             </form>
                         </Row>
                     </div >
-                    {/* <Form style={{ display: "flex", width: 100 + "%", width: 96 + "%" }} className='mb-3 ml-3 p-0'
-                        onSubmit={search}>
-                        <div className='mr-3' style={{ width: 100 + "%" }}>
 
-                            <Form.Control
-                                type="date"
-                                value={date}
-                                onChange={e => setKw(e.target.value)}
-                            />
-                        </div>
-                        <button className="btn-click" type="submit">🔍 Tìm kiếm</button>
-
-                    </Form> */}
-                    < Form className="form-thuoc" >
+                    <Form Form className="form-thuoc" >
                         <Table striped bordered hove className="text-center mb-5 table-toathuoc">
                             <thead>
                                 <tr>
@@ -101,7 +89,7 @@ const LichSuKham = () => {
 
                             </tbody>
                         </Table>
-
+                    </Form>
 
                 </section >
             </Container >

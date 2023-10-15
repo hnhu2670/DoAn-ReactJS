@@ -67,7 +67,8 @@ export const endpoints = {
     // user
     "user": `${SERVER_CONTEXT}/api/users`,
     "update-user": `${SERVER_CONTEXT}/api/user/update`,
-    "update-avatar": `${SERVER_CONTEXT}/api/user/changeAvatar`,
+    "update-avatar": `${SERVER_CONTEXT}/api/user/changeavatar`,
+    "cacphieucandanhgia" :  `${SERVER_CONTEXT}/api/benhnhan/danhgia`,
 
 
 
