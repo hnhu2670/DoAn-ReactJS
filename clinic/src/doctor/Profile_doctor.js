@@ -167,8 +167,8 @@ const Profile_doctor = () => {
                                     <hr />
                                     <Row className="p-1">
                                         <ul>
-                                            <li><img src={c.sickpersonId?.avatar} alt="ảnh" />
-                                                <p style={{ fontWeight: "bold" }} className="mt-4">{c.sickpersonId?.name}</p>{c.ratingDate.formData}
+                                            <li><img src={c.phieukhamId?.sickpersonId.avatar} alt="ảnh" />
+                                                <p style={{ fontWeight: "bold" }} className="mt-4">{c.phieukhamId?.sickpersonId.name}</p>{c.ratingDate.formData}
                                             </li>
 
                                             <li>

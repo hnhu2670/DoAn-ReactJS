@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import TypeButton from '../../button/Button'
 import ImgStar from "../../resources/image/sao.png"
@@ -10,12 +10,10 @@ import { useParams } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
 import { useEffect } from 'react'
 const DanhGia = () => {
-    const [user] = useContext(MyUserContext);
     const { id } = useParams()
-    const [bacsi, setbacsi] = useState([])
+    const [phieukham, setphieukham] = useState([])
     const [danhgia, setdanhgia] = useState({
-        IdBenhNhan: user.id,
-        IdDoctor: id,
+        phieukhamId: id,
         point: "",
         comment: "",
     });
@@ -71,8 +69,17 @@ const DanhGia = () => {
             </>)
         }
     }
-
+    const loadbacsi = async (id) => {
+        try {
+            let { data } = await apis.get(endpoints['phieukham'](id));
+            setphieukham(data)
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     useEffect(() => {
+<<<<<<< HEAD
         const loadbacsi = async () => {
             try {
                 let { data } = await apis.get(endpoints['pro-doctor'](id));
@@ -84,6 +91,11 @@ const DanhGia = () => {
         };
 
         loadbacsi()
+=======
+        if(id){
+            loadbacsi(id)
+        }  
+>>>>>>> e34e7f779f3427586de478bc7fd7375035f4acc3
     }, [id]);
 
     const change = (event, field) => {
@@ -100,8 +112,7 @@ const DanhGia = () => {
         const process = async () => {
             try {
                 let formData = new FormData();
-                formData.append("IdDoctor", danhgia.IdDoctor);
-                formData.append("IdBenhNhan", danhgia.IdBenhNhan);
+                formData.append("phieukhamId", danhgia.phieukhamId);
                 formData.append("point", danhgia.point);
                 formData.append("comment", danhgia.comment);
                 console.log(formData.data);
@@ -125,7 +136,7 @@ const DanhGia = () => {
 
         process();
     }
-
+    console.log(phieukham)
     console.log(danhgia)
     return (
         <Container>
@@ -134,8 +145,13 @@ const DanhGia = () => {
 
                 <Row>
                     <Col sm={5}>
+<<<<<<< HEAD
                         <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img>
                         {/* <h1>{bacsi.name}</h1> */}
+=======
+                        <img src={phieukham?.doctorId.avatar}></img>
+                        <h1>{phieukham?.doctorId.name}</h1>
+>>>>>>> e34e7f779f3427586de478bc7fd7375035f4acc3
                     </Col>
                     <Col className='col-danhgia mb-5' >
                         <Row>

@@ -161,7 +161,7 @@ const ThanhToan = () => {
                 console.log("thanh cong");
                 const templateId = 'template_xhjr5ss';
                 const serviceID = 'service_clinic2002';
-                // const url = "http://localhost:3000/danhgia/"+phieu.doctorId.id;
+                // const url = "http://localhost:3000/danhgia/"+phieu.id;
                 const url = "http://localhost:3000/login"
                 sendFeedback(serviceID, templateId, { tenbenhnhan: phieu.sickpersonId.name, link_danh_gia:url,tenbacsi:phieu.doctorId.name,reply_to: phieu.sickpersonId.emaill})
                 window.confirm("test")
