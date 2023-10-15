@@ -42,6 +42,7 @@ function App() {
 
           <Header />
           <Routes>
+            <Route path="/ClinicReact" exact element={<Home />} />
             <Route path="/" exact element={<Home />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/dangky" exact element={<Register />} />
