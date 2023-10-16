@@ -180,7 +180,7 @@ const DKLam = () => {
 
 
         const process = async () => {
-            if (window.confirm('Đăng kí lịch !!!!')) {
+            if (window.confirm('Bạn có chắc chắn đăng ký lịch làm này không ?')) {
                 try {
                     let formData = new FormData();
                     formData.append("IdUser", schedule.IdUser);
@@ -217,10 +217,8 @@ const DKLam = () => {
                         loadlichdangky1()
                         loadlichdangky2()
                         loadlichdangky3()
-
                         loadlichlamdangky()
-                        // <Alert Alert > Xác nhận thành công!!!!!!</Alert >
-                        // nav("/");
+                        alert("Đăng ký lịch làm thành công !!!")
                     }
                 } catch (error) {
                     console.log(error)
@@ -241,11 +239,13 @@ const DKLam = () => {
                 try {
                     let { data } = await apis.get(endpoints['huylichlam'](id));
                     console.log(data)
+                    alert("Hủy lịch thành công")
                     loadlichdangky1()
                     loadlichdangky2()
                     loadlichdangky3()
                     loadlichlamdangky()
                     setSuccess(true)
+                    
                 } catch (err) {
                     console.log(err);
                     <Alert>Hủy lịch thất bại</Alert>
@@ -255,7 +255,7 @@ const DKLam = () => {
         };
         huylich();
     };
-
+    lichlamdangky.sort((a, b) => new Date(a.dateSchedule) - new Date(b.dateSchedule));
     return (<>
         <Container>
             <section>
@@ -327,7 +327,7 @@ const DKLam = () => {
                             <tbody>
                                 <tr>
                                     <td>Ca sáng</td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[0]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[0]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -341,7 +341,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[1]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[1]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -355,7 +355,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[2]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[2]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -368,8 +368,9 @@ const DKLam = () => {
                                                 onChange={(e) => change(e, "thu4ca1", nextWeekDates[2])}
                                             />
                                         )}
+                                        
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[3]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[3]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -383,7 +384,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[4]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[4]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -397,7 +398,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[5]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[5]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -411,7 +412,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[6]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[6]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -428,7 +429,7 @@ const DKLam = () => {
                                 </tr>
                                 <tr>
                                     <td>Ca chiều</td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[0]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[0]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -442,7 +443,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[1]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[1]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -456,7 +457,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[2]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[2]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -470,7 +471,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[3]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[3]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -484,7 +485,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[4]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[4]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -498,7 +499,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[5]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[5]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -512,7 +513,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[6]).format('DD/MM/YYYY')}>
                                         {lichdangky2.includes(nextWeekDates[6]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -529,7 +530,7 @@ const DKLam = () => {
                                 </tr>
                                 <tr>
                                     <td>Ca tối</td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[0]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[0]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -543,7 +544,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[1]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[1]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -557,7 +558,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[2]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[2]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -571,7 +572,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[3]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[3]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -585,7 +586,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[4]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[4]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -599,7 +600,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[5]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[5]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -613,7 +614,7 @@ const DKLam = () => {
                                             />
                                         )}
                                     </td>
-                                    <td>
+                                    <td title={moment(nextWeekDates[6]).format('DD/MM/YYYY')}>
                                         {lichdangky3.includes(nextWeekDates[6]) ? (
                                             <Form.Check
                                                 aria-label="option 1"
@@ -656,7 +657,7 @@ const DKLam = () => {
                                             <td>{t.shiftId.start}</td>
                                             <td>{t.shiftId.end}</td>
                                             <td className="bthuy">
-                                                <button onClick={() => huy(t.id)}>❌</button>
+                                                <Button onClick={() => huy(t.id)}>❌</Button>
                                             </td>
 
                                         </tr>

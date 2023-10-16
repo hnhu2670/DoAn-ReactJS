@@ -104,6 +104,7 @@ const KeThuoc = () => {
                 let res = await apis.post(endpoints["kethuoc"], formData);
                 console.log("thanh cong post");
                 if (res.status === 200) {
+                    alert("Thêm "+themthuoc.tenthuoc+" thành công")
                     let formAdd = document.getElementById("row-addThuoc")
                     setThemThuoc({
                         idThuoc: '',
@@ -174,7 +175,7 @@ const KeThuoc = () => {
         } else {
             formAdd.style.display = 'none';
             console.log("ẩn")
-            window.confirm("dung lai")
+            // window.confirm("dung lai")
         }
         setThemThuoc((current) => {
             const update = { ...current };
@@ -189,6 +190,34 @@ const KeThuoc = () => {
     const formClose = () => {
         let formAdd = document.getElementById("row-addThuoc")
         formAdd.style.display = 'none';
+    }
+
+    const taohoadon = (evt) => {
+        evt.preventDefault();
+        const process = async () => {
+            try {
+                let formData = new FormData();
+                formData.append("IdAppo", id);
+                let res = await apis.post(endpoints["taohoadon"], formData);
+                console.log("thanh cong post");
+                if (res.status === 200) {
+                    console.log("tao xong hoa don va roi khoi");
+                    alert("Hoàn tất quá trình khám bệnh và chuẩn bị rời khỏi...")
+                    nav("/xemlichkham")
+                }
+                else {
+                    console.log("them that bai")
+                }
+
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        if (window.confirm("Bạn đã hoàn tất quá trình khám bệnh?")) {
+            process();
+          }
+        
     }
     return (
         <Container>
@@ -331,7 +360,9 @@ const KeThuoc = () => {
 
                 <Row className='m-4'>
                     {/* id phiếu khám */}
-                    <Link className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>
+                    {toathuoc.length>0?(<Link className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>)
+                    :(<Button className="btn-click" onClick={taohoadon}>Tạo hóa đơn và rời khỏi</Button>)}
+                    
 
                 </Row>
 

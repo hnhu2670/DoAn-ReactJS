@@ -28,6 +28,47 @@ const Register = () => {
             return { ...current, [field]: evt.target.value }
         })
     }
+    const validateFields = () => {
+        const nameRegex = /^[\p{L}\s]+$/u;
+        const addressRegex = /^[A-Za-z0-9\s]+$/;
+        const phoneNumberRegex = /^\d{10}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+        if (!nameRegex.test(user.name)) {
+          alert("Vui lòng nhập tên hợp lệ!");
+          return false;
+        }
+    
+        if (!addressRegex.test(user.address)) {
+          alert("Vui lòng nhập địa chỉ hợp lệ!");
+          return false;
+        }
+    
+        if (!phoneNumberRegex.test(user.phone)) {
+          alert("Vui lòng nhập số điện thoại hợp lệ!");
+          return false;
+        }
+    
+        if (!emailRegex.test(user.email)) {
+          alert("Vui lòng nhập địa chỉ email hợp lệ!");
+          return false;
+        }
+    
+        const currentDate = new Date();
+        const dob = new Date(user.dob);
+        const age = currentDate.getFullYear() - dob.getFullYear();
+        const monthDiff = currentDate.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < dob.getDate())) {
+          age--;
+        }
+    
+        if (age < 16) {
+          alert("Người dùng đang " + age + " tuổi (người dùng phải từ 16 tuổi trở lên)!!!");
+          return false;
+        }
+    
+        return true;
+      };
 
     const register = (evt) => {
         evt.preventDefault();
@@ -63,7 +104,9 @@ const Register = () => {
         if (user.password !== user.confirmPass) {
             setErr("Mật khẩu KHÔNG khớp!");
         } else {
-            process();
+            if(validateFields()){
+                process();
+            }
         }
         console.log(user);
     }
@@ -196,7 +239,7 @@ const Register = () => {
                     <Row className="m-2">
                         <Form.Group className="mb-3">
                             <Form.Label>Ảnh đại diện</Form.Label>
-                            <Form.Control type="file" ref={avatar} />
+                            <Form.Control type="file" ref={avatar} accept=".png"/>
                             <Form.Control.Feedback type="invalid">
                                 Vui lòng chọn ảnh!!!
                             </Form.Control.Feedback>

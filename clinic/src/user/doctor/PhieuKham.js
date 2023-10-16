@@ -89,8 +89,12 @@ const PhieuKham = () => {
 
         }
 
-
-        process();
+        if (loaidichvu.chuandoan.trim() === "") {
+           alert("Hãy nhập kết luận trước khi cấp thuốc...")
+          }else{
+            process();
+          }
+        
     }
 
 

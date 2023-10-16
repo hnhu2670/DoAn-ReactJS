@@ -25,34 +25,32 @@ const Header = () => {
     console.log(user)
 
     const [phieucanthanhtoan, setPhieucanthanhtoan] = useState([])
-    useEffect(() => {
-        const loadphieu = async () => {
-            try {
-                let res = await apis.get(endpoints["lichkhamcanthanhtoan"])
-                setPhieucanthanhtoan(res.data)
-                console.log("lấy được data")
-                console.log("================================")
-                console.log(res.data)
-            } catch (error) {
-                console.log(error)
-            }
+    const loadphieu = async () => {
+        try {
+            let res = await apis.get(endpoints["lichkhamcanthanhtoan"])
+            setPhieucanthanhtoan(res.data)
+            console.log("lấy được data")
+            console.log("================================")
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
         }
-        loadphieu()
-    }, []);
+    }
+    const loadphieudanhgia = async () => {
+        try {
+            let res = await authApi().get(endpoints["cacphieucandanhgia"])
+            setPhieucandanhgia(res.data)
+            console.log("lấy được data")
+            console.log("================================")
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const [phieucandanhgia, setPhieucandanhgia] = useState([])
     useEffect(() => {
-        const loadphieudanhgia = async () => {
-            try {
-                let res = await authApi().get(endpoints["cacphieucandanhgia"])
-                setPhieucandanhgia(res.data)
-                console.log("lấy được data")
-                console.log("================================")
-                console.log(res.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
         loadphieudanhgia()
+        loadphieu()
     }, []);
     return (
         <>

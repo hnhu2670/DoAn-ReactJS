@@ -142,12 +142,12 @@ const XNKham = () => {
                     // console.log(phieukham);
                 }
                 if (res.data == false) {
-                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân`); 
+                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân vì quá số lượng bệnh nhân khám trong ngày `+ thongtinmail.ngaykham); 
                     const templateId = 'template_6c5dkwu';
                     const serviceID = 'service_clinic2002';
                     sendFeedback(serviceID, templateId, { tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có đặt lịch khám tại phòng mạch Piscel vào ngày "+thongtinmail.ngaykham+" vào lúc " + thongtinmail.giokham
                     , noidung2: "Tuy nhiên phòng mạch của chúng tôi đã đạt đến số lượng lịch khám vào ngày đó", noidung3: "Hi vọng bạn có thể đặt lịch vào một ngày khác", reply_to: thongtinmail.emaill })
-                    if(window.confirm("Có muốn xóa lịch khám của"+thongtinmail.tenbenhnhan+" không ?") === true){
+                    if(window.confirm("Có muốn xóa lịch khám của "+thongtinmail.tenbenhnhan+" không ?") === true){
                         let { data } = await authApi().delete(endpoints.huylich(id));
                         console.log("xoa thanh cong")
                     }

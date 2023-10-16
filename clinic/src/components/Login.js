@@ -86,7 +86,7 @@ const Login = () => {
       setLoading(false)
       console.log(err)
       if (err.response && err.response.status === 401) {
-        setError(err.response.data);
+        setError("Tên tài khoản không tồn tại");
       } else {
         setError(err.response.data);
       }

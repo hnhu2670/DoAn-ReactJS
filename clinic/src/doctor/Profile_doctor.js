@@ -105,14 +105,15 @@ const Profile_doctor = () => {
                     {/* <h1 className="text-center text-login top-text">THÔNG TIN BÁC SĨ</h1> */}
                     <Row className="bs-thongtin"  >
                         <Col sm={4} className="p-4">
-                            <img src={doctorId.avatar} alt="ảnh" style={{ backgroundColor: "#eeefef" }} />
+                            <img src={doctorId?.avatar} alt="ảnh" style={{ backgroundColor: "#eeefef" }} />
                         </Col>
                         <Col className="bs-name mt-4">
                             {load === true ? (
                                 <>
-                                    <h3 style={{ fontSize: 35 + "px" }} className="text-success mb-3">{doctorId?.name}</h3>
-                                    <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3">Chuyên khoa {doctorId.khoaId.name}</p>
-                                    <p>(<i>{doctorId.khoaId.describe}</i>)</p>
+                                    <h3 style={{ fontSize: 35 + "px" }} className="text-success mb-3">{doctorId.rankId.name} {doctorId?.name}</h3>
+                                    <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3">Chuyên khoa : {doctorId?.khoaId.name}</p>
+                                    <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3">Giá khám : {(doctorId?.rankId.price).toLocaleString("vi-VN") + " VNĐ"}</p>
+                                    <p>(<i>{doctorId?.khoaId.describe}</i>)</p>
                                 </>
 
                             ) : (

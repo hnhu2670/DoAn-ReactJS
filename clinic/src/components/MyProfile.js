@@ -26,6 +26,7 @@ const MyProfile = () => {
         // "avatar": current_user.avatar
 
     })
+ 
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageChange = (event) => {
@@ -52,6 +53,43 @@ const MyProfile = () => {
             console.log(err);
         }
     }
+    const validateFields = () => {
+        const nameRegex = /^[\p{L}\s]+$/u;
+        if (!nameRegex.test(user.name)) {
+          alert("Vui lòng chỉ nhập chữ cái và dấu cách cho trường tên...");
+          return false;
+        }
+        
+        const addressRegex = /^[A-Za-z0-9\s]+$/;
+        if (!addressRegex.test(user.address)) {
+          alert("Vui lòng chỉ nhập chữ cái, số và dấu cách cho trường địa chỉ...");
+          return false;
+        }
+        const phoneNumberRegex = /^\d{10}$/;
+        if (!phoneNumberRegex.test(user.phone)) {
+          alert("Vui lòng nhập lại số điện thoại của bạn...");
+          return false;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(user.email)) {
+          alert("Vui lòng nhập lại địa chỉ email của bạn...");
+          return false;
+        }
+
+        const currentDate = new Date();
+        const dob = new Date(user.dod);
+        const age = currentDate.getFullYear() - dob.getFullYear();
+        const monthDiff = currentDate.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < dob.getDate())) {
+          age--;
+        }
+      
+        if (age < 16) {
+            alert("Người dùng đang "+age+ " tuổi (người dùng phải từ 16 tuổi trở lên)!!!");
+            return false;
+        }
+        return true;
+      };
     
     const updateUser = (evt) => {
         console.log(avatar.current.files)
@@ -89,8 +127,10 @@ const MyProfile = () => {
             }
 
         }
-        process();
-
+        if (validateFields()) {
+            process();
+          }
+        
     }
     
     return (<>
@@ -109,7 +149,7 @@ const MyProfile = () => {
                                     {/* <Image src={current_user.avatar} rounded /> */}
                                     <Image src={selectedImage ? URL.createObjectURL(selectedImage) : current_user.avatar} rounded />
                                     {/* <Form.Control className="mt-2" type='file' ref={avatar} style={{ width: 70 + "%" }} /> */}
-                                    <Form.Control className="mt-2" type='file' ref={avatar} style={{ width: 70 + "%" }} onChange={handleImageChange} />
+                                    <Form.Control className="mt-2" type='file' accept=".png" ref={avatar} style={{ width: 70 + "%" }} onChange={handleImageChange} />
                                 </Form.Group>
                             </Col>
                             <Col>
@@ -173,104 +213,4 @@ const MyProfile = () => {
 
     </>)
 }
-// function Update() {
-//     const nav = useNavigate();
-//     // const [data, setData] = useState([])
-//     const [value, setValue] = useState({
-//         name: "",
-//         address: "",
-//         phone: "",
-//         emaill: ""
-//     })
-
-//     useEffect(() => {
-//         const loadUser = async () => {
-//             try {
-//                 let { data } = await authApi().get(endpoints['current-user']);
-//                 setValue(data);
-
-//             } catch (err) {
-//                 console.log(err);
-//             }
-//         }
-
-//         loadUser()
-//     }, [])
-//     const updateUser = (evt) => {
-//         evt.preventDefault();
-//         const loadUpdate = async () => {
-//             try {
-//                 let res = await authApi().post(endpoints['update-user'], value);
-//                 // setData(data);
-//                 if (res.status === 200) {
-//                     nav("/");
-//                     console.log("thành công")
-//                     // nav("/");
-//                 }
-//             } catch (err) {
-//                 console.log(err);
-//             }
-//         }
-//         loadUpdate()
-//     }
-//     return (<>
-//         <Container>
-//             <section id="section-profile">
-
-//                 <div className="avatar">
-//                     {/* <Image src={user_avatar} rounded /> */}
-//                     <Form.Control className="avatar_input"
-//                         accept=".jpg, .jpeg, .png, .gif, .bmp" type="file"
-//                     />
-//                 </div>
-//                 <div className="profile-text">
-//                     <Form id="form-profile" onChange={updateUser}>
-//                         <h1 className="text-center">MY PROFILE</h1>
-
-//                         <Row>
-//                             <Form.Group className="mb-3">
-//                                 <Form.Label>Name</Form.Label>
-//                                 <Form.Control type="text" defaultValue={value.name}
-//                                     onChange={(e) => setValue({ ...value, name: e.target.value })}
-//                                 />
-//                             </Form.Group>
-//                         </Row>
-//                         <Row>
-//                             <Form.Group className="mb-3">
-//                                 <Form.Label>Address</Form.Label>
-//                                 <Form.Control type="text" defaultValue={value.address}
-//                                     onChange={(e) => setValue({ ...value, address: e.target.value })}
-//                                 />
-//                             </Form.Group>
-
-//                         </Row>
-//                         <Row>
-//                             <Form.Group className="mb-3">
-//                                 <Form.Label>Email</Form.Label>
-//                                 <Form.Control type="text" defaultValue={value.emaill}
-//                                     onChange={(e) => setValue({ ...value, emaill: e.target.value })}
-//                                 />
-//                             </Form.Group>
-//                         </Row>
-//                         <Row>
-//                             <Form.Group className="mb-3">
-//                                 <Form.Label>Phone</Form.Label>
-//                                 <Form.Control type="text" defaultValue={value.phone}
-//                                     onChange={(e) => setValue({ ...value, phone: e.target.value })}
-
-//                                 />
-//                             </Form.Group>
-//                         </Row>
-
-//                         <Row>
-//                             <TypeButton className="btn-normal">UPDATE</TypeButton>
-//                         </Row>
-//                     </Form>
-//                 </div>
-//             </section>
-
-//         </Container >
-
-//     </>)
-// }
 export default MyProfile

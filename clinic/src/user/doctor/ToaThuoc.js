@@ -72,6 +72,7 @@ const ToaThuoc = () => {
                 const imgY = 30;
                 doc.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
                 doc.save('hoadon.pdf');
+                alert("Xuất toa thuốc thành công")
                 setSuccessful(true);
                 // nav('/xemlichkham');
             } catch (error) {
@@ -124,6 +125,7 @@ const ToaThuoc = () => {
                 console.log("thanh cong post");
                 if (res.status === 200) {
                     console.log("tao xong hoa don va roi khoi");
+                    alert("Hoàn tất quá trình khám bệnh và chuẩn bị rời khỏi...")
                     nav("/xemlichkham")
                 }
                 else {
@@ -135,7 +137,10 @@ const ToaThuoc = () => {
                 console.log(error)
             }
         }
-        process();
+        if (window.confirm("Bạn đã hoàn tất quá trình khám bệnh?")) {
+            process();
+          }
+        
     }
 
     if (phieu.id == null) {
@@ -231,7 +236,7 @@ const ToaThuoc = () => {
                 </section>
                 <Row className='m-3' >
                     <Col><button className="btn-click mr-5" onClick={downPDF}>XUẤT FILE</button></Col>
-                    <Col><button className="btn-click" onClick={() => addNoti(phieu)}>GỬI XÁC NHẬN</button></Col>
+                    {/* <Col><button className="btn-click" onClick={() => addNoti(phieu)}>GỬI XÁC NHẬN</button></Col> */}
                     <Col><button className="btn-click" onClick={taohoadon}>Tạo hóa đơn và rời khỏi</button></Col>
                 </Row>
             </Container >

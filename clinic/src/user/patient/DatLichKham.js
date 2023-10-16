@@ -27,7 +27,8 @@ const DatLichKham = () => {
     // const [maxTime, setMaxTime] = useState("");
 // Tính toán ngày tối thiểu (hiện tại)
     const currentDate = new Date().toISOString().split("T")[0];
-    // const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
+    console.log(currentTime)
     // const lastTime = "20:00:00"; // Giờ cuối cùng mà người dùng có thể chọn
     useEffect(() => {
         setMinDate(currentDate);
@@ -40,6 +41,23 @@ const DatLichKham = () => {
             return { ...current, [field]: evt.target.value };
         });
     }
+    const validateFields = () => {
+        const Regex = /^[A-Za-z0-9\s]+$/;
+    
+        if (!Regex.test(appointment.motabenh)) {
+          alert("Vui lòng nhập mô tả hợp lệ!");
+          return false;
+        }
+        if(appointment.appointmentDate == currentDate){
+            if(appointment.appointmentTime < currentTime ){
+                alert("Vui lòng chọn thời gian phù hợp !");
+                return false;
+            }
+        }
+        
+    
+        return true;
+      };
 
 
     const dangky = (evt) => {
@@ -68,10 +86,12 @@ const DatLichKham = () => {
             }
 
         }
-
-        process();
+        if(validateFields()){
+            process();
+            // alert("hop le")
+        }
     }
-    // console(currentTime)
+   
     return (
         <>
 
