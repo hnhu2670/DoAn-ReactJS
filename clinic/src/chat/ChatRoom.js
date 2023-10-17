@@ -16,7 +16,7 @@ const ChatRoom = () => {
 
     const [chatName, setChatName] = useState([]);
     const [exist, setExist] = useState(false);
-
+    // giống trang chatbox
     useEffect(() => {
         const loadChatRoom = async () => {
             if (user !== null) {

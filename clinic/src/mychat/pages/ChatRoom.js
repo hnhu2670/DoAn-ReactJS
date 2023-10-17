@@ -3,10 +3,14 @@ import SendMessage from "../SendMessage"
 
 const ChatRoom = () => {
     return (
-        <div>
-            <ChatBox />
-            <SendMessage />
-        </div>
+        <>
+            chat room
+            < div >
+                <ChatBox />
+                <SendMessage />
+            </ div>
+        </>
+
     )
 }
 

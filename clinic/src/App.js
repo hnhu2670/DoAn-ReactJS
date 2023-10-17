@@ -31,6 +31,7 @@ import AllChatBox from './chat/AllChat';
 import NewChat from './chat/NewChat';
 import ThongBaoDG from './user/patient/ThongBaoDG';
 import Chat from './Chat';
+import AllChat from './mychat/pages/AllChat';
 export const MyUserContext = createContext();
 export const MyNotiContext = createContext()
 function App() {
@@ -77,7 +78,7 @@ function App() {
             {/* <Route path="/allchat" element={<AllChatBox />} />
             <Route path="/chat/:username" element={<NewChat />} />
             <Route path="/thongbaodanhgia" element={<ThongBaoDG />} /> */}
-
+            <Route path="/allchat" element={<AllChat />} />
           </Routes>
 
           <Footer />

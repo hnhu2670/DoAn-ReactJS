@@ -11,11 +11,17 @@ function Chat() {
             <Routes>
                 <Route path="/login-google" exact element={< Login />} />
                 <Route
-                    path="/chatroom"
+                    path="/chat/:name"
                     element={
                         <ChatRoom />
                     }
                 />
+                {/* <Route
+                    path="/chat/:{name}"
+                    element={
+                        <ChatRoom />
+                    }
+                /> */}
             </Routes>
 
         </AuthProvider>
