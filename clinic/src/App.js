@@ -30,6 +30,7 @@ import ThongBao from './user/nurse/ThongBao';
 import AllChatBox from './chat/AllChat';
 import NewChat from './chat/NewChat';
 import ThongBaoDG from './user/patient/ThongBaoDG';
+import Chat from './Chat';
 export const MyUserContext = createContext();
 export const MyNotiContext = createContext()
 function App() {
@@ -73,12 +74,14 @@ function App() {
             {/* thong bao */}
             <Route path="/thongbao" exact element={<ThongBao />} />
 
-            <Route path="/allchat" element={<AllChatBox />} />
+            {/* <Route path="/allchat" element={<AllChatBox />} />
             <Route path="/chat/:username" element={<NewChat />} />
-            <Route path="/thongbaodanhgia" element={<ThongBaoDG />} />
+            <Route path="/thongbaodanhgia" element={<ThongBaoDG />} /> */}
+
           </Routes>
 
           <Footer />
+          <Chat />
 
         </BrowserRouter>
       </MyNotiContext.Provider>

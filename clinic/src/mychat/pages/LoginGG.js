@@ -11,7 +11,7 @@ const Login = () => {
         try {
             await signinWithGoogle();
             if (currentUser) {
-                navigate("/chat")
+                navigate("/chatroom")
             }
             else navigate("/login-google")
         } catch (error) {

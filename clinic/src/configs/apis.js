@@ -3,8 +3,8 @@ import cookie from "react-cookies";
 
 
 const SERVER_CONTEXT = "/Clinnic";
-const SERVER = "http://localhost:8080";
-// const SERVER = "http://localhost:8901";
+// const SERVER = "http://localhost:8080";
+const SERVER = "http://localhost:8901";
 
 export const endpoints = {
 
@@ -68,7 +68,7 @@ export const endpoints = {
     "user": `${SERVER_CONTEXT}/api/users`,
     "update-user": `${SERVER_CONTEXT}/api/user/update`,
     "update-avatar": `${SERVER_CONTEXT}/api/user/changeavatar`,
-    "cacphieucandanhgia" :  `${SERVER_CONTEXT}/api/benhnhan/danhgia`,
+    "cacphieucandanhgia": `${SERVER_CONTEXT}/api/benhnhan/danhgia`,
 
 
 

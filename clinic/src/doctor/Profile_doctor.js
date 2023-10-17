@@ -110,10 +110,12 @@ const Profile_doctor = () => {
                         <Col className="bs-name mt-4">
                             {load === true ? (
                                 <>
-                                    <h3 style={{ fontSize: 35 + "px" }} className="text-success mb-3">{doctorId.rankId.name} {doctorId?.name}</h3>
+                                    <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3"><i>{doctorId?.rankId?.name}</i></p>
+                                    <h3 style={{ fontSize: 35 + "px" }} className="text-success mb-3"> {doctorId?.name}</h3>
                                     <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3">Chuyên khoa : {doctorId?.khoaId.name}</p>
-                                    <p style={{ fontSize: 20 + "px", color: "darkgreen" }} className="mb-3">Giá khám : {(doctorId?.rankId.price).toLocaleString("vi-VN") + " VNĐ"}</p>
-                                    <p>(<i>{doctorId?.khoaId.describe}</i>)</p>
+                                    <p>(<i>{doctorId?.khoaId?.describe}</i>)</p>
+                                    <p style={{ fontSize: 20 + "px", color: "red" }} className="mb-3 mt-4">Giá khám : {(doctorId?.rankId?.price).toLocaleString("vi-VN") + " VNĐ"}</p>
+
                                 </>
 
                             ) : (
