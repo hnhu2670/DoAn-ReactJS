@@ -1,12 +1,15 @@
 import { addDoc, collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { UserAuth } from "../mychat/context/AuthContext";
 import { db } from "../firebase";
+import { MyUserContext } from "../App";
 
 const SendMessage = () => {
     const [value, setValue] = useState("");
     const { currentUser } = UserAuth();
-    const newCollectionRef = collection(db, "chat", currentUser.uid, "chatbox");
+    const [user] = useContext(MyUserContext);
+
+    // const newCollectionRef = collection(db, "chat", currentUser.uid, "chatbox");
     const handleSendMessage = async (e) => {
         e.preventDefault();
 
@@ -17,25 +20,26 @@ const SendMessage = () => {
 
         try {
             // let dbName = currentUser.displayName + " chat Như Lê Thị Huỳnh"
-            const { uid, displayName, photoURL } = currentUser;//lấy từ currentUser
+            const { id, username, avatar } = user;//lấy từ currentUser
+
             // lưu vào chat
             await addDoc(collection(db, "newchat"), {
                 text: value,
-                name: displayName,
-                avatar: photoURL,
+                name: username,
+                avatar: avatar,
                 createdAt: serverTimestamp(),
-                uid
+                uid: id
             })
             // lưu vào newchat có id trùng vs id của người đăng nhập
-            const docRef = doc(db, "newchat", currentUser.uid);
+            // const docRef = doc(db, "newchat", currentUser.uid);
 
-            await setDoc(docRef, {
-                text: value,
-                name: displayName,
-                avatar: photoURL,
-                createdAt: serverTimestamp(),
-                uid
-            });
+            // await setDoc(docRef, {
+            //     text: value,
+            //     name: displayName,
+            //     avatar: photoURL,
+            //     createdAt: serverTimestamp(),
+            //     uid
+            // });
 
             // await addDoc(collection(db, "chat"), {
             //     text: value,

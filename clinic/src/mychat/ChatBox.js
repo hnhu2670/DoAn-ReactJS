@@ -6,27 +6,27 @@ import { UserAuth } from "./context/AuthContext";
 
 
 const ChatBox = () => {
-    const { username } = useParams();
+    // const { username } = useParams();
     const messagesEndRef = useRef();
     const [messages, setMassages] = useState([]);
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
     };
-    const { currentUser } = UserAuth();
+    // const { currentUser } = UserAuth();
     useEffect(scrollToBottom, [messages])
 
     useEffect(() => {
         // const url_collection = "chat/" + currentUser.name
         // truy vấn (q) để truy xuất dữ liệu từ cơ sở dữ liệu Firestore của Firebase.
-        // const q = query(
-        //     // db name in firebase
-        //     collection(db, url_collection,),
-        //     orderBy("createdAt"),//sắp xếp theo thời gian 
-        //     limit(50),
-        // );
-        const docRef = doc(db, "newchat", currentUser.uid);
+        const q = query(
+            // db name in firebase
+            collection(db, "newchat",),
+            orderBy("createdAt"),//sắp xếp theo thời gian 
+            limit(50),
+        );
+        // const docRef = doc(db, "newchat", currentUser.uid);
 
-        const q = query(collection(db, docRef), orderBy("createdAt"), limit(50));
+        // const q = query(collection(db, docRef), orderBy("createdAt"), limit(50));
 
 
         // trả ra dữ liệu
