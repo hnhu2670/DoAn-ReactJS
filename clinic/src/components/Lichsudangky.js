@@ -58,7 +58,7 @@ const Lichsudangky = () => {
         {/* <h1>Lịch sử đăng ký khám của bạn</h1> */}
         <Form id='table-lichkham'>
           {appointments.length > 0 ? (
-            <Table striped bordered hover className='table-toathuoc'>
+            <Table striped bordered hover className='table-toathuoc text-center'>
               <thead>
                 <tr>
                   <th>Ngày khám</th>

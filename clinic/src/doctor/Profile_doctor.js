@@ -147,9 +147,9 @@ const Profile_doctor = () => {
                 </div>
                 <hr></hr>
 
-                <div>
+                <div >
                     <h2 className="m-3" style={{ fontSize: 35 + "px" }}>ĐÁNH GIÁ CỦA BỆNH NHÂN</h2>
-                    <div className="rating">
+                    <div className="rating" style={{ display: "inline-block" }}>
                         <input type="radio" id="star5" name="rating" value="5" disabled={true} checked={score == 5} />
                         <label htmlFor="star5"><span className="star"></span></label>
                         <input type="radio" id="star4" name="rating" value="4" disabled={true} checked={score == 4} />
@@ -162,6 +162,9 @@ const Profile_doctor = () => {
                         <label htmlFor="star1"><span className="star"></span></label>
                     </div>
 
+                </div>
+
+                <div>
                     <ListGroup className="my-rating-list">
                         {rating.map((c, index) => {
                             const uniqueId = `star${index + 6}`; // Tạo id duy nhất bắt đầu từ 'star6'
@@ -175,7 +178,7 @@ const Profile_doctor = () => {
                                             </li>
 
                                             <li>
-                                                <div className="rating">
+                                                <div className="rating" style={{ display: "inline-block" }}>
                                                     <input type="radio" id={uniqueId} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 5} />
                                                     <label htmlFor={uniqueId}><span className="star"></span></label>
                                                     <input type="radio" id={`star${index + 7}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 4} />
@@ -187,6 +190,7 @@ const Profile_doctor = () => {
                                                     <input type="radio" id={`star${index + 10}`} name={`rating_${index}`} value={c.point} disabled={true} checked={c.point === 1} />
                                                     <label htmlFor={`star${index + 10}`}><span className="star"></span></label>
                                                 </div>
+
                                             </li>
                                             <li>{c.value}</li>
                                         </ul>
@@ -195,7 +199,6 @@ const Profile_doctor = () => {
                             );
                         })}
                     </ListGroup>
-
                 </div>
             </section>
         </Container >

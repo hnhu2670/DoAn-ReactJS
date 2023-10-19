@@ -29,7 +29,7 @@ const ThongBao = () => {
             <section>
                 <h1 className="text-center text-login top-text">YÊU CẦU THANH TOÁN HÓA ĐƠN</h1>
 
-                {phieucanthanhtoan.map((t) => (<>
+                {/* {phieucanthanhtoan.map((t) => (<>
                     <Row className='mb-4'>
                         Phiếu có mã là {t.id} đã khám cho bệnh nhân {t.sickpersonId.name} hoàn tất
                         <Link to={`/thanhtoan/${t.id}`} className='thanhtoan'>Nhấn </Link> để thanh toán...
@@ -38,7 +38,20 @@ const ThongBao = () => {
                 </>
 
 
-                ))}
+                ))} */}
+                {phieucanthanhtoan.length > 0 ? (
+                    phieucanthanhtoan.map((t) => (
+                        <>
+                            <Row className='mb-4'>
+                                Phiếu có mã là {t.id} đã khám cho bệnh nhân {t.sickpersonId.name} hoàn tất
+                                <Link to={`/thanhtoan/${t.id}`} className='thanhtoan'>Nhấn </Link> để thanh toán...
+                            </Row>
+                            <hr />
+                        </>
+                    ))
+                ) : (
+                    <Alert className='w-90 mr-10 ml-10 text-danger' style={{ border: "1px solid red" }}>Không có hóa đơn cần thanh toán</Alert>
+                )}
             </section>
 
 

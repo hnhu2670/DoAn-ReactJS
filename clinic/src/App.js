@@ -78,6 +78,7 @@ function App() {
             {/* <Route path="/allchat" element={<AllChatBox />} />
             <Route path="/chat/:username" element={<NewChat />} />
             <Route path="/thongbaodanhgia" element={<ThongBaoDG />} /> */}
+            <Route path="/thongbaodanhgia" element={<ThongBaoDG />} />
             <Route path="/allchat" element={<AllChat />} />
           </Routes>
 

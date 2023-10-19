@@ -25,7 +25,7 @@ const DatLichKham = () => {
     const [minDate, setMinDate] = useState("");
     // const [minTime, setMinTime] = useState("");
     // const [maxTime, setMaxTime] = useState("");
-// Tính toán ngày tối thiểu (hiện tại)
+    // Tính toán ngày tối thiểu (hiện tại)
     const currentDate = new Date().toISOString().split("T")[0];
     const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
     console.log(currentTime)
@@ -34,7 +34,7 @@ const DatLichKham = () => {
         setMinDate(currentDate);
         // setMinTime(currentTime);
         // setMaxTime(lastTime);
-      }, []);
+    }, []);
 
     const change = (evt, field) => {
         setDatLich((current) => {
@@ -42,22 +42,22 @@ const DatLichKham = () => {
         });
     }
     const validateFields = () => {
-        const Regex = /^[A-Za-z0-9\s]+$/;
-    
-        if (!Regex.test(appointment.motabenh)) {
-          alert("Vui lòng nhập mô tả hợp lệ!");
-          return false;
-        }
-        if(appointment.appointmentDate == currentDate){
-            if(appointment.appointmentTime < currentTime ){
+        // const Regex = /^[A-Za-z0-9\s]+$/;
+
+        // if (!Regex.test(appointment.motabenh)) {
+        //   alert("Vui lòng nhập mô tả hợp lệ!");
+        //   return false;
+        // }
+        if (appointment.appointmentDate == currentDate) {
+            if (appointment.appointmentTime < currentTime) {
                 alert("Vui lòng chọn thời gian phù hợp !");
                 return false;
             }
         }
-        
-    
+
+
         return true;
-      };
+    };
 
 
     const dangky = (evt) => {
@@ -86,12 +86,12 @@ const DatLichKham = () => {
             }
 
         }
-        if(validateFields()){
+        if (validateFields()) {
             process();
             // alert("hop le")
         }
     }
-   
+
     return (
         <>
 
@@ -168,9 +168,9 @@ const DatLichKham = () => {
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Ngày khám</Form.Label>
                                                 <Form.Control type="date" value={appointment.appointmentDate}
-                                                    onChange={e => change(e, "appointmentDate")} required 
-                                                    min={minDate}/>
-                                                    
+                                                    onChange={e => change(e, "appointmentDate")} required
+                                                    min={minDate} />
+
                                             </Form.Group>
                                         </Col>
                                         <Col>

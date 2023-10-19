@@ -18,58 +18,58 @@ const DanhGia = () => {
         comment: "",
     });
     const nav = useNavigate()
-    function changeDiem() {
-        let diem = 0;
-        let bstar = 0;
-        let gstar = 0;
+    // function changeDiem() {
+    //     let diem = 0;
+    //     let bstar = 0;
+    //     let gstar = 0;
 
-        if (diem === "5") {
-            bstar = 5;
-            gstar = 0;
-        }
-        else {
-            if (diem === "4") {
-                bstar = 4;
-                gstar = 1;
-            }
-            else {
-                if (diem === "3") {
-                    bstar = 3;
-                    gstar = 2;
-                }
-                else {
-                    if (diem === "2") {
-                        bstar = 2;
-                        gstar = 3;
-                    }
-                    else {
-                        if (diem === "1") {
-                            bstar = 1;
-                            gstar = 4;
-                        }
-                        else {
-                            if (diem === "0") {
-                                bstar = 0;
-                                gstar = 5;
-                            }
-                            else return (<>
-                                <p>Diem so khong co trong muc danh gia</p>
-                            </>)
-                        }
-                    }
-                }
-            }
-        }
+    //     if (diem === "5") {
+    //         bstar = 5;
+    //         gstar = 0;
+    //     }
+    //     else {
+    //         if (diem === "4") {
+    //             bstar = 4;
+    //             gstar = 1;
+    //         }
+    //         else {
+    //             if (diem === "3") {
+    //                 bstar = 3;
+    //                 gstar = 2;
+    //             }
+    //             else {
+    //                 if (diem === "2") {
+    //                     bstar = 2;
+    //                     gstar = 3;
+    //                 }
+    //                 else {
+    //                     if (diem === "1") {
+    //                         bstar = 1;
+    //                         gstar = 4;
+    //                     }
+    //                     else {
+    //                         if (diem === "0") {
+    //                             bstar = 0;
+    //                             gstar = 5;
+    //                         }
+    //                         else return (<>
+    //                             <p>Diem so khong co trong muc danh gia</p>
+    //                         </>)
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        for (let i = 0; i < bstar; i++) {
-            render(<>
-                <Row>
-                    <img src={ImgStar} />
-                </Row>
+    //     for (let i = 0; i < bstar; i++) {
+    //         render(<>
+    //             <Row>
+    //                 <img src={ImgStar} />
+    //             </Row>
 
-            </>)
-        }
-    }
+    //         </>)
+    //     }
+    // }
     const loadbacsi = async (id) => {
         try {
             let { data } = await apis.get(endpoints['phieukham'](id));
@@ -80,17 +80,6 @@ const DanhGia = () => {
         }
     };
     useEffect(() => {
-        // const loadbacsi = async () => {
-        //     try {
-        //         let { data } = await apis.get(endpoints['pro-doctor'](id));
-        //         setbacsi(data)
-        //         console.log(data);
-        //     } catch (err) {
-        //         console.log(err);
-        //     }
-        // };
-
-        // loadbacsi()
         if (id) {
             loadbacsi(id)
         }
@@ -148,8 +137,8 @@ const DanhGia = () => {
 
                         <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img>
                         {/* <h1>{bacsi.name}</h1> */}
-                        <img src={phieukham?.doctorId.avatar}></img>
-                        <h1>{phieukham?.doctorId.name}</h1>
+                        <img src={phieukham.doctorId?.avatar}></img>
+                        <h1>{phieukham.doctorId?.name}</h1>
 
                         <img src={phieukham.doctorId?.avatar}></img>
                         <h1>{phieukham.doctorId?.name}</h1>
@@ -169,17 +158,20 @@ const DanhGia = () => {
                         </Row>
 
                         <Row>
-                            <div class="rating">
-                                <input type="radio" id="star5" name="rating" value="5" onChange={e => change(e, "point")} />
-                                <label for="star5"></label>
-                                <input type="radio" id="star4" name="rating" value="4" onChange={e => change(e, "point")} />
-                                <label for="star4"></label>
-                                <input type="radio" id="star3" name="rating" value="3" onChange={e => change(e, "point")} />
-                                <label for="star3"></label>
-                                <input type="radio" id="star2" name="rating" value="2" onChange={e => change(e, "point")} />
-                                <label for="star2"></label>
-                                <input type="radio" id="star1" name="rating" value="1" onChange={e => change(e, "point")} />
-                                <label for="star1"></label>
+                            <div class="rating" style={{ display: "block" }}>
+                                <div>
+                                    <input type="radio" id="star5" name="rating" value="5" onChange={e => change(e, "point")} />
+                                    <label for="star5"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" onChange={e => change(e, "point")} />
+                                    <label for="star4"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" onChange={e => change(e, "point")} />
+                                    <label for="star3"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" onChange={e => change(e, "point")} />
+                                    <label for="star2"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" onChange={e => change(e, "point")} />
+                                    <label for="star1"></label>
+                                </div>
+
                             </div>
                         </Row>
                         <Row style={{ width: 95 + "%" }}>
