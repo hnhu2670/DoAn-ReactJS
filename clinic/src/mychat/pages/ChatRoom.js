@@ -26,11 +26,11 @@ const ChatRoom = (rep) => {
     return (
         <>
             < div >
-                <Row style={{ backgroundColor: "gray" }} className="py-2">
-                    <Col sm={2}>
-                        <Image src={doituongchat.avatar} style={{ width: "70px", height: "70px", borderRadius: "50%" }} />
+                <Row style={{ borderBottom: " 1px solid lightgray" }} className="py-2">
+                    <Col sm={1}>
+                        <Image src={doituongchat.avatar} style={{ width: "45px", height: "45px", borderRadius: "50%" }} />
                     </Col>
-                    <Col style={{ marginTop: "3%", fontSize: "25px" }}>
+                    <Col style={{ marginTop: "1%", fontSize: "18px" }}>
                         {doituongchat.name}
                     </Col>
                 </Row>

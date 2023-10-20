@@ -2,7 +2,7 @@ import 'daisyui/dist/full.css';
 import { useContext } from 'react';
 import { MyUserContext } from '../App';
 import moment from 'moment';
-
+import "./chat.css"
 
 const Message = (props) => {
     // const { currentUser } = UserAuth();
@@ -20,9 +20,9 @@ const Message = (props) => {
                                 <img src={message.avatar} />
                             </div>
                         </div>
-                        <div className="chat-header">
+                        <div className="chat-header mb-2">
                             {message.name}
-                            <time className="text-xs opacity-50">
+                            <time className="text-xs opacity-50 ml-3">
                                 {new Date(message.createdAt.seconds * 1000 + message.createdAt.nanoseconds / 1000000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </time>
                         </div>
@@ -33,39 +33,7 @@ const Message = (props) => {
                     </div>
                 </div>
 
-                {/* <div>
-                    <div className="chat chat-start">
-                        <div className="chat-image avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                            </div>
-                        </div>
-                        <div className="chat-header">
-                            Obi-Wan Kenobi
-                            <time className="text-xs opacity-50">12:45</time>
-                        </div>
-                        <div className="chat-bubble">You were the Chosen One!</div>
-                        <div className="chat-footer opacity-50">
-                            Delivered
-                        </div>
-                    </div>
-                    <div className="chat chat-end">
-                        <div className="chat-image avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                            </div>
-                        </div>
-                        <div className="chat-header">
-                            Anakin
-                            <time className="text-xs opacity-50">12:46</time>
-                        </div>
-                        <div className="chat-bubble">I hate you!</div>
-                        <div className="chat-footer opacity-50">
-                            Seen at 12:46
-                        </div>
-                    </div>
 
-                </div> */}
             </section>
 
         </>

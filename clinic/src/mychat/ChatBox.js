@@ -48,7 +48,7 @@ const ChatBox = (props) => {
     // console.log("user", user.username)
     // console.log("rep", rep)
     return (
-        <div className="containerWrap" style={{ height: "65vh", overflowY: "scroll" }}>
+        <div className="containerWrap px-3" style={{ height: "50vh", overflowY: "scroll" }}>
 
             {/* chat room */}
             {/* {messages.map((message) => (

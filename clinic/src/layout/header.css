@@ -22,3 +22,7 @@ button.btn-loginuser {
         border: none;
     }
 }
+
+.menu-active {
+    border-bottom: 2px solid green;
+}

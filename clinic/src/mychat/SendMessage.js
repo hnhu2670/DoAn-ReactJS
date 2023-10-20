@@ -66,7 +66,7 @@ const SendMessage = (props) => {
     }
 
     return (
-        <div className="bottom-0 w-full mt-2 mb-4">
+        <div className="bottom-0 w-full mt-3 mb-3 py-3" style={{ borderTop: " 1px solid lightgray" }}>
             <form onSubmit={handleSendMessage} className="px-2 containerWrap flex">
                 <input value={value} onChange={e => setValue(e.target.value)}
                     className="input focus:outline-none bg-gray-100 rounded-r-none"

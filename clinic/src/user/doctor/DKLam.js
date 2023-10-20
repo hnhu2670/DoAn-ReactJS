@@ -245,7 +245,7 @@ const DKLam = () => {
                     loadlichdangky3()
                     loadlichlamdangky()
                     setSuccess(true)
-                    
+
                 } catch (err) {
                     console.log(err);
                     <Alert>Hủy lịch thất bại</Alert>
@@ -368,7 +368,7 @@ const DKLam = () => {
                                                 onChange={(e) => change(e, "thu4ca1", nextWeekDates[2])}
                                             />
                                         )}
-                                        
+
                                     </td>
                                     <td title={moment(nextWeekDates[3]).format('DD/MM/YYYY')}>
                                         {lichdangky1.includes(nextWeekDates[3]) ? (
@@ -657,7 +657,7 @@ const DKLam = () => {
                                             <td>{t.shiftId.start}</td>
                                             <td>{t.shiftId.end}</td>
                                             <td className="bthuy">
-                                                <Button onClick={() => huy(t.id)}>❌</Button>
+                                                <Button className="btn-normal" onClick={() => huy(t.id)}>❌</Button>
                                             </td>
 
                                         </tr>

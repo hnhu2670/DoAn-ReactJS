@@ -18,7 +18,7 @@ const Home = () => {
                     </div>
                 </div>
             </nav>
-            <Container>
+            <Container >
                 <Row className='home-top text-center'>
                     <div className='mt-5'>
                         <h1>CHÀO MỪNG ĐẾN VỚI PISCES </h1>
@@ -49,8 +49,14 @@ const Home = () => {
 
                     </Col>
                 </Row>
-                <Row>
-                    {/* <Map /> */}
+                <Row >
+                    <Col>
+                        <Map />
+                    </Col>
+                    <Col>
+                        <h3 className='home-title text-center' style={{ margin: "20% 0 0 10%" }}>Hãy đến với chúng tôi ngay hôm nay</h3>
+
+                    </Col>
                 </Row>
             </Container>
         </>

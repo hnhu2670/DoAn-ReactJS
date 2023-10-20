@@ -31,6 +31,7 @@ const LichKham = () => {
 
     const today = moment(new Date()).format('DD/MM/YYYY')
     console.log(today)
+    appointments.sort((a, b) => new Date(a.appointmentDate) - new Date(b.appointmentDate));
     return (
 
         <Container>
@@ -64,6 +65,7 @@ const LichKham = () => {
                                         <td> {moment(appointment.appointmentDate).format('DD/MM/YYYY')}</td>
                                         <td>{moment(appointment.appointmentDate).format('HH:mm')}</td>
                                         <td style={{ fontStyle: "italic" }}>{appointment.prescriptionId.conclusion}</td>
+
                                         {today != moment(appointment.appointmentDate).format('DD/MM/YYYY') ? (
                                             <td>
                                                 Chưa đến lịch khám

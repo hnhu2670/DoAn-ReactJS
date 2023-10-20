@@ -80,8 +80,8 @@ const Doctor = () => {
                                     <div className="doctors-img">
                                         <img src={d.avatar} />
                                     </div>
-                                    <div>
-                                        <h2 className="mt-5 mb-3" style={{ fontSize: 1.3 + "rem", fontWeight: "bold" }}>{d.name}</h2>
+                                    <div >
+                                        <h2 className="mb-3" style={{ fontSize: 1.3 + "rem", fontWeight: "bold", marginTop: "4.5rem" }}>{d.name}</h2>
                                         <p><i>{d.khoaId.name}</i></p>
                                     </div>
                                     <div className="mt-3 mb-3">

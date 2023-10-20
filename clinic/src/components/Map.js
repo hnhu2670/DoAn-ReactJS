@@ -1,18 +1,25 @@
 import React from 'react'
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import GoogleMapReact from 'google-map-react';
 
-const Map = () => {
+export default function Map() {
+    const defaultProps = {
+        center: {
+            lat: 60,
+            lng: 77.01502627
+        },
+        zoom: 11
+    };
+
     return (
-        <section>
-            <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: '400px' }}>
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution="Map data © OpenStreetMap contributors"
-                />
-                <Marker position={[51.505, -0.09]} />
-            </MapContainer>
-        </section>
-    )
-}
+        // Important! Always set the container height explicitly
+        <div style={{ height: '50vh', width: '100%' }}>
+            <GoogleMapReact
+                bootstrapURLKeys={{ key: "AIzaSyB-M500zF9hEI3OoOPyK_dVHfWDyZcx5fI" }}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+            >
 
-export default Map
+            </GoogleMapReact>
+        </div>
+    );
+}

@@ -26,13 +26,13 @@ const MyProfile = () => {
         // "avatar": current_user.avatar
 
     })
- 
+
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-      };
+    };
 
     const change = (evt, field) => {
         setUser(current => {
@@ -56,24 +56,24 @@ const MyProfile = () => {
     const validateFields = () => {
         const nameRegex = /^[\p{L}\s]+$/u;
         if (!nameRegex.test(user.name)) {
-          alert("Vui lòng chỉ nhập chữ cái và dấu cách cho trường tên...");
-          return false;
+            alert("Vui lòng chỉ nhập chữ cái và dấu cách cho trường tên...");
+            return false;
         }
-        
+
         const addressRegex = /^[A-Za-z0-9\s]+$/;
         if (!addressRegex.test(user.address)) {
-          alert("Vui lòng chỉ nhập chữ cái, số và dấu cách cho trường địa chỉ...");
-          return false;
+            alert("Vui lòng chỉ nhập chữ cái, số và dấu cách cho trường địa chỉ...");
+            return false;
         }
         const phoneNumberRegex = /^\d{10}$/;
         if (!phoneNumberRegex.test(user.phone)) {
-          alert("Vui lòng nhập lại số điện thoại của bạn...");
-          return false;
+            alert("Vui lòng nhập lại số điện thoại của bạn...");
+            return false;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(user.email)) {
-          alert("Vui lòng nhập lại địa chỉ email của bạn...");
-          return false;
+            alert("Vui lòng nhập lại địa chỉ email của bạn...");
+            return false;
         }
 
         const currentDate = new Date();
@@ -81,16 +81,16 @@ const MyProfile = () => {
         const age = currentDate.getFullYear() - dob.getFullYear();
         const monthDiff = currentDate.getMonth() - dob.getMonth();
         if (monthDiff < 0 || (monthDiff === 0 && currentDate.getDate() < dob.getDate())) {
-          age--;
+            age--;
         }
-      
+
         if (age < 16) {
-            alert("Người dùng đang "+age+ " tuổi (người dùng phải từ 16 tuổi trở lên)!!!");
+            alert("Người dùng đang " + age + " tuổi (người dùng phải từ 16 tuổi trở lên)!!!");
             return false;
         }
         return true;
-      };
-    
+    };
+
     const updateUser = (evt) => {
         console.log(avatar.current.files)
         evt.preventDefault();
@@ -100,7 +100,7 @@ const MyProfile = () => {
                 let form = new FormData();
                 // let avatar = new FormData();
                 form.append("dod", user.dod);
-                if(avatar.current.files.length > 0){
+                if (avatar.current.files.length > 0) {
                     console.log("do thay anh")
                     form.append("avatar", avatar.current.files[0]);
                     let thayanh = await authApi().post(endpoints['update-avatar'], form);
@@ -129,10 +129,10 @@ const MyProfile = () => {
         }
         if (validateFields()) {
             process();
-          }
-        
+        }
+
     }
-    
+
     return (<>
         <Container>
             <section id="section-profile">
@@ -158,6 +158,7 @@ const MyProfile = () => {
                                         <Form.Label>Name</Form.Label>
                                         <Form.Control type="text" value={user.name}
                                             onChange={(e) => change(e, "name")}
+
                                         />
                                     </Form.Group>
                                 </Row>

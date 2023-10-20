@@ -12,9 +12,9 @@ const ChatApp = () => {
     console.log("rep:", rep)
     return (
         <>
-            <Container className='mt-3'>
+            <Container className='mt-3 mb-3' style={{ boxShadow: " 0 3px 6px rgba(0,0,0,0.16)" }}>
                 <Row>
-                    <Col sm={4} style={{ borderRight: "1.5px solid black" }}>
+                    <Col sm={4} style={{ borderRight: "1.5px solid green" }}>
                         <AllChat ClickRep={ClickRep} />
                     </Col>
                     <Col className='p-0'>
