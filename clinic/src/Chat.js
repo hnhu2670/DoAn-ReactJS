@@ -11,7 +11,7 @@ function Chat() {
             <Routes>
                 <Route path="/login-google" exact element={< Login />} />
                 <Route
-                    path="/chat"
+                    path="/chat/:rep"
                     element={
                         <ChatRoom />
                     }

@@ -1,15 +1,37 @@
-import { addDoc, collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useContext, useState } from "react"
+import { addDoc, collection, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react"
 import { UserAuth } from "../mychat/context/AuthContext";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { MyUserContext } from "../App";
+import apis, { endpoints } from "../configs/apis";
 
-const SendMessage = () => {
+const SendMessage = (props) => {
+    const { rep } = props;
     const [value, setValue] = useState("");
-    const { currentUser } = UserAuth();
+    // const { currentUser } = UserAuth();
     const [user] = useContext(MyUserContext);
+    const [doituongchat, setdoituongchat] = useState([]);
 
+    const laynguoichat = async (rep) => {
+        try {
+            let { data } = await apis.get(endpoints.laynguoidung(rep));
+            setdoituongchat(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        if (rep) {
+            laynguoichat(rep);
+        }
+    }, [rep]);
+    const urlnguoigui = "ClinnitChat"
+    // const urlnguoigui = user.username+"-"+doituongchat.username;
+    // const urlnguoinhan = doituongchat.username+"-"+user.username;
     // const newCollectionRef = collection(db, "chat", currentUser.uid, "chatbox");
+    console.log(doituongchat)
+
     const handleSendMessage = async (e) => {
         e.preventDefault();
 
@@ -19,35 +41,22 @@ const SendMessage = () => {
         }
 
         try {
-            // let dbName = currentUser.displayName + " chat Như Lê Thị Huỳnh"
-            const { id, username, avatar } = user;//lấy từ currentUser
-
+            const { id, username, avatar,name } = user;
             // lưu vào chat
-            await addDoc(collection(db, "newchat"), {
+            await addDoc(collection(db, urlnguoigui), {
                 text: value,
-                name: username,
+                name: name,
+                username: username,
                 avatar: avatar,
                 createdAt: serverTimestamp(),
-                uid: id
+                uid: id,
+                rep : doituongchat.username,
+                repavatar : doituongchat.avatar
+                // rep: { 
+                //     username: doituongchat.username,
+                //     avatar: doituongchat.avatar
+                //   },
             })
-            // lưu vào newchat có id trùng vs id của người đăng nhập
-            // const docRef = doc(db, "newchat", currentUser.uid);
-
-            // await setDoc(docRef, {
-            //     text: value,
-            //     name: displayName,
-            //     avatar: photoURL,
-            //     createdAt: serverTimestamp(),
-            //     uid
-            // });
-
-            // await addDoc(collection(db, "chat"), {
-            //     text: value,
-            //     name: displayName,
-            //     avatar: photoURL,
-            //     createdAt: serverTimestamp(),
-            //     uid
-            // })
         } catch (error) {
             console.log(error);
         }
