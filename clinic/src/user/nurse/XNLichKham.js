@@ -17,15 +17,15 @@ const XNKham = () => {
     const [idPhieu, setidPhieu] = useState(null);
     const [phieukham, setPhieuKham] = useState(null);
     const [yta] = useContext(MyUserContext)
-    const [thongtinmail , setThongTinMail] = useState({
-        tenbenhnhan:"",
-        ngaykham:"",
-        giokham:"",
-        basi:"",
-        khoa:"",
-        emaill:""
+    const [thongtinmail, setThongTinMail] = useState({
+        tenbenhnhan: "",
+        ngaykham: "",
+        giokham: "",
+        basi: "",
+        khoa: "",
+        emaill: ""
     })
-    const[idbacsi,setIdbacsi]=useState(null);
+    const [idbacsi, setIdbacsi] = useState(null);
 
 
 
@@ -126,7 +126,7 @@ const XNKham = () => {
                 formData.append("IdDoctor", idbacsi);
                 // console.log(formData.data);
                 console.log("thanh cong do");
-                let res = await authApi().post(endpoints["xacnhanbacsi"](id), formData);                
+                let res = await authApi().post(endpoints["xacnhanbacsi"](id), formData);
                 if (res.data == true) {
                     alert(`Gửi mail thành công`);
                     // window.confirm("test")
@@ -136,18 +136,22 @@ const XNKham = () => {
                     // window.confirm("test")
                     const templateId = 'template_6c5dkwu';
                     const serviceID = 'service_clinic2002';
-                    sendFeedback(serviceID, templateId, { tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có lịch hẹn khám tại phòng mạch Piscel vào ngày "+thongtinmail.ngaykham+" vào lúc " + thongtinmail.giokham
-                    ,noidung2:"Vui lòng đến trước giờ khám khoảng 15 - 30 phút để chúng tôi có thể phục vụ bạn một cách tốt nhất."
-                    ,noidung3:"Bác sĩ của bạn là"+thongtinmail.basi+" chuyên "+thongtinmail.khoa, reply_to: thongtinmail.emaill})
+                    sendFeedback(serviceID, templateId, {
+                        tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có lịch hẹn khám tại phòng mạch Piscel vào ngày " + thongtinmail.ngaykham + " vào lúc " + thongtinmail.giokham
+                        , noidung2: "Vui lòng đến trước giờ khám khoảng 15 - 30 phút để chúng tôi có thể phục vụ bạn một cách tốt nhất."
+                        , noidung3: "Bác sĩ của bạn là" + thongtinmail.basi + " chuyên " + thongtinmail.khoa, reply_to: thongtinmail.emaill
+                    })
                     // console.log(phieukham);
                 }
                 if (res.data == false) {
-                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân vì quá số lượng bệnh nhân khám trong ngày `+ thongtinmail.ngaykham); 
+                    alert(`Gửi mail đăng ký lịch thất bại đến bệnh nhân vì quá số lượng bệnh nhân khám trong ngày ` + thongtinmail.ngaykham);
                     const templateId = 'template_6c5dkwu';
                     const serviceID = 'service_clinic2002';
-                    sendFeedback(serviceID, templateId, { tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có đặt lịch khám tại phòng mạch Piscel vào ngày "+thongtinmail.ngaykham+" vào lúc " + thongtinmail.giokham
-                    , noidung2: "Tuy nhiên phòng mạch của chúng tôi đã đạt đến số lượng lịch khám vào ngày đó", noidung3: "Hi vọng bạn có thể đặt lịch vào một ngày khác", reply_to: thongtinmail.emaill })
-                    if(window.confirm("Có muốn xóa lịch khám của "+thongtinmail.tenbenhnhan+" không ?") === true){
+                    sendFeedback(serviceID, templateId, {
+                        tenbenhnhan: thongtinmail.tenbenhnhan, noidung1: "Bạn có đặt lịch khám tại phòng mạch Piscel vào ngày " + thongtinmail.ngaykham + " vào lúc " + thongtinmail.giokham
+                        , noidung2: "Tuy nhiên phòng mạch của chúng tôi đã đạt đến số lượng lịch khám vào ngày đó", noidung3: "Hi vọng bạn có thể đặt lịch vào một ngày khác", reply_to: thongtinmail.emaill
+                    })
+                    if (window.confirm("Có muốn xóa lịch khám của " + thongtinmail.tenbenhnhan + " không ?") === true) {
                         let { data } = await authApi().delete(endpoints.huylich(id));
                         console.log("xoa thanh cong")
                     }
@@ -164,18 +168,18 @@ const XNKham = () => {
 
     const handleSelectDoctor = (event) => {
         const selectedValue = event.target.value;
-        const [selectedDoctorId, selectedDoctorName, selectedKhoaName, selectedTenBenhNhan, selectedNgayKhamInMillis,email] = selectedValue.split(",");
+        const [selectedDoctorId, selectedDoctorName, selectedKhoaName, selectedTenBenhNhan, selectedNgayKhamInMillis, email] = selectedValue.split(",");
         setIdbacsi(selectedDoctorId);
         let selectedNgayKham = moment.unix(selectedNgayKhamInMillis / 1000);
         setThongTinMail(prevState => ({
-          tenbenhnhan: selectedTenBenhNhan,
-          ngaykham: selectedNgayKham.format("DD/MM/yyyy"),
-          giokham: selectedNgayKham.format("HH:mm"),
-          basi: selectedDoctorName,
-          khoa: selectedKhoaName,
-          emaill:email
+            tenbenhnhan: selectedTenBenhNhan,
+            ngaykham: selectedNgayKham.format("DD/MM/yyyy"),
+            giokham: selectedNgayKham.format("HH:mm"),
+            basi: selectedDoctorName,
+            khoa: selectedKhoaName,
+            emaill: email
         }));
-      };
+    };
 
     console.log(bacsi)
     // console.log(idPhieu)
@@ -195,8 +199,8 @@ const XNKham = () => {
                             <th>Mã bệnh nhân</th>
                             <th>Ngày đăng ký</th>
                             <th>Trạng thái</th>
-                            <th>Ghi chú</th>
-                            <th>🩺</th>
+                            <th>Triệu chứng</th>
+                            <th>Chọn bác sĩ khám</th>
                         </tr>
                     </thead>
                     <tbody className="scroll-table">
@@ -209,7 +213,12 @@ const XNKham = () => {
                                 <td>{d.status === 0 ? "Chưa xác nhận" : "Đã xác nhận"}</td>
                                 {/* <td>{phieubenh[index]?.id}-{phieubenh[index]?.conclusion}</td> */}
                                 <td>{phieubenh[index]?.conclusion}</td>
-                                <td><Button onClick={() => handlePhieuClick(d.id)} className="btn-click">Khám</Button></td>
+                                <td>
+                                    <Button onClick={() => handlePhieuClick(d.id)}
+                                        className="btn-click" style={{ color: "white" }}>Chọn
+                                    </Button>
+                                </td>
+
                             </tr>
                         ))}
                     </tbody>
@@ -236,17 +245,17 @@ const XNKham = () => {
                     <Row className="mb-3">
                         <Col>Chọn bác sĩ:</Col>
                         <Form.Control as="select" required onClick={handleSelectDoctor}>
-                        {bacsi.length > 0 ? (
-                            bacsi.map((t) => (
-                            <option key={t.id} value={`${t.id},${t.name},${t.khoaId.name},${phieukham?.sickpersonId.name},${phieukham?.appointmentDate},${phieukham?.sickpersonId.emaill}`}>
-                                {t.name} - {t.khoaId.name}
-                            </option>
-                            ))
-                        ) : (
-                            <option>Không có bác sĩ làm ngày {new Date(phieukham?.appointmentDate).toLocaleDateString("vi-VN")} !!!</option>
-                        )}
+                            {bacsi.length > 0 ? (
+                                bacsi.map((t) => (
+                                    <option key={t.id} value={`${t.id},${t.name},${t.khoaId.name},${phieukham?.sickpersonId.name},${phieukham?.appointmentDate},${phieukham?.sickpersonId.emaill}`}>
+                                        {t.name} - {t.khoaId.name}
+                                    </option>
+                                ))
+                            ) : (
+                                <option>Không có bác sĩ làm ngày {new Date(phieukham?.appointmentDate).toLocaleDateString("vi-VN")} !!!</option>
+                            )}
                         </Form.Control>
-                        </Row>
+                    </Row>
                     <Row>
                         <Button className="typebutton" onClick={() => xatnhanlichkham(phieukham?.id)}>XÁC NHẬN </Button>
                     </Row>

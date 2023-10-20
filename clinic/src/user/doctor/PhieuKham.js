@@ -90,11 +90,11 @@ const PhieuKham = () => {
         }
 
         if (loaidichvu.chuandoan.trim() === "") {
-           alert("Hãy nhập kết luận trước khi cấp thuốc...")
-          }else{
+            alert("Hãy nhập kết luận trước khi cấp thuốc...")
+        } else {
             process();
-          }
-        
+        }
+
     }
 
 
@@ -243,7 +243,7 @@ const PhieuKham = () => {
                 </div>
                 <div>
                     <Form.Group className="m-3">
-                        <Link className="btn-click" type="submit" onClick={khamBenh} >CẤP THUỐC</Link>
+                        <Link className="typebutton" type="submit" onClick={khamBenh} >CẤP THUỐC</Link>
                     </Form.Group>
                 </div>
             </section>

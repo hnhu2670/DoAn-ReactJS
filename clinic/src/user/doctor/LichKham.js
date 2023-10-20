@@ -10,6 +10,7 @@ import "../../resources/css/style.css"
 
 const LichKham = () => {
 
+
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -18,7 +19,7 @@ const LichKham = () => {
                 let { data } = await authApi().get(endpoints['lichkham']);
                 setAppointments(data)
                 setLoading(true)
-                console.log(data);
+                // console.log(data);
 
             } catch (err) {
                 console.log(err);
@@ -27,6 +28,9 @@ const LichKham = () => {
         };
         loadlichkham();
     }, []);
+
+    const today = moment(new Date()).format('DD/MM/YYYY')
+    console.log(today)
     return (
 
         <Container>
@@ -42,7 +46,7 @@ const LichKham = () => {
                                 <th>Ngày khám</th>
                                 <th>Giờ khám</th>
                                 <th>Triệu chứng</th>
-                                <th>Ghi chú</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,19 +55,27 @@ const LichKham = () => {
                                     <tr key={appointment.id}>
                                         <td>{appointment.id}</td>
                                         <td>{appointment.sickpersonId.id}</td>
-                                        <td><Link className='text-success'
+                                        <td className='text-left'><Link className='text-success'
                                             to={`${appointment.sickpersonId.id}`}
                                             title="Xem lịch sử khám của bệnh nhân"
                                         >
                                             {appointment.sickpersonId.name} </Link></td>
+                                        {/* cần sắp xếp lại theo ngày hẹn */}
                                         <td> {moment(appointment.appointmentDate).format('DD/MM/YYYY')}</td>
                                         <td>{moment(appointment.appointmentDate).format('HH:mm')}</td>
-                                        <td>{appointment.prescriptionId.conclusion}</td>
-                                        {/* chuyển qua trang phiếu khám => id phiếu khám */}
-                                        <td><Link className='text-danger' to={`khambenh/${appointment.id}/phieukham`}
-                                            id={appointment.id}>
-                                            Khám bệnh 🩺
-                                        </Link></td>
+                                        <td style={{ fontStyle: "italic" }}>{appointment.prescriptionId.conclusion}</td>
+                                        {today != moment(appointment.appointmentDate).format('DD/MM/YYYY') ? (
+                                            <td>
+                                                Chưa đến lịch khám
+                                            </td>
+                                        ) : (
+                                            <td>
+                                                <Link className='text-danger' to={`khambenh/${appointment.id}/phieukham`} id={appointment.id}>
+                                                    Khám bệnh 🩺
+                                                </Link>
+                                            </td>
+                                        )}
+
                                     </tr>
                                 ))}
                             </>) : (<>

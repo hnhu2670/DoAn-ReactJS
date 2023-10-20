@@ -104,7 +104,7 @@ const KeThuoc = () => {
                 let res = await apis.post(endpoints["kethuoc"], formData);
                 console.log("thanh cong post");
                 if (res.status === 200) {
-                    alert("Thêm "+themthuoc.tenthuoc+" thành công")
+                    alert("Thêm " + themthuoc.tenthuoc + " thành công")
                     let formAdd = document.getElementById("row-addThuoc")
                     setThemThuoc({
                         idThuoc: '',
@@ -216,8 +216,8 @@ const KeThuoc = () => {
         }
         if (window.confirm("Bạn đã hoàn tất quá trình khám bệnh?")) {
             process();
-          }
-        
+        }
+
     }
     return (
         <Container>
@@ -263,7 +263,7 @@ const KeThuoc = () => {
                                             <td>{d.idUnit.name}</td>
                                             <td>
 
-                                                <Button onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </Button>
+                                                <Button className='btn-normal' onClick={e => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </Button>
 
                                                 {/* <Button onClick={() => chonthuoc("idThuoc", d.id, "tenthuoc", d.name)}> ➕ </Button> */}
 
@@ -336,7 +336,9 @@ const KeThuoc = () => {
                         </Row>
                         <Row className="mb-4">
                             <div className="Logincontent logincontent2">
-                                <label htmlFor="pwd" className='text-black'>Cách dùng</label>
+                                <label htmlFor="pwd" className='text-black'
+
+                                >Cách dùng</label>
                                 <input type="text"
                                     id="pwd"
                                     className='input-login'
@@ -349,7 +351,7 @@ const KeThuoc = () => {
                         </Row>
                         <Row className="mb-4">
                             <div className="buttonLogin">
-                                <TypeButton onClick={napthuoc}>Thêm</TypeButton>
+                                <Button className="btn-normal" onClick={napthuoc}>Thêm</Button>
                             </div>
 
                         </Row>
@@ -360,9 +362,9 @@ const KeThuoc = () => {
 
                 <Row className='m-4'>
                     {/* id phiếu khám */}
-                    {toathuoc.length>0?(<Link className='btn-click' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>)
-                    :(<Button className="btn-click" onClick={taohoadon}>Tạo hóa đơn và rời khỏi</Button>)}
-                    
+                    {toathuoc.length > 0 ? (<Link className='typebutton' to={`/kethuoc/toathuoc/${id}`}>XUẤT PHIẾU</Link>)
+                        : (<Button className="typebutton" onClick={taohoadon}>Rời khỏi</Button>)}
+
 
                 </Row>
 

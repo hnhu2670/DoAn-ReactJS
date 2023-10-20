@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   font-family: 'Varela Round', sans-serif !important;
+  font-size: 17px;
 
 }
 
@@ -22,10 +23,10 @@ body {
   flex-wrap: wrap;
 }
 
-div.container {
-  padding: 0 4%;
-  /* margin: 0 5%; */
-}
+/* div.container {
+  /* padding: 0 4%; */
+/* margin: 0 5%; */
+/* } */
 
 /* form date */
 .form-control {
@@ -153,6 +154,7 @@ nav.menu>ul>li {
 
 .section-header img.avt_user {
   width: 30px !important;
+  border-radius: 50%;
 }
 
 
@@ -219,14 +221,6 @@ nav.menu>ul>li {
 }
 
 
-/* booking */
-/* .border {
-  display: flex;
-  border: 0.5px solid #5AAC4E;
-  border-radius: 30px;
-  margin: 50px;
-  background-color: #F5FFFA;
-} */
 
 .border1 {
   display: flex !important;
@@ -298,20 +292,6 @@ input[type="time"] {
   border-radius: 5px;
 }
 
-/* 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #45a049;
-} */
 
 /* QUEN MAT KHAU */
 .img-quenmk>img {
@@ -339,6 +319,14 @@ form#table-lichkham {
 table {
   border: 2px solid green;
   text-align: center;
+}
+
+table th {
+  font-size: 20px;
+}
+
+table td {
+  font-size: 17px;
 }
 
 td,

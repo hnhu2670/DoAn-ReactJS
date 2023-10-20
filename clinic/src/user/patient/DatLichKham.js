@@ -21,6 +21,7 @@ const DatLichKham = () => {
 
 
     });
+    const [isTimeSelected, setIsTimeSelected] = useState(false);
 
     const [minDate, setMinDate] = useState("");
     // const [minTime, setMinTime] = useState("");
@@ -40,6 +41,8 @@ const DatLichKham = () => {
         setDatLich((current) => {
             return { ...current, [field]: evt.target.value };
         });
+        setIsTimeSelected(true);
+
     }
     const validateFields = () => {
         // const Regex = /^[A-Za-z0-9\s]+$/;
@@ -53,6 +56,10 @@ const DatLichKham = () => {
                 alert("Vui lòng chọn thời gian phù hợp !");
                 return false;
             }
+        }
+        if (!isTimeSelected) {
+            alert('Vui lòng chọn giờ khám.');
+            return;
         }
 
 
@@ -176,12 +183,19 @@ const DatLichKham = () => {
                                         <Col>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Giờ khám</Form.Label>
+
                                                 <Form.Control as="select" value={appointment.appointmentTime}
                                                     onChange={e => change(e, "appointmentTime")}
                                                     // min={minTime}
                                                     // max={maxTime}
-                                                    required>
+                                                    required
+                                                    placeholder="Chọn ngày khám"
 
+                                                >
+
+                                                    <option value="" disabled hidden>
+                                                        Chọn ngày khám
+                                                    </option>
                                                     <option value="09:00:00">09:00:00</option>
                                                     <option value="09:30:00">09:30:00</option>
                                                     <option value="10:00:00">10:00:00</option>

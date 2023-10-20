@@ -139,8 +139,8 @@ const ToaThuoc = () => {
         }
         if (window.confirm("Bạn đã hoàn tất quá trình khám bệnh?")) {
             process();
-          }
-        
+        }
+
     }
 
     if (phieu.id == null) {
@@ -166,7 +166,7 @@ const ToaThuoc = () => {
                     </Row>
 
                     {successful ? (
-                        <Alert variant="success">Xuất phiếu thành công</Alert>
+                        <Alert className='w-70 text-success' style={{ border: "1px solid green" }}>Xuất phiếu thành công</Alert>
                     ) : (
                         console.log("thất bại")
                     )}
@@ -175,7 +175,7 @@ const ToaThuoc = () => {
 
                         <hr />
                         <div>
-                            <Row className='mb-2'>
+                            <Row className='mb-2 mt-3'>
                                 <Col>
                                     Họ và tên: <span>{phieu.sickpersonId.name}</span>
                                 </Col>
@@ -235,9 +235,11 @@ const ToaThuoc = () => {
 
                 </section>
                 <Row className='m-3' >
-                    <Col><button className="btn-click mr-5" onClick={downPDF}>XUẤT FILE</button></Col>
+                    <Col sm={2}><button className="btn-normal mr-5" style={{ padding: "10px" }}
+                        onClick={downPDF}>XUẤT FILE</button></Col>
                     {/* <Col><button className="btn-click" onClick={() => addNoti(phieu)}>GỬI XÁC NHẬN</button></Col> */}
-                    <Col><button className="btn-click" onClick={taohoadon}>Tạo hóa đơn và rời khỏi</button></Col>
+                    <Col><button className="btn-normal" style={{ padding: "10px" }}
+                        onClick={taohoadon}>Tạo hóa đơn và rời khỏi</button></Col>
                 </Row>
             </Container >
         </>
