@@ -1,8 +1,7 @@
 import React from 'react';
 import '../resources/css/home.css';
-// import doctor from "../resources/image/Doctors.jpg"
-import DoctorHome from '../resources/image/dolo.png';
 import { Col, Container, Row } from 'react-bootstrap';
+import Map from './Map';
 const Home = () => {
     return (
         <>
@@ -50,7 +49,9 @@ const Home = () => {
 
                     </Col>
                 </Row>
-
+                <Row>
+                    {/* <Map /> */}
+                </Row>
             </Container>
         </>
     );

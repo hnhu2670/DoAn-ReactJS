@@ -2,7 +2,6 @@ import Message from "./Message";
 import { collection, query, onSnapshot, orderBy, limit, doc } from "firebase/firestore";
 import { useEffect, useRef, useState, useParams, useContext } from "react";
 import { db } from "../firebase";
-import { UserAuth } from "./context/AuthContext";
 import { MyUserContext } from "../App";
 
 
@@ -45,19 +44,31 @@ const ChatBox = (props) => {
 
         return () => unsubscribe;
     }, []);
-    console.log(messages)
+    console.log("chatbox", messages)
+    // console.log("user", user.username)
+    // console.log("rep", rep)
     return (
-        <div className="pb-44 pt-20 containerWrap">
+        <div className="containerWrap" style={{ height: "65vh", overflowY: "scroll" }}>
 
+            {/* chat room */}
             {/* {messages.map((message) => (
 
                 <Message key={message.id} message={message} />
             ))} */}
+
+            {/* chat private */}
+
             {messages.map((message) => {
-            if ((message.rep === rep && message.username === user.username) || (message.rep === user.username && message.username === rep)) { 
-                return <Message key={message.id} message={message} rep = {rep} />;
-            }
-            return null;
+                if ((message.rep === rep.rep && message.username === user.username) || (message.rep === user.username && message.username === rep.rep)) {
+
+
+                    return <>
+                        <Message key={message.id} message={message} />
+                    </>
+
+
+                }
+                return null;
             })}
             <div ref={messagesEndRef}></div>
         </div>

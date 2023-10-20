@@ -27,11 +27,10 @@ import DanhGia from './user/patient/DanhGia';
 import KeThuoc from './user/doctor/KeThuoc';
 import MyUserAddBill from './reducer/MyUserAddBill';
 import ThongBao from './user/nurse/ThongBao';
-import AllChatBox from './chat/AllChat';
-import NewChat from './chat/NewChat';
 import ThongBaoDG from './user/patient/ThongBaoDG';
-import Chat from './Chat';
 import AllChat from './mychat/pages/AllChat';
+import ChatApp from './user/patient/ChatApp';
+import ChatRoom from './mychat/pages/ChatRoom';
 export const MyUserContext = createContext();
 export const MyNotiContext = createContext()
 function App() {
@@ -74,16 +73,22 @@ function App() {
             <Route path="/danhgia/:id" exact element={<DanhGia />} />
             {/* thong bao */}
             <Route path="/thongbao" exact element={<ThongBao />} />
-
-            {/* <Route path="/allchat" element={<AllChatBox />} />
-            <Route path="/chat/:username" element={<NewChat />} />
-            <Route path="/thongbaodanhgia" element={<ThongBaoDG />} /> */}
             <Route path="/thongbaodanhgia" element={<ThongBaoDG />} />
-            <Route path="/allchat" element={<AllChat />} />
+
+            {/* chat */}
+            {/* <Route path="/allchat" element={<AllChat />} /> */}
+            <Route
+              path="/chat/:rep"
+              element={
+                <ChatRoom />
+              }
+            />
+
+            <Route path="/chatapp" element={<ChatApp />} />
           </Routes>
 
           <Footer />
-          <Chat />
+          {/* <Chat /> */}
 
         </BrowserRouter>
       </MyNotiContext.Provider>

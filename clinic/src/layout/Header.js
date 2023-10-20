@@ -96,7 +96,7 @@ const Header = () => {
 
                                                     </>}
                                             </>}
-                                        <li><Link variant="secondary" to="/allchat">Chat now</Link></li>
+                                        <li><Link variant="secondary" to="/chatapp">Chat now</Link></li>
                                         <div style={{ paddingTop: 15 + "px" }}>
                                             <img class="avt_user" src={user.avatar} alt="" />
                                         </div>
