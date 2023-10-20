@@ -45,6 +45,11 @@ const ForgetPassword = () => {
         })
     }
 
+    // const otpExpirationTimer = setTimeout(() => {
+    //     setShowOTP(false);
+    //     toast.error("OTP đã hết hạn!");
+    //   }, 3000);
+    
     //Xác nhận sđt và gửi otp qua sms
     const onSubmitSMS = async () => {
         // const appVerifier = window.recaptchaVerifier;
@@ -90,13 +95,17 @@ const ForgetPassword = () => {
                                 setLoading(false);
                                 setShowOTP(true);
                                 toast.success("Đã gửi OTP qua SMS!");
+                                setTimeout(() => {
+                                    setShowOTP(false);
+                                    toast.error("OTP đã hết hạn!");
+                                 }, 60000);
                             })
                             .catch((error) => {
                                 console.log(error);
                                 setLoading(false);
                                 toast.success("Gửi OTP thất bại!");
                             });
-                        console.log(">>>>>> End Sign in phone ");
+                        console.log(">>>>>> End Sign in phone ");   
                         // }
                     } else {
                         setLoading(false);
@@ -126,7 +135,7 @@ const ForgetPassword = () => {
                 console.log(res);
                 setUser(true);
                 setLoading(false);
-                toast.success("Gửi OTP thành công!");
+                toast.success("Xác nhận OTP thành công!");
                 // nav("/inputOtp");
             })
             .catch((err) => {
@@ -307,7 +316,14 @@ const ForgetPassword = () => {
                                         <Row className='mb-3'>
                                             <Form.Group className="mb-3">
                                                 <Form.Label style={{ color: "#60a37e" }}>Số điện thoại</Form.Label>
-                                                <PhoneInput className="w-full form-phone" country={"in"} value={ph} onChange={handlePhoneChange} required />
+                                                {/* <PhoneInput className="w-full form-phone"  country={"in"} value={ph} onChange={handlePhoneChange} required /> */}
+                                                <PhoneInput
+                                                    className="w-full form-phone"
+                                                    country="vn" // Đặt mặc định quốc gia là "vn" (Việt Nam)
+                                                    // value={ph}
+                                                    onChange={handlePhoneChange}
+                                                    required
+                                                />
                                             </Form.Group>
                                             {!isPhValid && <p className='text-left font-medium' style={{ color: 'red' }}>Vui lòng điền số điện thoại.</p>}
                                         </Row>
