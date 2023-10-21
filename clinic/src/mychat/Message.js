@@ -23,7 +23,7 @@ const Message = (props) => {
                         <div className="chat-header mb-2">
                             {message.name}
                             <time className="text-xs opacity-50 ml-3">
-                                {new Date(message.createdAt.seconds * 1000 + message.createdAt.nanoseconds / 1000000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                {new Date(message.createdAt?.seconds * 1000 + message.createdAt?.nanoseconds / 1000000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </time>
                         </div>
                         <div className="chat-bubble">{message.text}</div>

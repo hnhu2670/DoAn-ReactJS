@@ -49,9 +49,21 @@ const ForgetPassword = () => {
     //     setShowOTP(false);
     //     toast.error("OTP đã hết hạn!");
     //   }, 3000);
-    
+    let otphethan
     //Xác nhận sđt và gửi otp qua sms
     const onSubmitSMS = async () => {
+        if (otphethan) {
+            clearTimeout(otphethan)
+        }
+        // const recaptchaContainer = document.getElementById("recaptcha-container");
+
+        // // Xóa phiên bản reCAPTCHA trước khi render lại
+        // while (recaptchaContainer.firstChild) {
+        //     console.log("ton tai roi", recaptchaContainer)
+        //     // alert(recaptchaContainer)
+        //     recaptchaContainer.firstChild.remove();
+        // }
+
         // const appVerifier = window.recaptchaVerifier;
         const appVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
             'size': 'invisible',
@@ -61,6 +73,7 @@ const ForgetPassword = () => {
             'expired-callback': () => { }
         });
 
+        console.log("nhu-duy", appVerifier)
         //Kiểm tra tên đăng nhập và số điện thoại truyền vào có null hay không
         if (ph === '' || ph.trim() === '' || username === '' || username.trim() === '') {
             setIsPhValid(false);
@@ -95,17 +108,21 @@ const ForgetPassword = () => {
                                 setLoading(false);
                                 setShowOTP(true);
                                 toast.success("Đã gửi OTP qua SMS!");
-                                setTimeout(() => {
-                                    setShowOTP(false);
-                                    toast.error("OTP đã hết hạn!");
-                                 }, 60000);
+                                // otphethan = setTimeout(() => {
+                                //     setShowOTP(false);
+                                //     setUser("")
+                                //     setPh("")
+                                //     appVerifier.clear()
+                                //     document.getElementById("recaptcha-container").remove()
+                                //     toast.error("OTP đã hết hạn!");
+                                // }, 10000);
                             })
                             .catch((error) => {
                                 console.log(error);
                                 setLoading(false);
                                 toast.success("Gửi OTP thất bại!");
                             });
-                        console.log(">>>>>> End Sign in phone ");   
+                        console.log(">>>>>> End Sign in phone ");
                         // }
                     } else {
                         setLoading(false);
@@ -124,6 +141,7 @@ const ForgetPassword = () => {
                 console.log(error);
             }
         }
+        // appVerifier.clear()
     }
 
     //Xác nhận và gửi otp

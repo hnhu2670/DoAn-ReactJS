@@ -64,17 +64,7 @@ const Header = () => {
         <>
             <div>
                 <header >
-                    {/* <ul id="menu">
-                        <li className={activeIndex === 0 ? "menu-active" : ""}>
-                            <a href="#" onClick={() => handleClick(0)}>Link 1</a>
-                        </li>
-                        <li className={activeIndex === 1 ? "menu-active" : ""}>
-                            <a href="#" onClick={() => handleClick(1)}>Link 2</a>
-                        </li>
-                        <li className={activeIndex === 2 ? "menu- active" : ""}>
-                            <a href="#" onClick={() => handleClick(2)}>Link 3</a>
-                        </li>
-                    </ul> */}
+
                     <section className="section-header">
                         <div className="flex tab-menu text-lg">
                             <div className="logoName">

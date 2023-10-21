@@ -3,8 +3,8 @@ import cookie from "react-cookies";
 
 
 const SERVER_CONTEXT = "/Clinnic";
-const SERVER = "http://localhost:8080";
-// const SERVER = "http://localhost:8901";
+// const SERVER = "http://localhost:8080";
+const SERVER = "http://localhost:8901";
 
 export const endpoints = {
 

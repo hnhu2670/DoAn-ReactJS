@@ -8,7 +8,6 @@ const ChatRoom = (rep) => {
     // const { rep } = useParams();
     console.log("-----------------", rep)
     const [doituongchat, setdoituongchat] = useState([]);
-
     const laynguoichat = async (rep) => {
         try {
             let { data } = await apis.get(endpoints.laynguoidung(rep));//gọi rep lúc click chọn ng chat
@@ -36,7 +35,7 @@ const ChatRoom = (rep) => {
                 </Row>
 
                 <ChatBox rep={rep} />
-                <SendMessage rep={rep} />
+                <SendMessage rep={rep} onMessageSent={() => rep.setMessageSent(true)} />
             </ div>
         </>
 

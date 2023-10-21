@@ -110,7 +110,7 @@ const Login = () => {
             <div className="login">
 
               <div className="mainLogin">
-                {error && <Alert className='w-90 mr-10 ml-10 text-danger'>{error}</Alert>}
+                {error && <Alert className='mr-10 ml-10 text-danger ' style={{ width: "auto" }}>{error}</Alert>}
                 <div className="form-login">
                   <h1 className="text-center text-login top-text">LOGIN</h1>
                   <Row className="mb-3">

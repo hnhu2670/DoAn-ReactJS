@@ -122,26 +122,30 @@ const Profile_doctor = () => {
                                 <MySpinner />
                             )}
                         </Col>
-                        <Col className="bs-lichkham mt-4" sm={5}>
-                            <h4 style={{ fontSize: 20 + "px", color: "darkgreen" }}>Lịch khám bệnh của bác sĩ</h4>
-                            {groupedShifts
-                                .sort((a, b) => new Date(a.dateSchedule) - new Date(b.dateSchedule))
-                                .map((group, index) => (
-                                    <Accordion key={index}>
-                                        <Accordion.Header>
-                                            {new Date(group.dateSchedule).toLocaleDateString("en-US")}
-                                        </Accordion.Header>
-                                        <Accordion.Body>
-                                            {group.shifts
-                                                .sort((a, b) => a.shiftId.id - b.shiftId.id)
-                                                .map((shift) => (
-                                                    <div key={shift.id}>
-                                                        {shift.shiftId?.name} : {shift.shiftId?.start} - {shift.shiftId?.end}
-                                                    </div>
-                                                ))}
-                                        </Accordion.Body>
-                                    </Accordion>
-                                ))}
+                        <Col className="bs-lichkham" sm={5} style={{ marginTop: "4.5rem" }}>
+                            {/* <h4 style={{ fontSize: 20 + "px", color: "darkgreen" }}>Lịch khám bệnh của bác sĩ</h4> */}
+                            <h3 style={{ fontSize: "1.5rem", color: "green" }} >Lịch khám bệnh của bác sĩ</h3>
+                            <div className="col-accordion">
+                                {groupedShifts
+                                    .sort((a, b) => new Date(a.dateSchedule) - new Date(b.dateSchedule))
+                                    .map((group, index) => (
+                                        <Accordion key={index} className="mt-3">
+                                            <Accordion.Header>
+                                                {new Date(group.dateSchedule).toLocaleDateString("en-US")}
+                                            </Accordion.Header>
+                                            <Accordion.Body>
+                                                {group.shifts
+                                                    .sort((a, b) => a.shiftId.id - b.shiftId.id)
+                                                    .map((shift) => (
+                                                        <div key={shift.id}>
+                                                            {shift.shiftId?.name} : {shift.shiftId?.start} - {shift.shiftId?.end}
+                                                        </div>
+                                                    ))}
+                                            </Accordion.Body>
+                                        </Accordion>
+                                    ))}
+                            </div>
+
                         </Col>
                     </Row>
                 </div>

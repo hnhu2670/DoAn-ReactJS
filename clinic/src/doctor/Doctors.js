@@ -70,7 +70,7 @@ const Doctor = () => {
 
                             />
                         </div>
-                        <button className="btn-click" type="submit">Tìm kiếm</button>
+                        <button className="btn-normal px-3" type="submit">Tìm</button>
 
                     </Form>
                     <section className="section-doctor">

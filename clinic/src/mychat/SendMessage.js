@@ -59,6 +59,7 @@ const SendMessage = (props) => {
                 //     avatar: doituongchat.avatar
                 //   },
             })
+            props.onMessageSent();
         } catch (error) {
             console.log(error);
         }

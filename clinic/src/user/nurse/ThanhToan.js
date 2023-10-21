@@ -163,7 +163,7 @@ const ThanhToan = () => {
                 const serviceID = 'service_clinic2002';
                 // const url = "http://localhost:3000/danhgia/"+phieu.id;
                 const url = "http://localhost:3000/login"
-                sendFeedback(serviceID, templateId, { tenbenhnhan: phieu.sickpersonId.name, link_danh_gia:url,tenbacsi:phieu.doctorId.name,reply_to: phieu.sickpersonId.emaill})
+                sendFeedback(serviceID, templateId, { tenbenhnhan: phieu.sickpersonId.name, link_danh_gia: url, tenbacsi: phieu.doctorId.name, reply_to: phieu.sickpersonId.emaill })
                 window.confirm("test")
                 // axios.get(res);
                 if (res.status === 200) {
@@ -173,10 +173,12 @@ const ThanhToan = () => {
                         console.log("2")
                         let reslink = await apis.get(endpoints["thanhtoanthanhcong"](thanhtoan.idAppo));
                         console.log("3")
-                        if(reslink.data == true){
+                        if (reslink.data == true) {
                             nat("/");
+                        } else {
+                            window.location.href = reslink.data;
                         }
-                        window.location.href = reslink.data;
+
 
                     } catch (error) {
                         console.error("Error while fetching reslink:", error);
