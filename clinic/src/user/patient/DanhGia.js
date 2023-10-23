@@ -9,6 +9,7 @@ import { MyUserContext } from '../../App'
 import { useNavigate, useParams } from 'react-router-dom'
 import apis, { endpoints } from '../../configs/apis'
 import { useEffect } from 'react'
+// import { FaAngellist } from 'react-icons/fa'
 const DanhGia = () => {
     const { id } = useParams()
     const [phieukham, setphieukham] = useState([])
@@ -135,13 +136,13 @@ const DanhGia = () => {
                 <Row>
                     <Col sm={5}>
 
-                        <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img>
+                        {/* <img style={{ width: 70 + "%", marginLeft: 10 + "%" }} src="https://res.cloudinary.com/dstqvlt8d/image/upload/v1697269356/e1sv7e3sqxdjyz9nbmvv.png"></img> */}
                         {/* <h1>{bacsi.name}</h1> */}
-                        <img src={phieukham.doctorId?.avatar}></img>
-                        <h1>{phieukham.doctorId?.name}</h1>
+                        <img style={{ width: "70%" }} className='mb-4' src={phieukham.doctorId?.avatar}></img>
+                        <h1 style={{ fontSize: "1.5rem" }}>{phieukham.doctorId?.name}</h1>
 
-                        <img src={phieukham.doctorId?.avatar}></img>
-                        <h1>{phieukham.doctorId?.name}</h1>
+                        {/* <img src={phieukham.doctorId?.avatar}></img>
+                        <h1>{phieukham.doctorId?.name}</h1> */}
 
                     </Col>
                     <Col className='col-danhgia mb-5' >
@@ -153,6 +154,7 @@ const DanhGia = () => {
                                     required>
 
                                 </Form.Control>
+                                {/* <FaAngellist /> */}
 
                             </Form.Group>
                         </Row>
