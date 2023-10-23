@@ -13,5 +13,5 @@ Các yêu cầu cần có:
     - Click chọn vào dấu "..." trên thanh công cụ 
     - Chọn Terminal
     - Terminal sẽ xuất hiện đường dẫn:
-        + Nếu nên file cuối cùng trên đường dẫn là clinic thì gõ: npm install (đợi load) => npm start (đợi dự án chạy lên là hoàn thành)
-        + Nếu nên file cuối cùng trên đường dẫn là DoAn-ReactJS thì gõ: cd clinic (di chuyển vào file clinic) => npm install (đợi load) => npm start (đợi dự án chạy lên là hoàn thành)
+        + Nếu tên file cuối cùng trên đường dẫn là clinic thì gõ: npm install (đợi load) => npm start (đợi dự án chạy lên là hoàn thành)
+        + Nếu tên file cuối cùng trên đường dẫn là DoAn-ReactJS thì gõ: cd clinic (di chuyển vào file clinic) => npm install (đợi load) => npm start (đợi dự án chạy lên là hoàn thành)
